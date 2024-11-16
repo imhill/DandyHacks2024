@@ -3,9 +3,21 @@ function switchTo(evt, tabName) {
     const friendsButton = document.getElementsById("friendsButton");
     const challengesButton = document.getElementsById("challengesButton");
 
-    leaderboardButton = addEventListener("click", function() { switchTab("leaderboard"); });
-    friendsButton = addEventListener("click", function() { switchTab("friends"); });
-    challengesButton = addEventListener("click", function() { switchTab("challenges"); });
+    leaderboardButton = addEventListener("click", switchToLeaderboard);
+    friendsButton = addEventListener("click", switchToFriends);
+    challengesButton = addEventListener("click", switchToChallenges);
+
+    function switchToLeaderboard(){
+        switchTab("leaderboard");
+    }
+
+    function switchToFriends(){
+        switchTab("friends");
+    }
+
+    function switchToChallenges(){
+        switchTab("challenges");
+    }
 
     //const leaderboardDiv = document.getElementsById("leaderboard");
     //const friendsDiv = document.getElementsById("friends");
