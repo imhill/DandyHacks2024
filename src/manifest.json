@@ -1,9 +1,14 @@
 {
 	"manifest_version": 3,
 	"name": "LeetCode JILE",
-	"version": "0.02",
+	"version": "0.10",
 	"action": {
 		"default_popup": "popup/poppington.html",
 		"default_icon": "icons/JILE.png"
-		}
+	},
+    "icons": {
+        "32": "icons/JILE-32.png",
+        "48": "icons/JILE-48.png",
+        "128": "icons/JILE-128.png"
+    }
 }
