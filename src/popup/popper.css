@@ -15,3 +15,7 @@ html{
 #homeIcon{
   display: block;
 }
+
+#friendsListTable{
+  color: red;
+}
