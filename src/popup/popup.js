@@ -1,47 +1,45 @@
-// import table building functions
-//import {createFriendsListTable} from "./friendsListTable.js";
-//import {createLeaderboardFriendsTable, } from "./leaderboardTables.js";
 import {GenerateTable} from "./generateTable.js";
 
-// Switching tabs
+/*
+ *    Switch between tabs
+ */
 
+//add the functions to the buttons
 const leaderboardButton = document.getElementById("leaderboardButton");
-const friendsButton = document.getElementById("friendsButton");
-const challengesButton = document.getElementById("challengesButton");
-
 leaderboardButton.addEventListener("click", switchToLeaderboard);
+const friendsButton = document.getElementById("friendsButton");
 friendsButton.addEventListener("click", switchToFriends);
+const challengesButton = document.getElementById("challengesButton");
 challengesButton.addEventListener("click", switchToChallenges);
 
-function switchToLeaderboard(){
-    switchTab("leaderboard");
-}
+//define the function to switch to a given page
+function switchToLeaderboard(){ switchTab("leaderboard"); }
+function switchToFriends(){ switchTab("friends"); }
+function switchToChallenges(){ switchTab("challenges"); }
 
-function switchToFriends(){
-    switchTab("friends");
-}
-
-function switchToChallenges(){
-    switchTab("challenges");
-}
-
+//define the divs for each of the tabs
 const leaderboardDiv = document.getElementById("leaderboard");
 const friendsDiv = document.getElementById("friends");
 const challengesDiv = document.getElementById("challenges");
-
+//opening home page icon
 const icon = document.getElementById("homeIcon");
 
+//put all the divs for tabs in an array
 const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon]
 
+//function to hide all divs
 function nukeDivs(divs){
     for(const d of divs){
         d.style.display = "none";
     }
 }
 
+//function that handles switching between tabs
 function switchTab(tab){
+    //fist clear all divs
     nukeDivs(tabDivs)
-    
+
+    //then depending on the argument, display the appropriate div
     switch(tab){
         case "leaderboard":
             leaderboardDiv.style.display = "block";
@@ -55,18 +53,25 @@ function switchTab(tab){
     }
 }
 
-//create the friends table
+/*
+ *    Create tables for each tab div
+ */
+
+//Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
 const friendsListData = [
   { name: 'John', age: 30 },
   { name: 'Mary', age: 25 }];
 
+//generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
 friendsListTable.id = "friendsListTable";
+
+//add it to the div
 friendsListTableDiv.appendChild(friendsListTable);
 
-//create the leaderboard tables
+//create the Leaderboard tab tables
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
@@ -74,6 +79,9 @@ const friendLeaderboardData = [
     {name: "ihill", runtime: "40", memory: "4"},
     {name: "jtrokel", runtime: "50", memory: "2"}];
 
+//generate the table with the data
 const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
 leaderboardFriendsTable.id = "leaderboardFriendsTable";
+
+//add it to the div
 friendsTableDiv.appendChild(leaderboardFriendsTable);
