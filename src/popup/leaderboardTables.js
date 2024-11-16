@@ -13,7 +13,7 @@ function generateTables() {
     for(const h of headers) {
         friendsTable.innerHTML += `<th>${h}</th>`;
     }
-    friendsTable.innerHTML += "</tr>;
+    friendsTable.innerHTML += "</tr>";
 
     for(let i = 0; i < names.length; i++) {
         friendsTable.innerHTML += "<tr>";
