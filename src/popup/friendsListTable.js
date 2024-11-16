@@ -1,4 +1,4 @@
-export function createFriendsListTable(data) {
+/*export function createFriendsListTable(data) {
   const table = document.createElement('table');
 
   const headerRow = table.insertRow();
@@ -17,3 +17,4 @@ export function createFriendsListTable(data) {
 
   return table;
 }
+*/
