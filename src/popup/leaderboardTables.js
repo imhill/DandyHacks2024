@@ -6,24 +6,21 @@ const names = ["ihill", "jtrokel", "lsciortino", "etock"];
 const times = [40, 50, 20, 25];
 const spaces = [4, 2, 10, 5];
 const problems = [1, 2, 3, 4];
-const columns = [names, times, spaces, problems];
+const rows = [["ihill", "40", "4", "1"], ["jtrokel", "50", "2", "2"]];
 
-function generateTables() {
-    friendsTable.innerHTML += "<tr>";
-    for(const h of headers) {
-        friendsTable.innerHTML += `<th>${h}</th>`;
-    }
-    friendsTable.innerHTML += "</tr>";
+function generateTable() {
+    let friendsBoard = document.createElement("table");
 
-    for(let i = 0; i < names.length; i++) {
-        friendsTable.innerHTML += "<tr>";
+    for (let row of rows) {
+        table.insertRow();
+        for (let cell of row) {
+            let newCell = table.rows[table.rows.length - 1].insertCell();
 
-        for(let j = 0; j < headers.length; i++) {
-            friendsTable.innerHTML += `<td>${column[j][i]}</td>`;
+            newCell.textContent = cell;
         }
-
-        friendsTable.innerHTML += "</tr>";
     }
+
+    friendsTable.appendChild(friendsBoard);
 }
 
-generateTables();
+generateTable();
