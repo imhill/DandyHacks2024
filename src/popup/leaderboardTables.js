@@ -18,8 +18,8 @@ function generateTables() {
     for(let i = 0; i < names.length; i++) {
         friendsTable.innerHTML += "<tr>";
 
-        for(const column of columns) {
-            friendsTable.innerHTML += `<td>${column[i]}</td>`;
+        for(let j = 0; j < headers.length; i++) {
+            friendsTable.innerHTML += `<td>${column[j][i]}</td>`;
         }
 
         friendsTable.innerHTML += "</tr>";
