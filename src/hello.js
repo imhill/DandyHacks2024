@@ -27,7 +27,7 @@ client.connect((err) => {
   }
 });
 
-/ Example POST endpoint
+// Example POST endpoint
 app.post('/post-problem', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
