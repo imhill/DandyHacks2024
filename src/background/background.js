@@ -1,4 +1,4 @@
-const LEETCODE_BASE_URL = "https://leetcode.com"
+const LEETCODE_BASE_URL = "https://leetcode.com";
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
