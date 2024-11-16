@@ -37,4 +37,5 @@ const data = [
 
 // Create the table and append it to the DOM
 const table = createTable(data);
+table.id = "friendsListTable";
 friendsListTableDiv.appendChild(table);
