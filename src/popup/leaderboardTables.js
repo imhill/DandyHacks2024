@@ -1,5 +1,5 @@
-const friendsTable = getElementById("leaderboardTableFriends");
-const communityTable = getElementById("leaderboardTableCommunity");
+const friendsTable = document.getElementById("leaderboardTableFriends");
+const communityTable = document.getElementById("leaderboardTableCommunity");
 
 const headers = ["Name", "Runtime", "Space", "Problems"];
 const names = ["ihill", "jtrokel", "lsciortino", "etock"];
