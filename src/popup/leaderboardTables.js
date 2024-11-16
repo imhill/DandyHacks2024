@@ -1,30 +1,19 @@
-const friendsTable = document.getElementById("leaderboardTableFriends");
-const communityTable = document.getElementById("leaderboardTableCommunity");
+export function createLeaderboardFriendsTable(data) {
+    let friendsLeaderboard = document.createElement("table");
 
-const friendData = [
-    {name: "ihill", runtime: "40", memory: "4"},
-    {name: "jtrokel", runtime: "50", memory: "2"}
-]
-
-function generateTable(data) {
-    let friendsBoard = document.createElement("table");
-
-    const headerRow = friendsBoard.insertRow();
+    const headerRow = friendsLeaderboard.insertRow();
     for (const key in data[0]) {
         const headerCell = headerRow.insertCell();
         headerCell.textContent = key;
     }
 
     for (const row of data) {
-        cRow = friendsBoard.insertRow();
+        cRow = friendsLeaderboard.insertRow();
         for (const key in row) {
             const cell = cRow.insertCell();
             cell.textContent = row[key];
         }
     }
 
-    return friendsBoard;
+    return friendsLeaderboard;
 }
-
-fBoard = generateTable(friendData);
-friendsTable.appendChild(fBoard);
