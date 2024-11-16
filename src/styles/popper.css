@@ -1,6 +1,6 @@
 :root{
     --tableBackground: #FFFFFF;
-    --popupBackground: linear-gradient(45deg, #FFFFFF, #DDDDDD);
+    --popupBackground: linear-gradient(-225deg, #FFFFFF, #AAAAAA);
 }
 
 html{
