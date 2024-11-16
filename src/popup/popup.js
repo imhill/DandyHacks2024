@@ -1,3 +1,5 @@
+// Switching tabs
+
 const leaderboardButton = document.getElementById("leaderboardButton");
 const friendsButton = document.getElementById("friendsButton");
 const challengesButton = document.getElementById("challengesButton");
