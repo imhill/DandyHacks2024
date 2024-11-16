@@ -1,6 +1,6 @@
 // import table building functions
 import {createFriendsListTable} from "./friendsListTable.js";
-//import {} from "leaderboardTables.js";
+import {createLeaderboardFriendsTable, } from "./leaderboardTables.js";
 
 // Switching tabs
 
@@ -53,17 +53,28 @@ function switchTab(tab){
             break
     }
 
-    //build friends table
+    //create the friends table
     const friendsListTableDiv = document.getElementById("friendsListTableDiv");
     
-    // Example data
     const data = [
       { name: 'John', age: 30 },
       { name: 'Mary', age: 25 }
     ];
     
-    // Create the table and append it to the DOM
-    const table = createFriendsListTable(data);
-    table.id = "friendsListTable";
-    friendsListTableDiv.appendChild(table);
+    const friendsListTable = createFriendsListTable(data);
+    friendsListTable.id = "friendsListTable";
+    friendsListTableDiv.appendChild(friendsListTable);
+
+    //create the leaderboard tables
+    const friendsTableDiv = document.getElementById("leaderboardTableFriends");
+    const communityTableDiv = document.getElementById("leaderboardTableCommunity");
+
+    const friendData = [
+        {name: "ihill", runtime: "40", memory: "4"},
+        {name: "jtrokel", runtime: "50", memory: "2"}
+    ]
+    
+    leaderboardFriendsTable = generateTable(friendData);
+    leaderboardFriendsTable.id = "leaderboardFriendsTable";
+    friendsTableDiv.appendChild(leaderboardFriendsTable);
 }
