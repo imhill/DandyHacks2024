@@ -1,4 +1,4 @@
-export function generateTable(){
+export function GenerateTable(){
     const table = document.createElement('table');
     
     const headerRow = table.insertRow();
