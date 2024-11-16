@@ -1,10 +1,25 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.url) {
-    console.log(`Tab ${tabId} updated to ${changeInfo.url}`);
-  }
-});
+chrome.webRequest.onCompleted.addListener(
+  async (details) => {
+    if (details.url.includes("graphql/")) {
+      console.log(`Request to ${details.url} completed. Fetching response body...`);
+
+      // Fetch the response body from the network
+      try {
+        const response = await fetch(details.url, {
+          method: details.method,
+          headers: details.requestHeaders,
+        });
+        const jsonData = await response.json();
+        console.log("GraphQL Response Data:", jsonData);
+      } catch (error) {
+        console.error("Error fetching response data:", error);
+      }
+    }
+  },
+  { urls: ["https://leetcode.com/*"] }
+);
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
