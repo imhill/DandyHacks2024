@@ -18,22 +18,32 @@ function switchToChallenges(){
     switchTab("challenges");
 }
 
-//#const leaderboardDiv = document.getElementsById("leaderboard");
-//#const friendsDiv = document.getElementsById("friends");
-//#const challengesDiv = document.getElementsById("challenges");
+const leaderboardDiv = document.getElementById("leaderboard");
+const friendsDiv = document.getElementById("friends");
+const challengesDiv = document.getElementById("challenges");
 
-const tabDivs = []
+const icon = document.getElementById("homeIcon");
+
+const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon]
+
+function nukeDivs(divs){
+    for(const d of divs){
+        d.style.display = "none";
+    }
+}
 
 function switchTab(tab){
+    nukeDivs(tabDivs)
+    
     switch(tab){
         case "leaderboard":
-            console.log("L");
+            leaderboardDiv.style.display = "block";
             break
         case "friends":
-            console.log("F");
+            friendsDiv.style.display = "block";
             break
         case "challenges":
-            console.log("C");
+            challengesDiv.style.display = "block";
             break
     }
 }
