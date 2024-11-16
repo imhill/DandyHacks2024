@@ -1,0 +1,9 @@
+html{
+  width: 800px;
+  height: 600px;
+}
+
+.tabButton{
+  display: inline-block;
+  border-radius: 8px;
+}
