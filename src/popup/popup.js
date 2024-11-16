@@ -7,9 +7,9 @@ function switchTo(evt, tabName) {
     friendsButton = addEventListener("click", function() { switchTab("friends"); });
     challengesButton = addEventListener("click", function() { switchTab("challenges"); });
 
-    const leaderboardDiv = document.getElementsById("leaderboard");
-    const friendsDiv = document.getElementsById("friends");
-    const challengesDiv = document.getElementsById("challenges");
+    //const leaderboardDiv = document.getElementsById("leaderboard");
+    //const friendsDiv = document.getElementsById("friends");
+    //const challengesDiv = document.getElementsById("challenges");
 
     function switchTab(tab){
         switch(tab){
