@@ -1,4 +1,4 @@
-const friendsListTable = document.getElementById("friendsListTable");
+const friendsListTable = document.getElementById("friendsListTableDiv");
 
 const friends = ["Bob","Alice","Henry Cramer","etock"];
 const streaks = ["0","2","-5","3"];
@@ -10,6 +10,7 @@ const columns = [friends,streaks];
 
 
 function generateTable(){
+    friendsListTable.innerHTML += `<table id="friendsListTable">`;
     friendsListTable.innerHTML += `<tr>`;
     for(const h of tableHeaders){
         friendsListTable.innerHTML += `<th>${h}</th>`;
@@ -23,7 +24,7 @@ function generateTable(){
         }
         friendsListTable.innerHTML += `</tr>`;
     }
-        
+    friendsListTable.innerHTML += `</table>`;
 }
 
 generateTable();
