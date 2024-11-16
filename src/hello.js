@@ -1,5 +1,6 @@
 // Load HTTP module
 const http = require("http");
+const { Client } = require('pg');
 
 const hostname = "0.0.0.0";
 const port = 8000;
