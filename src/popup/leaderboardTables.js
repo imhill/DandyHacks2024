@@ -18,7 +18,7 @@ function generateTable(data) {
     for (const row of data) {
         cRow = friendsBoard.insertRow();
         for (const key in row) {
-            const cell = row.insertCell();
+            const cell = cRow.insertCell();
             cell.textContent = row[key];
         }
     }
