@@ -1,6 +1,7 @@
 // import table building functions
-import {createFriendsListTable} from "./friendsListTable.js";
-import {createLeaderboardFriendsTable, } from "./leaderboardTables.js";
+//import {createFriendsListTable} from "./friendsListTable.js";
+//import {createLeaderboardFriendsTable, } from "./leaderboardTables.js";
+import {GenerateTable} from "./generateTable.js";
 
 // Switching tabs
 
@@ -61,7 +62,7 @@ function switchTab(tab){
       { name: 'Mary', age: 25 }
     ];
     
-    const friendsListTable = createFriendsListTable(data);
+    const friendsListTable = GenerateTable(data);
     friendsListTable.id = "friendsListTable";
     friendsListTableDiv.appendChild(friendsListTable);
 
@@ -74,7 +75,7 @@ function switchTab(tab){
         {name: "jtrokel", runtime: "50", memory: "2"}
     ]
     
-    leaderboardFriendsTable = generateTable(friendData);
+    leaderboardFriendsTable = GenerateTable(friendData);
     leaderboardFriendsTable.id = "leaderboardFriendsTable";
     friendsTableDiv.appendChild(leaderboardFriendsTable);
 }
