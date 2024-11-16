@@ -1,26 +1,30 @@
 const friendsTable = document.getElementById("leaderboardTableFriends");
 const communityTable = document.getElementById("leaderboardTableCommunity");
 
-const headers = ["Name", "Runtime", "Space", "Problems"];
-const names = ["ihill", "jtrokel", "lsciortino", "etock"];
-const times = [40, 50, 20, 25];
-const spaces = [4, 2, 10, 5];
-const problems = [1, 2, 3, 4];
-const rows = [["ihill", "40", "4", "1"], ["jtrokel", "50", "2", "2"]];
+const data = [
+    {name: "ihill", runtime: "40", memory: "4"},
+    {name: "jtrokel", runtime: "50", memory: "2"}
+]
 
-function generateTable() {
+function generateTable(data) {
     let friendsBoard = document.createElement("table");
 
-    for (let row of rows) {
-        table.insertRow();
-        for (let cell of row) {
-            let newCell = table.rows[table.rows.length - 1].insertCell();
+    const headerRow = friendsBoard.insertRow();
+    for (const key in data[0]) {
+        const headerCell = headerRow.insertCell();
+        headerCell.textContent = key;
+    }
 
-            newCell.textContent = cell;
+    for (const row of rows) {
+        cRow = friendsBoard.insertRow();
+        for (const key of row) {
+            const cell = row.insertCell();
+            cell.textContent = row[key];
         }
     }
 
-    friendsTable.appendChild(friendsBoard);
+    return friendsBoard;
 }
 
-generateTable();
+fBoard = generateTable();
+friendsTable.appendChild(fBoard);
