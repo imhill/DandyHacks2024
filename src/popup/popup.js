@@ -1,5 +1,5 @@
 // import table building functions
-import {createFriendsListTable} from "friendsListTable.js";
+import {createFriendsListTable} from "./friendsListTable.js";
 //import {} from "leaderboardTables.js";
 
 // Switching tabs
