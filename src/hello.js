@@ -59,7 +59,7 @@ app.post('/post-problem', async (req, res) => {
 
 
 // Prints a log once the server starts listening
-server.listen(port, hostname, function () {
+app.listen(port, hostname, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
