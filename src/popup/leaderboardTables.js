@@ -1,7 +1,7 @@
 const friendsTable = document.getElementById("leaderboardTableFriends");
 const communityTable = document.getElementById("leaderboardTableCommunity");
 
-const data = [
+const friendData = [
     {name: "ihill", runtime: "40", memory: "4"},
     {name: "jtrokel", runtime: "50", memory: "2"}
 ]
@@ -26,5 +26,5 @@ function generateTable(data) {
     return friendsBoard;
 }
 
-fBoard = generateTable();
+fBoard = generateTable(friendData);
 friendsTable.appendChild(fBoard);
