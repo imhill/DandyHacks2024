@@ -3,7 +3,7 @@
 	"name": "LeetCode JILE",
 	"version": "0.01",
 	"action": {
-		"default_popup": "popington.html",
-		"default_icon": "luhcon.png"
+		"default_popup": "popup/poppington.html",
+		"default_icon": "assets/luhcon.png"
 		}
 }
