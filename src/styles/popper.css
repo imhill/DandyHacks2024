@@ -1,11 +1,14 @@
 :root{
     --tableBackground: #FFFFFF;
-    --popupBackground: linear-gradient(45, #FFFFFF, #DDDDDD);
+    --popupBackground: linear-gradient(45deg, #FFFFFF, #DDDDDD);
 }
 
 html{
     width: 400px;
     height: 500px;
+}
+
+body{
     background-image: var(--popupBackground);
 }
 
