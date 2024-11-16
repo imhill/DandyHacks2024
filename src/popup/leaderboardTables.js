@@ -1,4 +1,4 @@
-export function createLeaderboardFriendsTable(data) {
+/*export function createLeaderboardFriendsTable(data) {
     let friendsLeaderboard = document.createElement("table");
 
     const headerRow = friendsLeaderboard.insertRow();
@@ -17,3 +17,4 @@ export function createLeaderboardFriendsTable(data) {
 
     return friendsLeaderboard;
 }
+*/
