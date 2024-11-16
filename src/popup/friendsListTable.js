@@ -1,13 +1,4 @@
-const friendsListTableDiv = document.getElementById("friendsListTableDiv");
-
-const friends = ["Bob","Alice","Henry Cramer","etock"];
-const streaks = ["0","2","-5","3"];
-
-const tableHeaders = ["Name","Streak"];
-
-const columns = [friends,streaks];
-
-function createTable(data) {
+export function createFriendsListTable(data) {
   const table = document.createElement('table');
 
   // Create table header
@@ -28,14 +19,3 @@ function createTable(data) {
 
   return table;
 }
-
-// Example data
-const data = [
-  { name: 'John', age: 30 },
-  { name: 'Mary', age: 25 }
-];
-
-// Create the table and append it to the DOM
-const table = createTable(data);
-table.id = "friendsListTable";
-friendsListTableDiv.appendChild(table);
