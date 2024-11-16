@@ -12,6 +12,6 @@
 		"128": "icons/JILE-128.png"
 	},
 	"background": {
-		"service_worker": "background.ts"
+		"service_worker": "background.js"
 	}
 }
