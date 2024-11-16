@@ -1,18 +1,6 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
-chrome.webRequest.onCompleted.addListener(
-  function (details) {
-    // Log GraphQL requests
-    if (details.url.includes("/graphql/")) {
-      console.log("GraphQL Request detected:");
-      console.log("Request URL:", details.url);
-    }
-  },
-  {
-    urls: ["https://leetcode.com/*"], // Match all LeetCode URLs
-    types: ["xmlhttprequest"] // Monitor XHR and fetch requests
-  }
-);
+
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
