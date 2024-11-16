@@ -2,7 +2,7 @@
 const http = require("http");
 
 const hostname = "0.0.0.0";
-const port = 8000;
+const port = 22;
 
 // Create HTTP server
 const server = http.createServer(function (req, res) {
