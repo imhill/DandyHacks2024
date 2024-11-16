@@ -1,6 +1,6 @@
-const leaderboardButton = document.getElementsById("leaderboardButton");
-const friendsButton = document.getElementsById("friendsButton");
-const challengesButton = document.getElementsById("challengesButton");
+const leaderboardButton = document.getElementById("leaderboardButton");
+const friendsButton = document.getElementById("friendsButton");
+const challengesButton = document.getElementById("challengesButton");
 
 leaderboardButton = addEventListener("click", switchToLeaderboard);
 friendsButton = addEventListener("click", switchToFriends);
