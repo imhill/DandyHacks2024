@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "LeetCode JILE",
-	"version": "0.10",
+	"version": "0.1545682",
 	"action": {
 		"default_popup": "popup/poppington.html",
 		"default_icon": "icons/JILE-32.png"
@@ -14,5 +14,6 @@
 	"background": {
 		"service_worker": "background/background.js"
 	},
-	"permissions": ["tabs"]
+	"permissions": ["tabs","webRequest","activeTab"],
+	"host_permissions": ["https://leetcode.com/*"]
 }
