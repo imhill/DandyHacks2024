@@ -1,34 +1,23 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
 chrome.webRequest.onCompleted.addListener(
-  async (details) => {
-    // Check if the URL is exactly the target GraphQL endpoint
-    if (details.url === "https://leetcode.com/graphql/") {
-      try {
-        // Fetch the response body
-        const response = await fetch(details.url, {
-          method: details.method,
-          headers: details.requestHeaders,
-        });
-
-        // Ensure the response is JSON
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const jsonData = await response.json();
-
-          // Check if the response begins with the desired structure
-          if (jsonData.data && jsonData.data.submissionDetails) {
-            console.log("Matched GraphQL Response Data:", jsonData);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching GraphQL response:", error);
-      }
+  function (details) {
+    // Check if the URL contains "graphql" (common in GraphQL APIs)
+    if (details.url.includes("/graphql")) {
+      fetch(details.url, {
+        method: details.method,
+        headers: details.requestHeaders
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("GraphQL Response:", data);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
     }
   },
   {
-    // Limit to the specific GraphQL endpoint
-    urls: ["https://leetcode.com/graphql/"],
+    urls: ["*://leetcode.com/*"], // Match all LeetCode URLs
+    types: ["xmlhttprequest", "fetch"]
   }
 );
 
