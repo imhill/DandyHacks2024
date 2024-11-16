@@ -1,7 +1,7 @@
 // Load HTTP module
 const http = require("http");
 
-const hostname = "127.0.0.1";
+const hostname = "0.0.0.0";
 const port = 8000;
 
 // Create HTTP server
@@ -10,7 +10,7 @@ const server = http.createServer(function (req, res) {
   res.writeHead(200, { "Content-Type": "text/plain" });
 
   // Send the response body "Hello World"
-  res.end("Hello World\n");
+  res.end("Hello from the EC2 instance!!!!!\n");
 });
 
 // Prints a log once the server starts listening
