@@ -1,21 +1,33 @@
+:root{
+    --tableBackground: #FFFFFF;
+    --popupBackground: linear-gradient(45, #FFFFFF, #DDDDDD);
+}
+
 html{
-  width: 400px;
-  height: 500px;
+    width: 400px;
+    height: 500px;
+    background-image: var(--popupBackground);
 }
 
 .tabButton{
-  display: inline-block;
-  border-radius: 8px;
+    display: inline-block;
+    border-radius: 8px;
 }
 
 .tabbody{
-  display: none;
+    display: none;
 }
 
 #homeIcon{
-  display: block;
+    display: block;
+}
+
+.tableDiv{
+    width: 380px;
+    border-radius: 4px;
+    background-color: var(--tableBackground);
 }
 
 #friendsListTable{
-  color: red;
+    color: red;
 }
