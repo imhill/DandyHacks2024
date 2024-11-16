@@ -59,8 +59,7 @@ function switchTab(tab){
     
     const data = [
       { name: 'John', age: 30 },
-      { name: 'Mary', age: 25 }
-    ];
+      { name: 'Mary', age: 25 }];
     
     const friendsListTable = GenerateTable(data);
     friendsListTable.id = "friendsListTable";
@@ -72,8 +71,7 @@ function switchTab(tab){
 
     const friendData = [
         {name: "ihill", runtime: "40", memory: "4"},
-        {name: "jtrokel", runtime: "50", memory: "2"}
-    ]
+        {name: "jtrokel", runtime: "50", memory: "2"}];
     
     leaderboardFriendsTable = GenerateTable(friendData);
     leaderboardFriendsTable.id = "leaderboardFriendsTable";
