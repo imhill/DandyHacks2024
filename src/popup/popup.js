@@ -53,27 +53,27 @@ function switchTab(tab){
             challengesDiv.style.display = "block";
             break
     }
-
-    //create the friends table
-    const friendsListTableDiv = document.getElementById("friendsListTableDiv");
-    
-    const data = [
-      { name: 'John', age: 30 },
-      { name: 'Mary', age: 25 }];
-    
-    const friendsListTable = GenerateTable(data);
-    friendsListTable.id = "friendsListTable";
-    friendsListTableDiv.appendChild(friendsListTable);
-
-    //create the leaderboard tables
-    const friendsTableDiv = document.getElementById("leaderboardTableFriends");
-    const communityTableDiv = document.getElementById("leaderboardTableCommunity");
-
-    const friendData = [
-        {name: "ihill", runtime: "40", memory: "4"},
-        {name: "jtrokel", runtime: "50", memory: "2"}];
-    
-    leaderboardFriendsTable = GenerateTable(friendData);
-    leaderboardFriendsTable.id = "leaderboardFriendsTable";
-    friendsTableDiv.appendChild(leaderboardFriendsTable);
 }
+
+//create the friends table
+const friendsListTableDiv = document.getElementById("friendsListTableDiv");
+
+const data = [
+  { name: 'John', age: 30 },
+  { name: 'Mary', age: 25 }];
+
+const friendsListTable = GenerateTable(data);
+friendsListTable.id = "friendsListTable";
+friendsListTableDiv.appendChild(friendsListTable);
+
+//create the leaderboard tables
+const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
+
+const friendData = [
+    {name: "ihill", runtime: "40", memory: "4"},
+    {name: "jtrokel", runtime: "50", memory: "2"}];
+
+leaderboardFriendsTable = GenerateTable(friendData);
+leaderboardFriendsTable.id = "leaderboardFriendsTable";
+friendsTableDiv.appendChild(leaderboardFriendsTable);
