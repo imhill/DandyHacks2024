@@ -1,8 +1,10 @@
-const LEETCODE_BASE_URL = "https://leetcode.com";
+const LEETCODE_BASE_URL = "leetcode.com";
 
-if(window.location.href.contains(LEETCODE_BASE_URL)){
-  console.log("Yippee we're leetcoding");
-}
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.url) {
+    console.log(`Tab ${tabId} updated to ${changeInfo.url}`);
+  }
+});
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
