@@ -1,9 +1,13 @@
 // Load HTTP module
 const http = require("http");
 const { Client } = require('pg');
+const express = require('express');
 
 const hostname = "0.0.0.0";
 const port = 8000;
+
+const app = express();
+app.use(express.json());
 
 // PostgreSQL connection setup
 const client = new Client({
@@ -23,29 +27,36 @@ client.connect((err) => {
   }
 });
 
-// Create HTTP server
-const server = http.createServer(function (req, res) {
-  if (req.url === '/ping') {
-    // Set the response HTTP header with HTTP status and Content type
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("PONG\n");
-  } else if (req.url === '/postgres-test') {
-    client.query('SELECT * FROM users', (err, result) => {
-      if (err) {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('Error querying the database\n');
-      } else {
-        // Send the response with data retrieved from PostgreSQL
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(`Data from PostgreSQL: ${JSON.stringify(result.rows)}\n`);
-      }
-    });
-  } else {
-    // Handle 404 for any other route
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not Found');
+/ Example POST endpoint
+app.post('/post-problem', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  if (!jsonBody || !jsonBody.problemNum || !jsonBody.runtime || !jsonBody.space ) {
+    return res.status(400).json({ error: 'Missing required JSON field' });
+  }
+  const query = `
+    INSERT INTO problems (usr_id, problem_number, runtime, space)
+    VALUES ($1, $2, $3, $4)
+  `;
+  try {
+    // Execute the query with parameters
+    const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
+    
+    // Send the response
+    res.status(201);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Prints a log once the server starts listening
 server.listen(port, hostname, function () {
