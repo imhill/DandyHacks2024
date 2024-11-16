@@ -58,11 +58,11 @@ function switchTab(tab){
 //create the friends table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const data = [
+const friendsListData = [
   { name: 'John', age: 30 },
   { name: 'Mary', age: 25 }];
 
-const friendsListTable = GenerateTable(data);
+const friendsListTable = GenerateTable(friendsListData);
 friendsListTable.id = "friendsListTable";
 friendsListTableDiv.appendChild(friendsListTable);
 
@@ -70,10 +70,10 @@ friendsListTableDiv.appendChild(friendsListTable);
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-const friendData = [
+const friendLeaderboardData = [
     {name: "ihill", runtime: "40", memory: "4"},
     {name: "jtrokel", runtime: "50", memory: "2"}];
 
-leaderboardFriendsTable = GenerateTable(friendData);
+leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
 leaderboardFriendsTable.id = "leaderboardFriendsTable";
 friendsTableDiv.appendChild(leaderboardFriendsTable);
