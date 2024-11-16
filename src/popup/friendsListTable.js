@@ -1,4 +1,4 @@
-const friendsListTable = getElementById("friendsListTable");
+const friendsListTable = document.getElementById("friendsListTable");
 
 const friends = ["Bob","Alice","Henry Cramer","etock"];
 
