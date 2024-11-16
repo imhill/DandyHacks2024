@@ -1,0 +1,9 @@
+{
+	"manifest_version": 3,
+	"name": "LeetCode JILE",
+	"version": "0.01",
+	"action": {
+		"default_popup": "popington.html",
+		"default_icon": "iconicslayepicwow.png"
+		}
+}
