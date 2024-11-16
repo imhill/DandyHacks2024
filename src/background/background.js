@@ -1,6 +1,6 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
-chrome.webRequest.onCompleted.addListener(
+/*chrome.webRequest.onCompleted.addListener(
   async (details) => {
     if (details.url.includes("graphql/")) {
       console.log(`Request to ${details.url} completed. Fetching response body...`);
@@ -18,8 +18,8 @@ chrome.webRequest.onCompleted.addListener(
       }
     }
   },
-  { urls: ["https://leetcode.com/*"] }
-);
+  { urls: ["https://leetcode.com/problem/*"] }
+);*/
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
