@@ -4,6 +4,6 @@
 	"version": "0.02",
 	"action": {
 		"default_popup": "popup/poppington.html",
-		"default_icon": "assets/luhcon.png"
+		"default_icon": "icons/JILE.png"
 		}
 }
