@@ -74,6 +74,6 @@ const friendLeaderboardData = [
     {name: "ihill", runtime: "40", memory: "4"},
     {name: "jtrokel", runtime: "50", memory: "2"}];
 
-leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
+const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
 leaderboardFriendsTable.id = "leaderboardFriendsTable";
 friendsTableDiv.appendChild(leaderboardFriendsTable);
