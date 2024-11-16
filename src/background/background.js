@@ -2,22 +2,15 @@ const LEETCODE_BASE_URL = "leetcode.com";
 
 chrome.webRequest.onCompleted.addListener(
   function (details) {
-    // Check if the URL contains "graphql" (common in GraphQL APIs)
+    // Log GraphQL requests
     if (details.url.includes("/graphql")) {
-      fetch(details.url, {
-        method: details.method,
-        headers: details.requestHeaders
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("GraphQL Response:", data);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+      console.log("GraphQL Request detected:");
+      console.log("Request URL:", details.url);
     }
   },
   {
-    urls: ["*://leetcode.com/*"], // Match all LeetCode URLs
-    types: ["xmlhttprequest", "fetch"]
+    urls: ["https://leetcode.com/*"], // Match all LeetCode URLs
+    types: ["xmlhttprequest", "fetch"] // Monitor XHR and fetch requests
   }
 );
 
