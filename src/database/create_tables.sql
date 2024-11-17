@@ -6,15 +6,15 @@ CREATE TABLE users (
 );
 CREATE TABLE problems (
     usr_id INTEGER REFERENCES users(usr_id),   -- Foreign key linking to users table's id
-    problem_number INTEGER NOT NULL,        -- Problem number (e.g., problem ID)
+    title_slug VARCHAR(50) NOT NULL,        -- Problem number (e.g., problem ID)
     runtime INTEGER,                        -- Time taken to solve the problem (in seconds or milliseconds)
     space FLOAT,                            -- Memory used to solve the problem (in floating point)
     completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for when the problem was completed
-    PRIMARY KEY (usr_id, problem_number)    -- Composite primary key (usr_id, problem_number)
+    PRIMARY KEY (usr_id, title_slug)    -- Composite primary key (usr_id, title_slug)
 );
 CREATE TABLE challenge_problem (
     challenge_id SERIAL PRIMARY KEY,            -- Challenge number as the primary key (unique)
-    problem_number INTEGER NOT NULL,           -- The problem number associated with the challenge
+    title_slug VARCHAR(50) NOT NULL,           -- The problem number associated with the challenge
     start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for when the challnege was created
     expiration TIMESTAMP                            -- Timestamp for when the challnege is expired
 );
