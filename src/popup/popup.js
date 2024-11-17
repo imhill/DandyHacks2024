@@ -70,15 +70,15 @@ function switchTab(tab){
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
 const friendsListData = [
-    { name: 'lscortino'},
-    { name: 'etock'},
-    { name: 'hcramer'},
-    { name: 'jtrokel'},
-    { name: 'bobama'},
-    { name: 'ljames'},
-    { name: 'pblart'},
-    { name: 'lthomson'},
-    { name: 'dbov'}];
+    { User: 'lscortino'},
+    { User: 'etock'},
+    { User: 'hcramer'},
+    { User: 'jtrokel'},
+    { User: 'bobama'},
+    { User: 'ljames'},
+    { User: 'pblart'},
+    { User: 'lthomson'},
+    { User: 'dbov'}];
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
@@ -107,8 +107,8 @@ const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv"
 fetchData();*/
 
 const friendLeaderboardData = [
-    {name: "ihill", runtime: "40", memory: "4"},
-    {name: "jtrokel", runtime: "50", memory: "2"}];
+    {User: "ihill", Runtime: "40", Memory: "4"},
+    {User: "jtrokel", Runtime: "50", Memory: "2"}];
 
 //generate the table with the data
 const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
@@ -123,12 +123,12 @@ const activeChallengesTableDiv = document.getElementById("activeChallengesTableD
 const previousChallengesDiv = document.getElementById("previousChallengesTableDiv");
 
 const activeChallengesData = [
-    {with: "lscortino", question: "1", expires: "8pm, 11/19/24"},
-    {with: "jtrokel", question: "735", expires: "6pm, 11/20/24"}];
+    {User: "lscortino", Question: "1", Expires: "8pm, 11/19/24"},
+    {User: "jtrokel", Question: "735", Expires: "6pm, 11/20/24"}];
 
 const previousChallengesData = [
-    {with: "etock", question: "1738", winner: "ihill"},
-    {with: "jtrokel", question: "542", winner: "jtrokel"}];
+    {User: "etock", Question: "1738", Winner: "ihill"},
+    {User: "jtrokel", Question: "542", Winner: "jtrokel"}];
 
 //generate the table with the data
 const activeChallengesTable = GenerateTable(activeChallengesData);
