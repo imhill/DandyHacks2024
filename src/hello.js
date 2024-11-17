@@ -86,7 +86,7 @@ app.post('/add-friend', async (req, res) => {
     const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [jsonBody.friend]);
   
-    console.log(userRes.rows);
+    console.log(userRes.rows[0].usr_id);
     if (userRes.rows.length === 0) {
       res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
     }
@@ -97,8 +97,7 @@ app.post('/add-friend', async (req, res) => {
   
     const usrId = userRes.rows[0].usr_id;
     const friendId = friendRes.rows[0].usr_id;
-    console.log(userRes);
-    const result = await client.query(query, [userRes, friendRes]);
+    const result = await client.query(query, [usrId, friendId]);
     // Send the response
     res.sendStatus(201);
   } catch (err) {
