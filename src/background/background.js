@@ -1,6 +1,6 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
-chrome.webRequest.onBeforeRequest.addListener(
+chrome.webRequest.onCompleted.addListener(
     async (details) => {
         const url = details.url;
         if (url.includes("/check/")) {
@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             }
         }
     },
-    { urls: ["*://*.leetcode.com/submissions/detail/*/check"] },
+    { urls: ["https://leetcode.com/submissions/detail/*/check"] },
     []
 );
 
