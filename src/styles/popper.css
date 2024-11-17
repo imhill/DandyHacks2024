@@ -1,6 +1,6 @@
 :root{
-    --tableBackground: #FFFFFF;
-    --popupBackground: linear-gradient(-225deg, #FFFFFF, #AAAAAA);
+    --tableBackground: #FFF;
+    --popupBackground: linear-gradient(-225deg, #FFF, #AAA);
 }
 
 html{
@@ -31,19 +31,25 @@ body{
     background-color: var(--tableBackground);
 }
 
+table{
+    width: 100%;
+    border-spacing: 0;
+    text-align: left;
+}
+
 th{
     background-color: #F28C28;
-    color: #444444;
+    color: #222;
 }
 
 tr{
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 tr:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #e2e2e2;
 }
 
 tr:hover {
-    background-color: rgba(50,0,0,0.25);
+    background-color: rgba(160,90,30,0.25);
 }
