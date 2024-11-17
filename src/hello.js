@@ -365,8 +365,18 @@ app.post('/post-problem', async (req, res) => {
     INSERT INTO problems (usr_id, problem_number, runtime, space)
     VALUES ((SELECT usr_id FROM users WHERE username = $1), $2, $3, $4)
     ON CONFLICT (usr_id, problem_number)
-    DO UPDATE SET runtime = EXCLUDED.runtime, space = EXCLUDED.space;
+    DO UPDATE
+        SET runtime = CASE
+                        WHEN EXCLUDED.runtime < problems.runtime THEN EXCLUDED.runtime
+                        ELSE problems.runtime
+                     END,
+            space = CASE
+                        WHEN EXCLUDED.runtime < problems.runtime THEN EXCLUDED.space
+                        ELSE problems.space
+                    END;
+
   `;
+  
   try {
     // Execute the query with parameters
     const result = await client.query(query, [queryParams.username, jsonBody.titleSlug, jsonBody.runtime, jsonBody.space]);
