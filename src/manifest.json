@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "LeetCode JILE",
-	"version": "0.75",
+	"version": "0.80",
 	"action": {
 		"default_popup": "popup/poppington.html",
 		"default_icon": "icons/JILE-32.png"

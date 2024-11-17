@@ -17,15 +17,13 @@ export async function GetLeaderboard() {
     
     // Send leaderboard request
     try {
-        const leaderboardResponse = await fetch(`http://3.143.223.90:8000/get-problem-stats?username=${username}`, {
+        const leaderboardResponse = await fetch(`http://3.143.223.90:8000/get-problem-stats?username=${username}&titleSlug=${slug}`, {
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                titleSlug: slug
-            })
+            }
         });
-        console.log(leaderboardResponse);
+        const boardData = await leaderboardResponse.json()
+        return boardData;
     } catch(err) {
         console.error(err)
     }
