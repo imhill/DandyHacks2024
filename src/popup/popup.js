@@ -91,7 +91,7 @@ friendsListTableDiv.appendChild(friendsListTable);
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-const fetchData = async () => {
+/*const fetchData = async () => {
   try {
     const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard');
     if (!response.ok) {
@@ -104,7 +104,7 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
+fetchData();*/
 
 const friendLeaderboardData = [
     {name: "ihill", runtime: "40", memory: "4"},
@@ -116,3 +116,26 @@ leaderboardFriendsTable.id = "leaderboardFriendsTable";
 
 //add it to the div
 friendsTableDiv.appendChild(leaderboardFriendsTable);
+
+
+//create the Challenge tab tables
+const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
+const previousChallengesDiv = document.getElementById("previousChallengesTableDiv");
+
+const activeChallengesData = [
+    {with: "lscortino", question: "1"},
+    {with: "jtrokel", question: "735"}];
+
+const previousChallengesData = [
+    {with: "etock", question: "1", winner: "ihill"},
+    {with: "jtrokel", question: "735", winner: "jtrokel"}];
+
+//generate the table with the data
+const activeChallengesTable = GenerateTable(activeChallengesData);
+leaderboardFriendsTable.id = "leaderboardFriendsTable";
+const previousChallengesTable = GenerateTable(previousChallengesData);
+leaderboardFriendsTable.id = "leaderboardFriendsTable";
+
+//add it to the div
+activeChallengesTableDiv.appendChild(activeChallengesTable);
+previousChallengesDiv.appendChild(previousChallengesTable);
