@@ -57,7 +57,9 @@ chrome.webRequest.onCompleted.addListener(
                             space: Number(gqlSubData.memory)
                         });
 
-                    const createResp = await fetch(`http://3.143.223.90:8000/create-user?username=${gqlSubData.user.username}`);
+                    const createResp = await fetch(`http://3.143.223.90:8000/create-user?username=${gqlSubData.user.username}`, {
+                        method: "POST"
+                    });
                     console.log(createResp);
 
                     const dbResponse = await fetch(`http://3.143.223.90:8000/post-problem?username=${gqlSubData.user.username}`, {
