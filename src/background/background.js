@@ -50,16 +50,21 @@ chrome.webRequest.onCompleted.addListener(
 
                     const gqlSubData = gqlData.data.submissionDetails;
                     console.log("user: ", gqlSubData.user.username, "lang: ", gqlSubData.lang.name, "runtime: ", gqlSubData.runtimeDisplay, "memory: ", gqlSubData.memoryDisplay);
+
+                    const dbBody = JSON.stringify({
+                            problemNum: Number(gqlSubData.question.questionId),
+                            runtime: Number(gqlSubData.runtime),
+                            space: Number(gqlSubData.memory)
+                        });
+
+                    await fetch(`http://3.143.223.90:8000/create-user?username=${gqlSubData.user.username}`)
+
                     const dbResponse = await fetch(`http://3.143.223.90:8000/post-problem?username=${gqlSubData.user.username}`, {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({
-                            problemNum: Number(gqlSubData.question.questionId),
-                            runtime: Number(gqlSubData.runtime),
-                            space: Number(gqlSubData.memory)
-                        })
+                        body: dbBody
                     });
                     console.log(dbResponse);
                 }
