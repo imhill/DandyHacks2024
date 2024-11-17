@@ -91,7 +91,7 @@ friendsListTableDiv.appendChild(friendsListTable);
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-/*const fetchData = async () => {
+const fetchData = async () => {
   try {
     const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard');
     if (!response.ok) {
@@ -104,7 +104,7 @@ const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv"
   }
 };
 
-fetchData();*/
+fetchData();
 
 const friendLeaderboardData = [
     {User: "ihill", Runtime: "40", Memory: "4"},
