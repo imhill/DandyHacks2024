@@ -12,9 +12,24 @@ body{
     background-image: var(--popupBackground);
 }
 
+.tabbutton{
+    background-color: red;
+    border: none;
+    display: inline-block;
+    margin-right: -2px;
+}
+
 .tabButton{
     display: inline-block;
-    border-radius: 8px;
+    border-radius: 6px 6px 0px 0px;
+}
+
+.activeTab{
+    background-color: #aaa;
+}
+
+.inactiveTab{
+    background-color: #ddd;
 }
 
 .tabbody{
