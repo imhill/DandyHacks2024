@@ -75,9 +75,10 @@ app.post('/add-friend', async (req, res) => {
   `;
   try {
     // Execute the query with parameters
-    const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
+    const result = await client.query(query, [queryParams.username]);
     console.log(results);
     // Send the response
+    res.sendStatus(201);
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
