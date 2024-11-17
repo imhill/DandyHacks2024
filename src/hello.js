@@ -305,14 +305,15 @@ app.get('/get-problem-stats', async (req, res) => {
                  FROM problems p
                         JOIN friends f
                              ON p.usr_id = f.friend_id
-                 WHERE f.usr_id = $1
+                        JOIN users u ON u.usr_id = p.usr_id
+                 WHERE f.usr_id = u.usr_id
                    AND EXISTS (
                      SELECT *
                      FROM friends f2
                      WHERE f2.usr_id = f.friend_id
                        AND f2.friend_id = p.usr_id
                    )
-                   AND p.problem_number = $1;`;
+                   AND p.problem_number = $2;`;
   try {
     // Execute the query with parameters
     const result = await client.query(query, [jsonBody.titleSlug]);
