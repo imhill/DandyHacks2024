@@ -81,12 +81,10 @@ app.post('/add-friend', async (req, res) => {
     DO NOTHING;
   `;
   try {
-    console.log(queryParams.username);
     // Execute the query with parameters
     const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [jsonBody.friend]);
   
-    console.log(userRes.rows[0].usr_id);
     if (userRes.rows.length === 0) {
       res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
     }
@@ -106,6 +104,49 @@ app.post('/add-friend', async (req, res) => {
   }
 });
 
+app.get('/get-friends', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  const query = `
+    SELECT f.friend_id
+    FROM friends f
+    WHERE f.usr_id = $1
+      AND EXISTS (
+        SELECT $1
+        FROM friends f2
+        WHERE f2.usr_id = f.friend_id
+          AND f2.friend_id = $1
+      );
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    if (friendRes.rows.length === 0) {
+      res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const result = await client.query(query, [usrId]);
+    console.log(result);
+    // Send the response
+    res.sendStatus(201);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 //Dummy for now
 app.get('/get-challenge-leaderboard', async (req, res) => {
