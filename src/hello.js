@@ -76,7 +76,7 @@ app.post('/add-friend', async (req, res) => {
   try {
     // Execute the query with parameters
     const result = await client.query(query, [queryParams.username]);
-    console.log(results);
+    console.log(result);
     // Send the response
     res.sendStatus(201);
   } catch (err) {
