@@ -103,7 +103,12 @@ app.post('/add_friend', async (req, res) => {
   }
   const query = `
     INSERT INTO friends (usr_id, friend_id)
-    VALUES ($1, $2)
+    VALUES (
+               (SELECT usr_id FROM users WHERE username = $1),  -- Get the usr_id based on the username
+               (SELECT usr_id FROM users WHERE username = $2)   -- Get the friend_id based on the friend's username
+           )
+      ON CONFLICT (usr_id, friend_id)  -- Avoid conflicts if the same friendship already exists
+    DO NOTHING;
   `;
   try {
     // Execute the query with parameters
