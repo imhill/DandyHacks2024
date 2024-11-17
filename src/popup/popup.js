@@ -127,8 +127,8 @@ const activeChallengesData = [
     {with: "jtrokel", question: "735", expires: "6pm, 11/20/24"}];
 
 const previousChallengesData = [
-    {with: "etock", question: "1", winner: "ihill"},
-    {with: "jtrokel", question: "735", winner: "jtrokel"}];
+    {with: "etock", question: "1738", winner: "ihill"},
+    {with: "jtrokel", question: "542", winner: "jtrokel"}];
 
 //generate the table with the data
 const activeChallengesTable = GenerateTable(activeChallengesData);
