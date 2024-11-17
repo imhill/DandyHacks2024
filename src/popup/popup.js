@@ -1,5 +1,6 @@
 import {GenerateTable} from "./generateTable.js";
 import {AddFriend,GetFriends} from "./friendUtils.js";
+import {GetLeaderboard} from "./leaderboardUtils.js";
 
 /*
  *    Switch between tabs
@@ -12,7 +13,7 @@ const friendsButton = document.getElementById("friendsButton");
 friendsButton.addEventListener("click", switchToFriends);
 const challengesButton = document.getElementById("challengesButton");
 challengesButton.addEventListener("click", switchToChallenges);
-
+//group buttons
 const tabButtons = [leaderboardButton,friendsButton,challengesButton];
 
 //define the function to switch to a given page
@@ -26,8 +27,7 @@ const friendsDiv = document.getElementById("friends");
 const challengesDiv = document.getElementById("challenges");
 //opening home page icon
 const icon = document.getElementById("homeIcon");
-
-//put all the divs for tabs in an array
+//group divs
 const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon];
 
 //function to hide all divs
@@ -35,7 +35,6 @@ function nukeDivs(divs,buttons){
     for(const d of divs){
         d.style.display = "none";
     }
-
     for(const b of buttons){
         b.className = "tabButton inactiveTab";
     }
@@ -70,20 +69,17 @@ function switchTab(tab){
 //Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const results_from_function = await GetFriends();
-
 function formatFriendsList(friendList){
-    
     const formattedList = []
-    
     for(const friend of friendList){
         formattedList.push({User: friend});
     }
-
     return formattedList;
 }
 
-const friendsListData = formatFriendsList(results_from_function.pending);
+const rawFriendsList = await GetFriends();
+
+const friendsListData = formatFriendsList(rawFriendsList.friends);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
@@ -92,29 +88,36 @@ friendsListTable.id = "friendsListTable";
 //add it to the div
 friendsListTableDiv.appendChild(friendsListTable);
 
+
 //create the Leaderboard tab tables
+const leaderboardTitle = document.getElementById("leaderboardTitle");
+
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+
+const rawLeaderboard = await GetLeaderboard();
+
+function formatLeaderboardData(board){
+    const formattedList = [];
+    const probArray = board[0].problem_number.split("-");
+    for (let i = 0; i < probArray.length; i++) {
+        probArray[i] = String(probArray[i]).charAt(0).toUpperCase() + String(probArray[i]).slice(1);
+    }
+    leaderboardTitle.textContent = probArray.join(" ");
+
+    for (const row of board) {
+        formattedList.push({
+            User: row.username,
+            Runtime: String(row.runtime) + " ms",
+            Memory: String((row.space / 1000000).toFixed(2)) + " MB"
+        });
+    }
+    return formattedList;
+}
+
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-/*const fetchData = async () => {
-  try {
-    const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard?username=ezra');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log('Response data:', data);
-    return (data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-fetchData();*/
-
-const friendLeaderboardData = [
-    {User: "ihill", Runtime: "40", Memory: "4"},
-    {User: "jtrokel", Runtime: "50", Memory: "2"}];
+const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
+console.log(friendLeaderboardData);
 
 //generate the table with the data
 const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);

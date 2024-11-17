@@ -1,3 +1,4 @@
+
 :root{
     --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #FFF, #AAA);
@@ -80,13 +81,32 @@ tr:hover {
 
 #searchBarTextBox{
     width: 230px;
-    height: 40px;
+    height: 30px;
     border-radius: 8px;
     background-color: #DDD;
     border: 0;
+    margin: 30px 0px 20px 30px;
 }
 
 #addFriendButton{
     display: inline-block;
-    height: 30px;
+    height: 20px;
+    font-size: 10px;
+    margin: -46px 0px 0px 290px;
+    border: 0;
+    border-radius: 4px;
+}
+
+#addFriendButton:hover{
+    background-color: rgba(242,140,40,0.5);
+}
+
+#addFriendsButton:active{
+    background-color: rgba(242,140,40,1);
+}
+
+#leaderboardTitle{
+    margin:0;
+    padding: 20px 10px 10px 10px;
+    text-align: center;
 }
