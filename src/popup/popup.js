@@ -1,4 +1,5 @@
 import {GenerateTable} from "./generateTable.js";
+import {AddFriend} from "./addFriend.js";
 
 /*
  *    Switch between tabs
