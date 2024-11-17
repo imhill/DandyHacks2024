@@ -89,36 +89,29 @@ friendsListTable.id = "friendsListTable";
 friendsListTableDiv.appendChild(friendsListTable);
 
 
-const rawLeaderboard await GetLeaderboard();
-
-console.log(rawLeaderboard);
-
-
-
-
 //create the Leaderboard tab tables
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+
+const rawLeaderboard = await GetLeaderboard();
+
+function formatLeaderboardData(board){
+    const formattedList = [];
+    console.log(board);
+    for (const row of board) {
+        console.log(row);
+        formattedList.push({
+            User: row.username,
+            Runtime: String(row.runtime) + " ms",
+            Memory: String(row.space / 1000000) + " MB"
+        });
+    }
+    return formattedList;
+}
+
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-/*const fetchData = async () => {
-  try {
-    const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard?username=ezra');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log('Response data:', data);
-    return (data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-fetchData();*/
-
-const friendLeaderboardData = [
-    {User: "ihill", Runtime: "40", Memory: "4"},
-    {User: "jtrokel", Runtime: "50", Memory: "2"}];
+const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
+console.log(friendLeaderboardData);
 
 //generate the table with the data
 const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
