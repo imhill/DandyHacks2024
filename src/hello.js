@@ -322,7 +322,7 @@ app.get('/get-problem-stats', async (req, res) => {
 
                   UNION
 
-                  SELECT p.runtime, p.space, p.completed_at, u.username
+                  SELECT p.runtime, p.space, p.completed_at, u.username, p.problem_number
                   FROM problems p
                          JOIN users u
                               ON u.usr_id = p.usr_id
