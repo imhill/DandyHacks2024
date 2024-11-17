@@ -1,4 +1,5 @@
 import {GenerateTable} from "./generateTable.js";
+import {AddFriend,GetFriends} from "./friendUtils.js";
 
 /*
  *    Switch between tabs
@@ -69,16 +70,20 @@ function switchTab(tab){
 //Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const friendsListData = [
-    { User: 'lscortino'},
-    { User: 'etock'},
-    { User: 'hcramer'},
-    { User: 'jtrokel'},
-    { User: 'bobama'},
-    { User: 'ljames'},
-    { User: 'pblart'},
-    { User: 'lthomson'},
-    { User: 'dbov'}];
+const results_from_function = await GetFriends();
+
+function formatFriendsList(friendList){
+    
+    const formattedList = []
+    
+    for(const friend of friendList){
+        formattedList.push({User: friend});
+    }
+
+    return formattedList;
+}
+
+const friendsListData = formatFriendsList(results_from_function.pending);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
@@ -91,7 +96,7 @@ friendsListTableDiv.appendChild(friendsListTable);
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-const fetchData = async () => {
+/*const fetchData = async () => {
   try {
     const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard?username=ezra');
     if (!response.ok) {
@@ -105,7 +110,7 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
+fetchData();*/
 
 const friendLeaderboardData = [
     {User: "ihill", Runtime: "40", Memory: "4"},
@@ -118,6 +123,17 @@ leaderboardFriendsTable.id = "leaderboardFriendsTable";
 //add it to the div
 friendsTableDiv.appendChild(leaderboardFriendsTable);
 
+//add a friend
+const addFriendButton = document.getElementById("addFriendButton");
+const searchBarTextbox = document.getElementById("searchBarTextBox");
+addFriendButton.addEventListener("click", sendFriendReq);
+
+
+function sendFriendReq() {
+    const friendToAdd = searchBarTextbox.value;
+    console.log(friendToAdd);
+    AddFriend(friendToAdd);
+}
 
 //create the Challenge tab tables
 const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");

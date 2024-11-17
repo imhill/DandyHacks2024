@@ -78,13 +78,15 @@ tr:hover {
     color: rgba(128,128,128,0.5);
 }
 
-#searchBarDiv{
+#searchBarTextBox{
     width: 230px;
     height: 40px;
     border-radius: 8px;
     background-color: #DDD;
+    border: 0;
 }
 
-#searchBarTextBox{
-    border: 0;
+#addFriendButton{
+    display: inline-block;
+    height: 30px;
 }
