@@ -53,6 +53,25 @@ app.post('/create-user', async (req, res) => {
   }
 });
 
+//Create User Endpoint
+app.get('/get-challenge-leaderboard', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({error: 'Missing required query parameter: username'});
+  }
+  try {
+    // Execute the query with paramet
+    res.send(201).json({challenges: [{'leo':10}, {'ezra':5}]});
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.post('/add-friend', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
@@ -92,7 +111,7 @@ app.post('/add-friend', async (req, res) => {
   
     const usrId = userRes.rows[0].usr_id;
     const friendId = friendRes.rows[0].usr_id;
-    // const result = await client.query(query, [userRes, friendRes]);
+    const result = await client.query(query, [userRes, friendRes]);
     // Send the response
     res.sendStatus(201);
   } catch (err) {
