@@ -82,7 +82,7 @@ function formatFriendsList(friendList){
     return formattedList;
 }
 
-const friendsListData = formatFriendsList(results_from_function);
+const friendsListData = formatFriendsList(results_from_function.pending);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
@@ -95,7 +95,7 @@ friendsListTableDiv.appendChild(friendsListTable);
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
-const fetchData = async () => {
+/*const fetchData = async () => {
   try {
     const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard?username=ezra');
     if (!response.ok) {
@@ -109,7 +109,7 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
+fetchData();*/
 
 const friendLeaderboardData = [
     {User: "ihill", Runtime: "40", Memory: "4"},
