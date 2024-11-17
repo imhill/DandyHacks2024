@@ -70,16 +70,19 @@ function switchTab(tab){
 //Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const friendsListData = [
-    { User: 'lscortino'},
-    { User: 'etock'},
-    { User: 'hcramer'},
-    { User: 'jtrokel'},
-    { User: 'bobama'},
-    { User: 'ljames'},
-    { User: 'pblart'},
-    { User: 'lthomson'},
-    { User: 'dbov'}];
+const results_from_function = GetFriends();
+
+function formatFriendsList(friendList){
+    const formattedList = []
+    
+    for(const friend of friendList){
+        formattedList.push({User: friend});
+    }
+
+    return formattedList;
+}
+
+const friendsListData = formatFriendsList(results_from_function);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
