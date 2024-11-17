@@ -10,12 +10,24 @@ export async function GetLeaderboard() {
     const slugRegex = /.*?leetcode.com\/problems\/(.*?)\/sub.*/;
     const result = slugRegex.exec(tabUrl);
 
-    const titleSlug = result[1];
+    const slug = result[1];
     
     // Get username
     const username = await GetUsername();
     
     // Send leaderboard request
-    console.log("slug, name, ", titleSlug, username);
-
+    try {
+        const leaderboardResponse = await fetch(`http://3.143.223.90:8000/get-problem-stats?username=${username}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                titleSlug: slug
+            })
+        });
+        console.log(leaderboardResponse);
+    } catch(err) {
+        console.error(err)
+    }
+    return [];
 }
