@@ -69,15 +69,28 @@ app.post('/add-friend', async (req, res) => {
   const query = `
     INSERT INTO friends (usr_id, friend_id)
     VALUES (
-               (SELECT usr_id FROM users WHERE username = $1),  -- Get the usr_id based on the username
-               (SELECT usr_id FROM users WHERE username = $2)   -- Get the friend_id based on the friend's username
+               $1,  -- Get the usr_id based on the username
+               $2   -- Get the friend_id based on the friend's username
            )
       ON CONFLICT (usr_id, friend_id)  -- Avoid conflicts if the same friendship already exists
     DO NOTHING;
   `;
   try {
     // Execute the query with parameters
-    const result = await client.query(query, [queryParams.username, jsonBody.friend]);
+    const userRes = await client.query('SELECT usr_id FROM users WHERE username = $1', [queryParams.username]);
+    const friendRes = await client.query('SELECT usr_id FROM users WHERE username = $2', [jsonBody.friend]);
+  
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+  
+    if (friendRes.rows.length === 0) {
+      res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
+    }
+  
+    const usrId = userRes.rows[0].usr_id;
+    const friendId = friendRes.rows[0].usr_id;
+    const result = await client.query(query, [userRes, friendRes]);
     // Send the response
     res.sendStatus(201);
   } catch (err) {
