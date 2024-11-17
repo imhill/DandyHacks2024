@@ -48,16 +48,16 @@ function switchTab(tab){
     //then depending on the argument, display the appropriate div
     switch(tab){
         case "leaderboard":
-            leaderboardButton.className = "activeTab";
+            leaderboardButton.className = "tabButton activeTab";
             leaderboardDiv.style.display = "block";
             break;
         case "friends":
             friendsDiv.style.display = "block";
-            friendsButton.className = "activeTab";
+            friendsButton.className = "tabButton activeTab";
             break;
         case "challenges":
             challengesDiv.style.display = "block";
-            challengesButton.className = "activeTab";
+            challengesButton.className = "tabButton activeTab";
             break;
     }
 }
