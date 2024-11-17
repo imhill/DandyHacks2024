@@ -93,12 +93,13 @@ const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv"
 
 const fetchData = async () => {
   try {
-    const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard');
+    const response = await fetch('http://3.143.223.90:8000/get-challenge-leaderboard?username=ezra');
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
     console.log('Response data:', data);
+    return (data);
   } catch (error) {
     console.error('Error:', error);
   }
