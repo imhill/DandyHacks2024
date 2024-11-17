@@ -1,3 +1,4 @@
+
 :root{
     --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #FFF, #AAA);
@@ -102,4 +103,10 @@ tr:hover {
 
 #addFriendsButton:active{
     background-color: rgba(242,140,40,1);
+}
+
+#leaderboardTitle{
+    margin:0;
+    padding: 20px 10px 10px 10px;
+    text-align: center;
 }
