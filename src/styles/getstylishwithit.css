@@ -19,10 +19,6 @@ body{
     margin-right: -2px;
     font-size: 16px;
     padding: 4px 12px 2px 12px;
-}
-
-.tabButton{
-    display: inline-block;
     border-radius: 6px 6px 0px 0px;
 }
 
@@ -86,23 +82,31 @@ tr:hover {
     background-color: #DDD;
     border: 0;
     margin: 30px 0px 20px 30px;
+    padding: 10px;
 }
 
-#addFriendButton{
+.friendButton{
     display: inline-block;
     height: 20px;
     font-size: 10px;
-    margin: -46px 0px 0px 290px;
     border: 0;
     border-radius: 4px;
 }
 
-#addFriendButton:hover{
-    background-color: rgba(242,140,40,0.5);
+.friendButton:hover{
+    background-color: rgba(196,196,196,1);
 }
 
-#addFriendsButton:active{
-    background-color: rgba(242,140,40,1);
+.friendButton:active{
+    background-color: rgba(128,128,128,1);
+}
+
+#removeFriendButton{
+    margin: -32px 0px 0px 280px;
+}
+
+#addFriendButton{
+    margin: -56px 0px 0px 290px;
 }
 
 #leaderboardTitle{
