@@ -1,3 +1,5 @@
+import {GetUsername} from "./getUsername.js";
+
 export async function AddFriend(friendName) {
     // Get runner's username
     const username = await getUsername();
@@ -40,27 +42,4 @@ export async function GetFriends() {
         console.error(err);
     }
     return [];
-}
-
-async function getUsername() {
-    try {
-        const query = `
-            query globalData {
-              userStatus {
-                username
-              }
-             }`;
-        const response = await fetch("https://leetcode.com/graphql/", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ query: query })
-        });
-        const data = await response.json();
-        const username = data.data.userStatus.username;
-        return username;
-    } catch (err) {
-        console.error(err);
-    }
 }
