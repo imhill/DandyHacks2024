@@ -1,22 +1,10 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
 chrome.webRequest.onCompleted.addListener(
-    async (details) => {
-        const url = details.url;
-        if (url.includes("/check/")) {
-            console.log("saw check");
-
-            try {
-                const response = await fetch(url);
-                const data = await response.text();
-
-                console.log("response body: ", data);
-            } catch (err) {
-                console.error("error fetching response: ", err);
-            }
-        }
+    (details) => {
+        console.log("HOORAY!!!!");
     },
-    { urls: ["https://leetcode.com/submissions/detail/*/check"] },
+    { urls: ["https://leetcode.com/*/check"] },
     []
 );
 
