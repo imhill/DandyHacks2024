@@ -295,6 +295,7 @@ app.get('/get-active-challenges', async (req, res) => {
 });
 
 app.get('/get-problem-stats', async (req, res) => {
+  const queryParm = req.query;
   const jsonBody = req.body;
   
   if (!jsonBody.titleSlug) {
@@ -316,7 +317,7 @@ app.get('/get-problem-stats', async (req, res) => {
                    AND p.problem_number = $2;`;
   try {
     // Execute the query with parameters
-    const result = await client.query(query, [jsonBody.titleSlug]);
+    const result = await client.query(query, [queryParm.username, jsonBody.titleSlug]);
     // Send the response
     res.status(200).json(result.rows);
   } catch (err) {
