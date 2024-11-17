@@ -1,7 +1,8 @@
 {
 	"manifest_version": 3,
 	"name": "LeetCode JILE",
-	"version": "0.99",
+	"version": "1.00",
+	"description": "Winning DandyHacks 2024 Community Track Submission",
 	"action": {
 		"default_popup": "popup/poppington.html",
 		"default_icon": "icons/JILE-32.png"
