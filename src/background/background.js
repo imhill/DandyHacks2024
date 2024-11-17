@@ -51,8 +51,9 @@ chrome.webRequest.onCompleted.addListener(
                     const gqlSubData = gqlData.data.submissionDetails;
                     console.log("user: ", gqlSubData.user.username, "lang: ", gqlSubData.lang.name, "runtime: ", gqlSubData.runtimeDisplay, "memory: ", gqlSubData.memoryDisplay);
 
+                    console.log("slug: ", gqlSubData.question.titleSlug);
                     const dbBody = JSON.stringify({
-                            problemNum: Number(gqlSubData.question.questionId),
+                            titleSlug: gqlSubData.question.titleSlug,
                             runtime: Number(gqlSubData.runtime),
                             space: Number(gqlSubData.memory)
                         });
