@@ -194,7 +194,6 @@ app.get('/get-friends', async (req, res) => {
 app.get('/get-challenge-leaderboard', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
-  const jsonBody = req.body;
   
   // Validate query parameters and body
   if (!queryParams.username) {
@@ -219,6 +218,39 @@ app.get('/get-challenge-leaderboard', async (req, res) => {
     // Send the response
     console.log(result.rows);
     res.status(200).json(result.rows[0].challenge_count);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/get-problem-count', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  const query = `
+    SELECT COUNT(*) AS problems_count
+    FROM problems
+    WHERE usr_id = $1;
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const result = await client.query(query, [usrId]);
+    // Send the response
+    console.log(result.rows);
+    res.status(200).json(result.rows[0].problems_count);
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
