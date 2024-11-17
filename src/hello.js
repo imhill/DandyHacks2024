@@ -49,12 +49,9 @@ app.post('/post-problem', async (req, res) => {
   `;
   try {
     // Execute the query with parameters
-    console.log("befoer query");
     const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
-    console.log("after query");
     // Send the response
     res.sendStatus(201);
-    console.log("after response");
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -65,26 +62,27 @@ app.post('/add-friend', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
   const jsonBody = req.body;
-
+  
   // Validate query parameters and body
   if (!queryParams.username) {
-    return res.status(400).json({ error: 'Missing required query parameter: username' });
+    return res.status(400).json({error: 'Missing required query parameter: username'});
   }
-
+  
   const query = `
-	INSERT INTO users (username)
-	VALUES ($1)
-	ON CONFLICT (username) DO NOTHING
+    INSERT INTO users (username)
+    VALUES ($1) ON CONFLICT (username) DO NOTHING
 	RETURNING usr_id
-`;
+  `;
   try {
     // Execute the query with parameters
-    console.log("befoer query");
     const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
-	console.log(results);
-    console.log("after query");
+    console.log(results);
     // Send the response
-
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // Prints a log once the server starts listening
 app.listen(port, hostname, function () {
