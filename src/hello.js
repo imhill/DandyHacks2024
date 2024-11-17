@@ -301,7 +301,7 @@ app.get('/get-problem-stats', async (req, res) => {
   if (!queryParm.titleSlug && queryParm.titleSlug) {
     return res.status(400).json({ error: 'Missing required query parameter: username' });
   }
-  const query = `SELECT (p.runtime, p.space, p.completed_at, u.username)
+  const query = `SELECT p.runtime, p.space, p.completed_at, u.username
                   FROM problems p
                          JOIN friends f
                               ON p.usr_id = f.friend_id
@@ -322,7 +322,7 @@ app.get('/get-problem-stats', async (req, res) => {
 
                   UNION
 
-                  SELECT p.*
+                  SELECT p.runtime, p.space, p.completed_at, u.username
                   FROM problems p
                          JOIN users u
                               ON u.usr_id = p.usr_id
