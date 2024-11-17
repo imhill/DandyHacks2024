@@ -70,7 +70,7 @@ function switchTab(tab){
 //Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const results_from_function = GetFriends();
+const results_from_function = await GetFriends();
 
 console.log(results_from_function);
 
