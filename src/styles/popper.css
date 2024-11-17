@@ -31,12 +31,9 @@ body{
     background-color: var(--tableBackground);
 }
 
-#friendsListTable{
-    color: red;
-}
-
 th{
     background-color: #F28C28;
+    color: #444444;
 }
 
 tr{
