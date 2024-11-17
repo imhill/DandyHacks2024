@@ -1,7 +1,5 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
-
-
 //Check if URL contains "/submissions/detail/" & "/check/"
 
 //Check if response has "state" == "SUCCESS" 
