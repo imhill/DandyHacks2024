@@ -34,3 +34,19 @@ body{
 #friendsListTable{
     color: red;
 }
+
+th{
+    background-color: #F28C28;
+}
+
+tr{
+    background-color: #ffffff;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: rgba(50,0,0,0.25);
+}
