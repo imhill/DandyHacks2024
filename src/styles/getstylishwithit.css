@@ -97,5 +97,9 @@ tr:hover {
 }
 
 #addFriendButton:hover{
-    background-color: rgba(242 140 40,0.5);
+    background-color: rgba(242,140,40,0.5);
+}
+
+#addFriendsButton:active{
+    background-color: rgba(242,140,40,1);
 }
