@@ -133,7 +133,7 @@ app.post('/remove-friend', async (req, res) => {
   const query = `
     DELETE FROM friends
     WHERE usr_id = $1  -- The usr_id (user) based on the username
-    AND friend_id = $2;  -- The friend_id (friend) based on the friend's username
+      AND friend_id = $2;  -- The friend_id (friend) based on the friend's username
   `;
   try {
     // Execute the query with parameters
@@ -183,7 +183,8 @@ app.get('/get-friends', async (req, res) => {
     const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
     
     if (userRes.rows.length === 0) {
-      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` });
+      return;
     }
     
     const usrId = userRes.rows[0].usr_id;
@@ -302,38 +303,38 @@ app.get('/get-problem-stats', async (req, res) => {
     return res.status(400).json({ error: 'Missing required query parameter: username' });
   }
   const query = `SELECT p.runtime, p.space, p.completed_at, u.username, p.problem_number
-                  FROM problems p
-                         JOIN friends f
-                              ON p.usr_id = f.friend_id
-                         JOIN users u
-                              ON u.usr_id = f.friend_id
-                  WHERE f.usr_id = (
-                    SELECT usr_id
-                    FROM users
-                    WHERE username = $1
-                  )
-                    AND EXISTS (
-                      SELECT 1
-                      FROM friends f2
-                      WHERE f2.usr_id = f.friend_id
-                        AND f2.friend_id = f.usr_id
-                    )
-                    AND p.problem_number = $2
-
-                  UNION
-
-                  SELECT p.runtime, p.space, p.completed_at, u.username, p.problem_number
-                  FROM problems p
-                         JOIN users u
-                              ON u.usr_id = p.usr_id
-
-                  WHERE p.usr_id = (
-                    SELECT usr_id
-                    FROM users
-                    WHERE username = $1
-                  )
-                    AND p.problem_number = $2;
-
+                 FROM problems p
+                        JOIN friends f
+                             ON p.usr_id = f.friend_id
+                        JOIN users u
+                             ON u.usr_id = f.friend_id
+                 WHERE f.usr_id = (
+                   SELECT usr_id
+                   FROM users
+                   WHERE username = $1
+                 )
+                   AND EXISTS (
+                     SELECT 1
+                     FROM friends f2
+                     WHERE f2.usr_id = f.friend_id
+                       AND f2.friend_id = f.usr_id
+                   )
+                   AND p.problem_number = $2
+  
+                 UNION
+  
+                 SELECT p.runtime, p.space, p.completed_at, u.username, p.problem_number
+                 FROM problems p
+                        JOIN users u
+                             ON u.usr_id = p.usr_id
+  
+                 WHERE p.usr_id = (
+                   SELECT usr_id
+                   FROM users
+                   WHERE username = $1
+                 )
+                   AND p.problem_number = $2;
+  
   `
   try {
     // Execute the query with parameters
@@ -364,17 +365,17 @@ app.post('/post-problem', async (req, res) => {
   const query = `
     INSERT INTO problems (usr_id, problem_number, runtime, space)
     VALUES ((SELECT usr_id FROM users WHERE username = $1), $2, $3, $4)
-    ON CONFLICT (usr_id, problem_number)
+      ON CONFLICT (usr_id, problem_number)
     DO UPDATE
-        SET runtime = CASE
-                        WHEN EXCLUDED.runtime < problems.runtime THEN EXCLUDED.runtime
-                        ELSE problems.runtime
-                     END,
+               SET runtime = CASE
+               WHEN EXCLUDED.runtime < problems.runtime THEN EXCLUDED.runtime
+               ELSE problems.runtime
+    END,
             space = CASE
                         WHEN EXCLUDED.runtime < problems.runtime THEN EXCLUDED.space
                         ELSE problems.space
-                    END;
-
+    END;
+  
   `;
   
   try {
