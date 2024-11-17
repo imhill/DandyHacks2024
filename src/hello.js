@@ -307,10 +307,10 @@ app.get('/get-problem-stats', async (req, res) => {
                              ON p.usr_id = f.friend_id
                  WHERE f.usr_id = $1
                    AND EXISTS (
-                     SELECT $1
+                     SELECT *
                      FROM friends f2
                      WHERE f2.usr_id = f.friend_id
-                       AND f2.friend_id = $1
+                       AND f2.friend_id = p.usr_id
                    )
                    AND p.problem_number = $1;`;
   try {
