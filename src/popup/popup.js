@@ -79,7 +79,7 @@ function formatFriendsList(friendList){
 
 const rawFriendsList = await GetFriends();
 
-const friendsListData = formatFriendsList(rawFriendsList.active);
+const friendsListData = formatFriendsList(rawFriendsList.friends);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
