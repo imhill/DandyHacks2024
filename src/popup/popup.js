@@ -88,6 +88,12 @@ friendsListTable.id = "friendsListTable";
 //add it to the div
 friendsListTableDiv.appendChild(friendsListTable);
 
+
+GetLeaderboard();
+
+
+
+
 //create the Leaderboard tab tables
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
