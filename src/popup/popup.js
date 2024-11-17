@@ -117,7 +117,6 @@ function formatLeaderboardData(board){
 const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
 
 const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
-console.log(friendLeaderboardData);
 
 //generate the table with the data
 const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
@@ -134,7 +133,6 @@ addFriendButton.addEventListener("click", sendFriendReq);
 
 function sendFriendReq() {
     const friendToAdd = searchBarTextbox.value;
-    console.log(friendToAdd);
     AddFriend(friendToAdd);
 }
 
