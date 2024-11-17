@@ -73,3 +73,18 @@ tr:nth-child(even){
 tr:hover {
     background-color: rgba(160,90,30,0.25);
 }
+
+::placeholder{
+    color: rgba(128,128,128,0.5);
+}
+
+#searchBarDiv{
+    width: 230px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #DDD;
+}
+
+#searchBarTextBox{
+    border: 0;
+}
