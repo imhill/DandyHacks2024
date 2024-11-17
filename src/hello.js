@@ -146,11 +146,6 @@ app.post('/post-problem', async (req, res) => {
     // Execute the query with parameters
     const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
     // Send the response
-    res.set({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    });
     res.sendStatus(201);
   } catch (err) {
     console.error('Error executing query:', err.stack);
@@ -160,11 +155,6 @@ app.post('/post-problem', async (req, res) => {
 
 // Preflight CORS
 app.options('/post-problem', (req, res) => {
-  res.set({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-  });
   res.status(204).send();
 });
 
