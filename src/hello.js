@@ -137,7 +137,7 @@ app.get('/get-friends', async (req, res) => {
     const result = await client.query(query, [usrId]);
     console.log(result);
     // Send the response
-    res.sendStatus(201);
+    res.status(200).json(result.rows.map(row => row.friend_id));
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
