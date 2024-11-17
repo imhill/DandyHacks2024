@@ -1,6 +1,6 @@
 export async function AddFriend(friendName) {
     // Get runner's username
-    const username = getUsername();
+    const username = await getUsername();
 
     // Send friend request
     try {
@@ -11,7 +11,17 @@ export async function AddFriend(friendName) {
             },
             body: JSON.stringify({
                 friend: friendName
-            });
+            })
+        });
+
+        const revFriendReqResponse = await fetch(`http://3.143.223.90:8000/add-friend?username=${friendName}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                friend: username
+            })
         });
     } catch (err) {
         console.error(err)
@@ -24,9 +34,9 @@ async function getUsername() {
             query globalData {
               userStatus {
                 username
-            }
-        }`;
-        const response = await fetch("https://leetcode.com/grahql", {
+              }
+             }`;
+        const response = await fetch("https://leetcode.com/graphql/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
