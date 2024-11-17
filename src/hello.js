@@ -133,10 +133,6 @@ app.get('/get-friends', async (req, res) => {
       res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
     }
     
-    if (friendRes.rows.length === 0) {
-      res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
-    }
-    
     const usrId = userRes.rows[0].usr_id;
     const result = await client.query(query, [usrId]);
     console.log(result);
