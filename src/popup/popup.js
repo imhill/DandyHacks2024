@@ -72,6 +72,8 @@ const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
 const results_from_function = GetFriends();
 
+console.log(results_from_function);
+
 function formatFriendsList(friendList){
     console.log(friendList);
     
