@@ -57,7 +57,8 @@ app.post('/post-problem', async (req, res) => {
     const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
     console.log("after query");
     // Send the response
-    res.status(201);
+    res.sendStatus(201);
+    console.log("after response");
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
