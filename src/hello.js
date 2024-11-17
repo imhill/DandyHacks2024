@@ -302,7 +302,7 @@ app.get('/get-problem-stats', async (req, res) => {
     return res.status(400).json({ error: 'Missing required query parameter: username' });
   }
   
-  const query = `SELECT * from problems WHERE problems.problem_number = $2;`;
+  const query = `SELECT * from problems WHERE problems.problem_number = $1;`;
   try {
     // Execute the query with parameters
     const result = await client.query(query, [jsonBody.titleSlug]);
