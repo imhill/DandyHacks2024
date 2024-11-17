@@ -13,7 +13,7 @@ const friendsButton = document.getElementById("friendsButton");
 friendsButton.addEventListener("click", switchToFriends);
 const challengesButton = document.getElementById("challengesButton");
 challengesButton.addEventListener("click", switchToChallenges);
-
+//group buttons
 const tabButtons = [leaderboardButton,friendsButton,challengesButton];
 
 //define the function to switch to a given page
@@ -27,8 +27,7 @@ const friendsDiv = document.getElementById("friends");
 const challengesDiv = document.getElementById("challenges");
 //opening home page icon
 const icon = document.getElementById("homeIcon");
-
-//put all the divs for tabs in an array
+//group divs
 const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon];
 
 //function to hide all divs
@@ -36,7 +35,6 @@ function nukeDivs(divs,buttons){
     for(const d of divs){
         d.style.display = "none";
     }
-
     for(const b of buttons){
         b.className = "tabButton inactiveTab";
     }
@@ -71,20 +69,17 @@ function switchTab(tab){
 //Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
-const results_from_function = await GetFriends();
-
 function formatFriendsList(friendList){
-    
     const formattedList = []
-    
     for(const friend of friendList){
         formattedList.push({User: friend});
     }
-
     return formattedList;
 }
 
-const friendsListData = formatFriendsList(results_from_function.pending);
+const rawFriendsList = await GetFriends();
+
+const friendsListData = formatFriendsList(rawFriendsList.active);
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
