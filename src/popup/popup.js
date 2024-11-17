@@ -119,6 +119,17 @@ leaderboardFriendsTable.id = "leaderboardFriendsTable";
 //add it to the div
 friendsTableDiv.appendChild(leaderboardFriendsTable);
 
+//add a friend
+const addFriendButton = document.getElementById("addFriendButton");
+const searchBarTextbox = document.getElementById("searchBarTextBox");
+addFriendButton.addEventListener("click", sendFriendReq);
+
+
+function sendFriendReq() {
+    const friendToAdd = searchBarTextbox.value;
+    AddFriend(friendToAdd);
+    console.log(`added friend ${friendToAdd}`);
+}
 
 //create the Challenge tab tables
 const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
