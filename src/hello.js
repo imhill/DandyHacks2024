@@ -308,6 +308,7 @@ app.get('/get-problem-stats', async (req, res) => {
                              ON p.usr_id = f.friend_id
                         JOIN users u ON u.usr_id = p.usr_id
                  WHERE f.usr_id = u.usr_id
+                   AND f.username = $1
                    AND EXISTS (
                      SELECT *
                      FROM friends f2
