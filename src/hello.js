@@ -158,6 +158,16 @@ app.post('/post-problem', async (req, res) => {
   }
 });
 
+// Preflight CORS
+app.options('/post-problem', (req, res) => {
+  res.set({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+  });
+  res.status(204).send();
+});
+
 // Prints a log once the server starts listening
 app.listen(port, hostname, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
