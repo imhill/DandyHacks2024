@@ -217,6 +217,7 @@ app.get('/get-challenge-leaderboard', async (req, res) => {
     const usrId = userRes.rows[0].usr_id;
     const result = await client.query(query, [usrId]);
     // Send the response
+    console.log(result.rows);
     res.status(200).json(result.rows.length);
   } catch (err) {
     console.error('Error executing query:', err.stack);
