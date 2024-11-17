@@ -169,15 +169,7 @@ app.get('/get-friends', async (req, res) => {
   }
   
   const query = `
-    SELECT f.friend_id
-    FROM friends f
-    WHERE f.usr_id = $1
-      AND EXISTS (
-        SELECT $1
-        FROM friends f2
-        WHERE f2.usr_id = f.friend_id
-          AND f2.friend_id = $1
-      );
+    SELECT u.username FROM friends f JOIN users u ON f.friend_id = u.usr_id WHERE f.usr_id = $1 AND EXISTS ( SELECT $1 FROM friends f2 WHERE f2.usr_id = f.friend_id AND f2.friend_id = $1 );
   `;
   const query2 = `
     SELECT f.friend_id
