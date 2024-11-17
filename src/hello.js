@@ -92,7 +92,7 @@ app.post('/add-friend', async (req, res) => {
   
     const usrId = userRes.rows[0].usr_id;
     const friendId = friendRes.rows[0].usr_id;
-    const result = await client.query(query, [userRes, friendRes]);
+    // const result = await client.query(query, [userRes, friendRes]);
     // Send the response
     res.sendStatus(201);
   } catch (err) {
