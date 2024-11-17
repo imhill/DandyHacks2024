@@ -218,7 +218,7 @@ app.get('/get-challenge-leaderboard', async (req, res) => {
     const result = await client.query(query, [usrId]);
     // Send the response
     console.log(result.rows);
-    res.status(200).json(result.challenge_count);
+    res.status(200).json(result[0].challenge_count);
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
