@@ -94,7 +94,6 @@ function sendFriendReq() {
     const friendToAdd = searchBarTextbox.value;
     AddFriend(friendToAdd);
     searchBarTextbox.value = "";
-    switchTab("friends");
 }
 
 function removeFriend() {
