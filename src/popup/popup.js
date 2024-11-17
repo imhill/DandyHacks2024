@@ -90,6 +90,8 @@ friendsListTableDiv.appendChild(friendsListTable);
 
 
 //create the Leaderboard tab tables
+const leaderboardTitle = document.getElementById("leaderboardTitle");
+
 const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 
 const rawLeaderboard = await GetLeaderboard();
@@ -97,6 +99,11 @@ const rawLeaderboard = await GetLeaderboard();
 function formatLeaderboardData(board){
     const formattedList = [];
     console.log(board);
+    const probArray = board[0].problem_number.split("-");
+    for (let i = 0; i < probArray.length; i++) {
+        probArray[i] = String(probArray[i]).charAt(0).toUpperCase() + String(probArray[i]).slice(1);
+    }
+    leaderboardTitle.textContent = probArray.join(" ");
     for (const row of board) {
         console.log(row);
         formattedList.push({
