@@ -189,6 +189,8 @@ app.get('/get-friends', async (req, res) => {
     const usrId = userRes.rows[0].usr_id;
     const friendsResult = await client.query(query, [usrId]);
     const totalResult = await client.query(query2, [usrId]);
+    console.log(friendsResult.rows);
+    console.log(totalResult.rows);
     // Send the response
     res.status(200).json({friends: friendsResult.rows.map(row => row.friend_id), pending: totalResult.rows.filter(item => !friendsResult.rows.includes(item)).map(row => row.friend_id)});
   } catch (err) {
