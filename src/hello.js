@@ -343,8 +343,8 @@ AND p.problem_number = $2;
 `
   try {
     // Execute the query with parameters
-    const result = await client.query(query2, [queryParm.username, queryParm.titleSlug]);
-    // const result = await client.query(query, [queryParm.titleSlug]);
+    // const result = await client.query(query2, [queryParm.username, queryParm.titleSlug]);
+    const result = await client.query(query, [queryParm.titleSlug]);
     // Send the response
     res.status(200).json(result.rows);
   } catch (err) {
