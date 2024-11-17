@@ -7,6 +7,7 @@ const hostname = "0.0.0.0";
 const port = 8000;
 
 const app = express();
+const cors = require('cors');
 app.use(express.json());
 
 // PostgreSQL connection setup
@@ -27,6 +28,11 @@ client.connect((err) => {
   }
 });
 
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.post('/create-user', async (req, res) => {
   // Access query parameters and JSON body
@@ -78,7 +84,7 @@ app.post('/add-friend', async (req, res) => {
     console.log(queryParams.username);
     // Execute the query with parameters
     debugger;
-    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = $1::VARCHAR;`, [queryParams.username]);
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ${queryParams.username};`);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($2);`, [jsonBody.friend]);
   
     console.log(userRes.rows);
