@@ -65,7 +65,7 @@ app.get('/get-challenge-leaderboard', async (req, res) => {
   }
   try {
     // Execute the query with paramet
-    res.send(201).json({challenges: [{'leo':10}, {'ezra':5}]});
+    res.status(201).json({challenges: [{'leo':10}, {'ezra':5}]});
     console.log("made it here");
   } catch (err) {
     console.error('Error executing query:', err.stack);
