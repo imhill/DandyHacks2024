@@ -169,18 +169,7 @@ app.get('/get-friends', async (req, res) => {
   }
   
   const query = `
-    SELECT p.*
-    FROM problems p
-           JOIN friends f
-                ON p.usr_id = f.friend_id
-    WHERE f.usr_id = $1
-      AND EXISTS (
-        SELECT $1
-        FROM friends f2
-        WHERE f2.usr_id = f.friend_id
-          AND f2.friend_id = $1
-      )
-      AND p.problem_number = $1;
+    SELECT u.username FROM friends f JOIN users u ON f.friend_id = u.usr_id WHERE f.usr_id = $1 AND EXISTS ( SELECT $1 FROM friends f2 WHERE f2.usr_id = f.friend_id AND f2.friend_id = $1 );
   `;
   const query2 = `
     SELECT u.username
@@ -312,12 +301,23 @@ app.get('/get-problem-stats', async (req, res) => {
     return res.status(400).json({ error: 'Missing required query parameter: username' });
   }
   
-  const query = `select * from problems where problem_number = $1`;
+  const query = `SELECT p.*
+                 FROM problems p
+                        JOIN friends f
+                             ON p.usr_id = f.friend_id
+                 WHERE f.usr_id = $1
+                   AND EXISTS (
+                     SELECT $1
+                     FROM friends f2
+                     WHERE f2.usr_id = f.friend_id
+                       AND f2.friend_id = $1
+                   )
+                   AND p.problem_number = $1;`;
   try {
     // Execute the query with parameters
     const result = await client.query(query, [jsonBody.titleSlug]);
     // Send the response
-    res.status(200).json(result.rows[0]);
+    res.status(200).json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
