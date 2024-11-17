@@ -73,6 +73,8 @@ const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 const results_from_function = GetFriends();
 
 function formatFriendsList(friendList){
+    console.log(friendList);
+    
     const formattedList = []
     
     for(const friend of friendList){
