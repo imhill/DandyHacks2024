@@ -9,6 +9,10 @@ const port = 8000;
 const app = express();
 const cors = require('cors');
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`${req.method} request made to: ${req.url} at ${new Date().toISOString()}`);
+  next(); // Pass the request to the next middleware or route handler
+});
 
 // PostgreSQL connection setup
 const client = new Client({
@@ -235,6 +239,39 @@ app.get('/get-problem-count', async (req, res) => {
     SELECT COUNT(*) AS problems_count
     FROM problems
     WHERE usr_id = $1;
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const result = await client.query(query, [usrId]);
+    // Send the response
+    res.status(200).json(result.rows[0].problems_count);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/get-active-challenges', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  const query = `
+    FROM usr_challenge uc
+    JOIN challenge_problem cp ON uc.challenge_id = cp.challenge_id
+    WHERE uc.usr_id = 1
+    AND cp.expiration > CURRENT_TIMESTAMP;
   `;
   try {
     // Execute the query with parameters
