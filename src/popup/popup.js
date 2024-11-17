@@ -1,5 +1,6 @@
 import {GenerateTable} from "./generateTable.js";
 import {AddFriend,GetFriends} from "./friendUtils.js";
+import {GetLeaderboard} for "./leaderboardUtils.js";
 
 /*
  *    Switch between tabs
