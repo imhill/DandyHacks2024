@@ -11,24 +11,24 @@ const leaderboardButton = document.getElementById("leaderboardButton");
 leaderboardButton.addEventListener("click", switchToLeaderboard);
 const friendsButton = document.getElementById("friendsButton");
 friendsButton.addEventListener("click", switchToFriends);
-const challengesButton = document.getElementById("challengesButton");
-challengesButton.addEventListener("click", switchToChallenges);
+//const challengesButton = document.getElementById("challengesButton");
+//challengesButton.addEventListener("click", switchToChallenges);
 //group buttons
-const tabButtons = [leaderboardButton,friendsButton,challengesButton];
+const tabButtons = [leaderboardButton,friendsButton];//,challengesButton];
 
 //define the function to switch to a given page
 function switchToLeaderboard(){ switchTab("leaderboard"); }
 function switchToFriends(){ switchTab("friends"); }
-function switchToChallenges(){ switchTab("challenges"); }
+//function switchToChallenges(){ switchTab("challenges"); }
 
 //define the divs for each of the tabs
 const leaderboardDiv = document.getElementById("leaderboard");
 const friendsDiv = document.getElementById("friends");
-const challengesDiv = document.getElementById("challenges");
+//const challengesDiv = document.getElementById("challenges");
 //opening home page icon
 const icon = document.getElementById("homeIcon");
 //group divs
-const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon];
+const tabDivs = [leaderboardDiv,friendsDiv,icon];//challengesDiv];
 
 //function to hide all divs
 function nukeDivs(divs,buttons){
@@ -55,10 +55,10 @@ function switchTab(tab){
             friendsDiv.style.display = "block";
             friendsButton.className = "tabButton activeTab";
             break;
-        case "challenges":
+        /*case "challenges":
             challengesDiv.style.display = "block";
             challengesButton.className = "tabButton activeTab";
-            break;
+            break;*/
     }
 }
 
@@ -138,7 +138,7 @@ function sendFriendReq() {
 }
 
 //create the Challenge tab tables
-const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
+/*const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
 const previousChallengesDiv = document.getElementById("previousChallengesTableDiv");
 
 const activeChallengesData = [
@@ -157,4 +157,4 @@ leaderboardFriendsTable.id = "leaderboardFriendsTable";
 
 //add it to the div
 activeChallengesTableDiv.appendChild(activeChallengesTable);
-previousChallengesDiv.appendChild(previousChallengesTable);
+previousChallengesDiv.appendChild(previousChallengesTable);*/
