@@ -10,8 +10,17 @@ const app = express();
 const cors = require('cors');
 app.use(express.json());
 app.use((req, res, next) => {
-  console.log(`${req.method} request made to: ${req.url} at ${new Date().toISOString()}`);
-  next(); // Pass the request to the next middleware or route handler
+  const originalSend = res.send; // Save the original res.send method
+  
+  res.send = function (body) {
+    console.log(`
+      ${req.method} request to ${req.url} at ${new Date().toISOString()}
+      Response: ${body}
+    `);
+    originalSend.call(this, body); // Call the original res.send with the response body
+  };
+  
+  next(); // Pass to the next middleware or route handler
 });
 
 // PostgreSQL connection setup
@@ -91,6 +100,7 @@ app.post('/add-friend', async (req, res) => {
   
     if (userRes.rows.length === 0) {
        res.status(400).json({ error: `${queryParams.username} does not exist in users database` });
+       console.log(
        return;
     }
   
