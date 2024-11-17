@@ -134,6 +134,7 @@ addFriendButton.addEventListener("click", sendFriendReq);
 function sendFriendReq() {
     const friendToAdd = searchBarTextbox.value;
     AddFriend(friendToAdd);
+    searchBarTextbox.value = "";
 }
 
 //create the Challenge tab tables
