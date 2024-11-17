@@ -91,10 +91,12 @@ app.post('/add-friend', async (req, res) => {
   
     if (userRes.rows.length === 0) {
        res.status(400).json({ error: `${queryParams.username} does not exist in users database` });
+       return;
     }
   
     if (friendRes.rows.length === 0) {
       res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
+      return;
     }
   
     const usrId = userRes.rows[0].usr_id;
