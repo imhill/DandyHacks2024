@@ -304,7 +304,6 @@ app.get('/get-problem-stats', async (req, res) => {
     // Execute the query with parameters
     const result = await client.query(query, [jsonBody.titleSlug]);
     // Send the response
-    console.log(result);
     res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error('Error executing query:', err.stack);
