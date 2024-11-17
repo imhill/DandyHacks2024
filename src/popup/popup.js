@@ -36,7 +36,7 @@ function nukeDivs(divs,buttons){
     }
 
     for(const b of buttons){
-        b.className = "inactiveTab";
+        b.className = "tabButton inactiveTab";
     }
 }
 
