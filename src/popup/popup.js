@@ -70,15 +70,15 @@ function switchTab(tab){
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
 const friendsListData = [
-    { name: 'John'},
-    { name: 'Leo'},
-    { name: 'Ezra'},
-    { name: 'Jacob'},
-    { name: 'Micheal'},
-    { name: 'LeBron'},
-    { name: 'John 2'},
-    { name: 'Bob'},
-    { name: 'Mary'}];
+    { name: 'lscortino'},
+    { name: 'etock'},
+    { name: 'hcramer'},
+    { name: 'jtrokel'},
+    { name: 'bobama'},
+    { name: 'ljames'},
+    { name: 'pblart'},
+    { name: 'lthomson'},
+    { name: 'dbov'}];
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
