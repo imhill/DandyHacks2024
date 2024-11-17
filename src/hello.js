@@ -169,7 +169,18 @@ app.get('/get-friends', async (req, res) => {
   }
   
   const query = `
-    SELECT u.username FROM friends f JOIN users u ON f.friend_id = u.usr_id WHERE f.usr_id = $1 AND EXISTS ( SELECT $1 FROM friends f2 WHERE f2.usr_id = f.friend_id AND f2.friend_id = $1 );
+    SELECT p.*
+    FROM problems p
+           JOIN friends f
+                ON p.usr_id = f.friend_id
+    WHERE f.usr_id = $1
+      AND EXISTS (
+        SELECT $1
+        FROM friends f2
+        WHERE f2.usr_id = f.friend_id
+          AND f2.friend_id = $1
+      )
+      AND p.problem_number = $1;
   `;
   const query2 = `
     SELECT u.username
@@ -189,8 +200,6 @@ app.get('/get-friends', async (req, res) => {
     const usrId = userRes.rows[0].usr_id;
     const friendsResult = await client.query(query, [usrId]);
     const totalResult = await client.query(query2, [usrId]);
-    console.log(friendsResult.rows);
-    console.log(totalResult.rows);
     // Send the response
     res.status(200).json({friends: friendsResult.rows.map(row => row.username), pending: totalResult.rows.filter(item => !friendsResult.rows.includes(item)).map(row => row.username)});
   } catch (err) {
