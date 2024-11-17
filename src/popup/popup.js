@@ -72,10 +72,7 @@ const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 
 const results_from_function = await GetFriends();
 
-console.log(results_from_function);
-
 function formatFriendsList(friendList){
-    console.log(friendList);
     
     const formattedList = []
     
@@ -134,6 +131,7 @@ addFriendButton.addEventListener("click", sendFriendReq);
 
 function sendFriendReq() {
     const friendToAdd = searchBarTextbox.value;
+    console.log(friendToAdd);
     AddFriend(friendToAdd);
 }
 

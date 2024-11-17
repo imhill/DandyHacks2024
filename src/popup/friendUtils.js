@@ -34,11 +34,12 @@ export async function GetFriends() {
 
     try {
         const friendList = await fetch(`http://3.143.223.90:8000/get-friends?username=${username}`);
+        const friends = await friendList.json()
+        return friends;
     } catch (err) {
         console.error(err);
     }
-
-    console.log(friendList);
+    return [];
 }
 
 async function getUsername() {
