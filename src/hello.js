@@ -305,7 +305,7 @@ app.get('/get-problem-stats', async (req, res) => {
   const query = `SELECT * from problems WHERE problems.problem_number = $2;`;
   try {
     // Execute the query with parameters
-    const result = await client.query(query, [queryParm.username, jsonBody.titleSlug]);
+    const result = await client.query(query, [jsonBody.titleSlug]);
     // Send the response
     res.status(200).json(result.rows);
   } catch (err) {
