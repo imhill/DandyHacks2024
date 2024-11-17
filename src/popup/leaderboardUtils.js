@@ -7,7 +7,7 @@ export async function GetLeaderboard() {
         currentWindow: true
     });
     const tabUrl = tab.url;
-    const slugRegex = /.*?leetcode.com\/problems\/(.*?)\/sub.*/;
+    const slugRegex = /.*?leetcode.com\/problems\/(.*?)\/(.*)?/;
     const result = slugRegex.exec(tabUrl);
 
     const slug = result[1];
