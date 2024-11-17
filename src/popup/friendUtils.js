@@ -28,6 +28,19 @@ export async function AddFriend(friendName) {
     }
 }
 
+export async function GetFriends() {
+    // Get user's username
+    const username = await getUsername();
+
+    try {
+        const friendList = await fetch(`http://3.143.223.90:8000/get-friends?username=${username}`);
+    } catch (err) {
+        console.error(err);
+    }
+
+    console.log(friendList);
+}
+
 async function getUsername() {
     try {
         const query = `
