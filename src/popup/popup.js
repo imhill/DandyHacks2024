@@ -123,8 +123,8 @@ const activeChallengesTableDiv = document.getElementById("activeChallengesTableD
 const previousChallengesDiv = document.getElementById("previousChallengesTableDiv");
 
 const activeChallengesData = [
-    {with: "lscortino", question: "1"},
-    {with: "jtrokel", question: "735"}];
+    {with: "lscortino", question: "1", expires: "8pm, 11/19/24"},
+    {with: "jtrokel", question: "735", expires: "6pm, 11/20/24"}];
 
 const previousChallengesData = [
     {with: "etock", question: "1", winner: "ihill"},
