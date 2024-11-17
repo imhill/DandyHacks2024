@@ -83,9 +83,7 @@ app.post('/add-friend', async (req, res) => {
   try {
     console.log(queryParams.username);
     // Execute the query with parameters
-    const escapedUsername = queryParams.username.replace(/'/g, "''");
-    
-    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ${escapedUsername};`);
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = "ezra";`);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($2);`, [jsonBody.friend]);
   
     console.log(userRes.rows);
