@@ -89,7 +89,9 @@ friendsListTable.id = "friendsListTable";
 friendsListTableDiv.appendChild(friendsListTable);
 
 
-GetLeaderboard();
+const rawLeaderboard await GetLeaderboard();
+
+console.log(rawLeaderboard);
 
 
 
