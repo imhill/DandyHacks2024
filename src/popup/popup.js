@@ -98,18 +98,17 @@ const rawLeaderboard = await GetLeaderboard();
 
 function formatLeaderboardData(board){
     const formattedList = [];
-    console.log(board);
     const probArray = board[0].problem_number.split("-");
     for (let i = 0; i < probArray.length; i++) {
         probArray[i] = String(probArray[i]).charAt(0).toUpperCase() + String(probArray[i]).slice(1);
     }
     leaderboardTitle.textContent = probArray.join(" ");
+
     for (const row of board) {
-        console.log(row);
         formattedList.push({
             User: row.username,
             Runtime: String(row.runtime) + " ms",
-            Memory: String(row.space / 1000000) + " MB"
+            Memory: String((row.space / 1000000).toFixed(2)) + " MB"
         });
     }
     return formattedList;
