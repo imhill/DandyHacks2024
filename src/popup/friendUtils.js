@@ -2,7 +2,7 @@ import {GetUsername} from "./getUsername.js";
 
 export async function AddFriend(friendName) {
     // Get runner's username
-    const username = await getUsername();
+    const username = await GetUsername();
 
     // Send friend request
     try {
@@ -32,7 +32,7 @@ export async function AddFriend(friendName) {
 
 export async function GetFriends() {
     // Get user's username
-    const username = await getUsername();
+    const username = await GetUsername();
 
     try {
         const friendList = await fetch(`http://3.143.223.90:8000/get-friends?username=${username}`);
