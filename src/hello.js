@@ -104,6 +104,48 @@ app.post('/add-friend', async (req, res) => {
   }
 });
 
+app.post('/remove-friend', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  if (!jsonBody || !jsonBody.friend ) {
+    return res.status(400).json({ error: 'Missing JSON field friend' });
+  }
+  const query = `
+    DELETE FROM friends
+    WHERE usr_id = $1  -- The usr_id (user) based on the username
+    AND friend_id = $2;  -- The friend_id (friend) based on the friend's username
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [jsonBody.friend]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    if (friendRes.rows.length === 0) {
+      res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const friendId = friendRes.rows[0].usr_id;
+    const result = await client.query(query, [usrId, friendId]);
+    // Send the response
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.get('/get-friends', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
