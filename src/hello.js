@@ -191,6 +191,84 @@ app.get('/get-friends', async (req, res) => {
   }
 });
 
+app.get('/get-challenge-leaderboard', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  const query = `
+    SELECT COUNT(*) AS challenge_count
+    FROM usr_challenge
+    WHERE usr_id = $1;
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const result = await client.query(query, [usrId]);
+    // Send the response
+    res.status(200).json(result.rows.length);
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/get-problem-stats', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({ error: 'Missing required query parameter: username' });
+  }
+  
+  const query = `
+    SELECT f.friend_id
+    FROM friends f
+    WHERE f.usr_id = $1
+      AND EXISTS (
+        SELECT $1
+        FROM friends f2
+        WHERE f2.usr_id = f.friend_id
+          AND f2.friend_id = $1
+      );
+  `;
+  const query2 = `
+    SELECT f.friend_id
+    FROM friends f
+    WHERE f.usr_id = $1
+  `;
+  try {
+    // Execute the query with parameters
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    
+    if (userRes.rows.length === 0) {
+      res.status(400).json({ error: `${queryParams.username} does not exist in users database` })
+    }
+    
+    const usrId = userRes.rows[0].usr_id;
+    const friendsResult = await client.query(query, [usrId]);
+    const totalResult = await client.query(query2, [usrId]);
+    // Send the response
+    res.status(200).json({friends: friendsResult.rows.map(row => row.friend_id), pending: totalResult.rows.filter(item => !friendsResult.rows.includes(item)).map(row => row.friend_id)});
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //Dummy for now
 app.get('/get-challenge-leaderboard', async (req, res) => {
   // Access query parameters and JSON body
