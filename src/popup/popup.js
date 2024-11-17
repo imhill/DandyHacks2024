@@ -12,6 +12,8 @@ friendsButton.addEventListener("click", switchToFriends);
 const challengesButton = document.getElementById("challengesButton");
 challengesButton.addEventListener("click", switchToChallenges);
 
+const tabButtons = [leaderboardButton,friendsButton,challengesButton];
+
 //define the function to switch to a given page
 function switchToLeaderboard(){ switchTab("leaderboard"); }
 function switchToFriends(){ switchTab("friends"); }
@@ -25,31 +27,38 @@ const challengesDiv = document.getElementById("challenges");
 const icon = document.getElementById("homeIcon");
 
 //put all the divs for tabs in an array
-const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon]
+const tabDivs = [leaderboardDiv,friendsDiv,challengesDiv,icon];
 
 //function to hide all divs
-function nukeDivs(divs){
+function nukeDivs(divs,buttons){
     for(const d of divs){
         d.style.display = "none";
+    }
+
+    for(const b of buttons){
+        b.className = "inactiveTab";
     }
 }
 
 //function that handles switching between tabs
 function switchTab(tab){
     //fist clear all divs
-    nukeDivs(tabDivs)
+    nukeDivs(tabDivs,tabButtons);
 
     //then depending on the argument, display the appropriate div
     switch(tab){
         case "leaderboard":
+            leaderboardButton.className = "activeTab";
             leaderboardDiv.style.display = "block";
-            break
+            break;
         case "friends":
             friendsDiv.style.display = "block";
-            break
+            friendsButton.className = "activeTab";
+            break;
         case "challenges":
             challengesDiv.style.display = "block";
-            break
+            challengesButton.className = "activeTab";
+            break;
     }
 }
 
