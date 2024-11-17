@@ -125,6 +125,11 @@ app.get('/get-friends', async (req, res) => {
           AND f2.friend_id = $1
       );
   `;
+  const query2 = `
+    SELECT f.friend_id
+    FROM friends f
+    WHERE f.usr_id = $1
+  `;
   try {
     // Execute the query with parameters
     const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
@@ -134,10 +139,10 @@ app.get('/get-friends', async (req, res) => {
     }
     
     const usrId = userRes.rows[0].usr_id;
-    const result = await client.query(query, [usrId]);
-    console.log(result);
+    const friendsResult = await client.query(query, [usrId]);
+    const totalResult = await client.query(query, [usrId]);
     // Send the response
-    res.status(200).json(result.rows.map(row => row.friend_id));
+    res.status(200).json({friends: friendsResult.rows.map(row => row.friend_id), pending: totalResult - friendsResult});
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -174,7 +179,7 @@ app.post('/post-problem', async (req, res) => {
     return res.status(400).json({ error: 'Missing required query parameter: username' });
   }
   
-  if (!jsonBody || !jsonBody.problemNum || !jsonBody.runtime || !jsonBody.space ) {
+  if (!jsonBody || !jsonBody.titleSlug || !jsonBody.runtime || !jsonBody.space ) {
     return res.status(400).json({ error: 'Missing required JSON field' });
   }
   const query = `
@@ -185,7 +190,7 @@ app.post('/post-problem', async (req, res) => {
   `;
   try {
     // Execute the query with parameters
-    const result = await client.query(query, [queryParams.username, jsonBody.problemNum, jsonBody.runtime, jsonBody.space]);
+    const result = await client.query(query, [queryParams.username, jsonBody.titleSlug, jsonBody.runtime, jsonBody.space]);
     // Send the response
     res.set({
       'Access-Control-Allow-Origin': '*',
