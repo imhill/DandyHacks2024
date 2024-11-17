@@ -20,7 +20,9 @@ chrome.webRequest.onCompleted.addListener(
                     const query = `
                       query {
                         submissionDetails(submissionId: ${id}) {
+                          runtime
                           runtimeDisplay
+                          memory
                           memoryDisplay
                           user {
                             username
@@ -48,6 +50,18 @@ chrome.webRequest.onCompleted.addListener(
 
                     const gqlSubData = gqlData.data.submissionDetails;
                     console.log("user: ", gqlSubData.user.username, "lang: ", gqlSubData.lang.name, "runtime: ", gqlSubData.runtimeDisplay, "memory: ", gqlSubData.memoryDisplay);
+                    const dbResponse = await fetch(`http://3.143.223.90:8000/post-problem?username=${gqlSubData.user.username}`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            problemNum: Number(gqlSubData.question.questionId),
+                            runtime: Number(gqlSubData.runtime),
+                            space: Number(gqlSubData.memory)
+                        })
+                    });
+                    console.log(dbResponse);
                 }
             } catch (err) {
                 console.error(err);
@@ -57,33 +71,6 @@ chrome.webRequest.onCompleted.addListener(
     { urls: ["*://leetcode.com/*/check*"] },
     []
 );
-
-/*
-chrome.webRequest.onCompleted.addListener(
-    async (details) => {
-        const url = details.url;
-        const initiator = details.initiator;
-        if (url.includes("/graphql/") && initiator == "https://leetcode.com") {
-            console.log("HOORAY!!!! (graphql)");
-            console.log("id: ", id);
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if ("submissionDetails" in data) {
-                    let subDetails = data.submissionDetails;
-                    console.log("user: ", subDetails.user.username, "lang: ", subDetails.lang.name, "runtime: ", subDetails.runtimeDisplay, "memory: ", subDetails.memoryDisplay);
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    },
-    { urls: ["*://leetcode.com/graphql*"] },
-    []
-);
-*/
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
