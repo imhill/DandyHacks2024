@@ -43,13 +43,9 @@ app.post('/post-problem', async (req, res) => {
   }
   const query = `
     INSERT INTO problems (usr_id, problem_number, runtime, space)
-    VALUES (
-               (SELECT usr_id FROM users WHERE username = $1),
-               $2, -- Problem number
-               $3, -- Runtime (in seconds or milliseconds)
-               $4 -- Memory usage
-           );
-
+    VALUES ((SELECT usr_id FROM users WHERE username = $1), $2, $3, $4)
+    ON CONFLICT (usr_id, problem_number)
+    DO UPDATE SET runtime = EXCLUDED.runtime, space = EXCLUDED.space;
   `;
   try {
     // Execute the query with parameters
