@@ -97,15 +97,15 @@ app.post('/add-friend', async (req, res) => {
     // Execute the query with parameters
     const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [jsonBody.friend]);
-  
+    
     if (userRes.rows.length === 0) {
-       return res.status(400).json({ error: `${queryParams.username} does not exist in users database` });
+      return res.status(400).json({ error: `${queryParams.username} does not exist in users database` });
     }
-  
+    
     if (friendRes.rows.length === 0) {
       return res.status(400).json({ error: `Friend with username ${jsonBody.friend} does not exist.`});
     }
-  
+    
     const usrId = userRes.rows[0].usr_id;
     const friendId = friendRes.rows[0].usr_id;
     const result = await client.query(query, [usrId, friendId]);
@@ -396,9 +396,9 @@ app.post('/post-problem', async (req, res) => {
 // Preflight CORS
 app.options('/post-problem', (req, res) => {
   res.set({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
   });
   res.status(204).send();
 });
