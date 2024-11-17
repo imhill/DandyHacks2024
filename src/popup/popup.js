@@ -1,5 +1,5 @@
 import {GenerateTable} from "./generateTable.js";
-import {AddFriend,GetFriends} from "./friendUtils.js";
+import {AddFriend,RemoveFriend,GetFriends} from "./friendUtils.js";
 import {GetLeaderboard} from "./leaderboardUtils.js";
 
 /*
@@ -30,44 +30,24 @@ const icon = document.getElementById("homeIcon");
 //group divs
 const tabDivs = [leaderboardDiv,friendsDiv,icon];//challengesDiv];
 
-//function to hide all divs
-function nukeDivs(divs,buttons){
-    for(const d of divs){
-        d.style.display = "none";
-    }
-    for(const b of buttons){
-        b.className = "tabButton inactiveTab";
-    }
-}
-
-//function that handles switching between tabs
-function switchTab(tab){
-    //fist clear all divs
-    nukeDivs(tabDivs,tabButtons);
-
-    //then depending on the argument, display the appropriate div
-    switch(tab){
-        case "leaderboard":
-            leaderboardButton.className = "tabButton activeTab";
-            leaderboardDiv.style.display = "block";
-            break;
-        case "friends":
-            friendsDiv.style.display = "block";
-            friendsButton.className = "tabButton activeTab";
-            break;
-        /*case "challenges":
-            challengesDiv.style.display = "block";
-            challengesButton.className = "tabButton activeTab";
-            break;*/
-    }
-}
 
 /*
  *    Create tables for each tab div
  */
 
-//Friends tab friend list table
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
+
+const leaderboardTitle = document.getElementById("leaderboardTitle");
+const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+
+const addFriendButton = document.getElementById("addFriendButton");
+const searchBarTextbox = document.getElementById("searchBarTextBox");
+addFriendButton.addEventListener("click", sendFriendReq);
+
+const removeFriendButton = document.getElementById("removeFriendButton");
+removeFriendButton.addEventListener("click", removeFriend);
+
+const tableDivs = [friendsListTableDiv,friendsTableDiv];
 
 function formatFriendsList(friendList){
     const formattedList = []
@@ -77,24 +57,20 @@ function formatFriendsList(friendList){
     return formattedList;
 }
 
-const rawFriendsList = await GetFriends();
-
-const friendsListData = formatFriendsList(rawFriendsList.friends);
-
-//generate the table based on the data
-const friendsListTable = GenerateTable(friendsListData);
-friendsListTable.id = "friendsListTable";
-
-//add it to the div
-friendsListTableDiv.appendChild(friendsListTable);
-
-
-//create the Leaderboard tab tables
-const leaderboardTitle = document.getElementById("leaderboardTitle");
-
-const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
-
-const rawLeaderboard = await GetLeaderboard();
+async function buildFriendsTab(){
+    //Friends tab friend list table
+    
+    const rawFriendsList = await GetFriends();
+    
+    const friendsListData = formatFriendsList(rawFriendsList.friends);
+    
+    //generate the table based on the data
+    const friendsListTable = GenerateTable(friendsListData);
+    friendsListTable.id = "friendsListTable";
+    
+    //add it to the div
+    friendsListTableDiv.appendChild(friendsListTable);
+}
 
 function formatLeaderboardData(board){
     const formattedList = [];
@@ -114,27 +90,70 @@ function formatLeaderboardData(board){
     return formattedList;
 }
 
-const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
-
-const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
-
-//generate the table with the data
-const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
-leaderboardFriendsTable.id = "leaderboardFriendsTable";
-
-//add it to the div
-friendsTableDiv.appendChild(leaderboardFriendsTable);
-
-//add a friend
-const addFriendButton = document.getElementById("addFriendButton");
-const searchBarTextbox = document.getElementById("searchBarTextBox");
-addFriendButton.addEventListener("click", sendFriendReq);
-
-
 function sendFriendReq() {
     const friendToAdd = searchBarTextbox.value;
     AddFriend(friendToAdd);
     searchBarTextbox.value = "";
+    switchTab("friends");
+}
+
+function removeFriend() {
+    const enemyToRemove = searchBarTextbox.value;
+    RemoveFriend(enemyToRemove);
+    searchBarTextbox.value = "";
+}
+
+async function buildLeaderboardTab(){
+    //create the Leaderboard tab tables
+    const rawLeaderboard = await GetLeaderboard();
+    
+    //const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
+    
+    const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
+    
+    //generate the table with the data
+    const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
+    leaderboardFriendsTable.id = "leaderboardFriendsTable";
+    
+    //add it to the div
+    friendsTableDiv.appendChild(leaderboardFriendsTable);
+}
+
+//function to hide all divs
+function nukeDivs(divs,buttons){
+    for(const d of divs){
+        d.style.display = "none";
+    }
+    for(const b of buttons){
+        b.className = "tabButton inactiveTab";
+    }
+    for(const tD of tableDivs){
+        tD.innerHTML = "";
+    }
+}
+
+//function that handles switching between tabs
+function switchTab(tab){
+    //fist clear all divs
+    nukeDivs(tabDivs,tabButtons);
+
+    //then depending on the argument, display the appropriate div
+    switch(tab){
+        case "leaderboard":
+            leaderboardButton.className = "tabButton activeTab";
+            leaderboardDiv.style.display = "block";
+            buildLeaderboardTab();
+            break;
+        case "friends":
+            friendsDiv.style.display = "block";
+            friendsButton.className = "tabButton activeTab";
+            buildFriendsTab();
+            break;
+        /*case "challenges":
+            challengesDiv.style.display = "block";
+            challengesButton.className = "tabButton activeTab";
+            break;*/
+    }
 }
 
 //create the Challenge tab tables
