@@ -28,7 +28,6 @@ client.connect((err) => {
 });
 
 
-//Create User Endpoint
 app.post('/create-user', async (req, res) => {
   // Access query parameters and JSON body
   const queryParams = req.query;
@@ -47,25 +46,6 @@ app.post('/create-user', async (req, res) => {
     // Execute the query with parameters
     const result = await client.query(query, [queryParams.username]);
     res.sendStatus(201);
-  } catch (err) {
-    console.error('Error executing query:', err.stack);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-//Create User Endpoint
-app.get('/get-challenge-leaderboard', async (req, res) => {
-  // Access query parameters and JSON body
-  const queryParams = req.query;
-  const jsonBody = req.body;
-  
-  // Validate query parameters and body
-  if (!queryParams.username) {
-    return res.status(400).json({error: 'Missing required query parameter: username'});
-  }
-  try {
-    // Execute the query with paramet
-    res.status(201).json({challenges: [{'leo':10}, {'ezra':5}]});
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -97,10 +77,7 @@ app.post('/add-friend', async (req, res) => {
   try {
     console.log(queryParams.username);
     // Execute the query with parameters
-    const query = `
-    SELECT usr_id FROM users WHERE username = ($1);
-  `;
-    const userRes = await client.query(query, [queryParams.username]);
+    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($2);`, [jsonBody.friend]);
   
     console.log(userRes.rows);
@@ -124,6 +101,25 @@ app.post('/add-friend', async (req, res) => {
 });
 
 
+//Dummy for now
+app.get('/get-challenge-leaderboard', async (req, res) => {
+  // Access query parameters and JSON body
+  const queryParams = req.query;
+  const jsonBody = req.body;
+  
+  // Validate query parameters and body
+  if (!queryParams.username) {
+    return res.status(400).json({error: 'Missing required query parameter: username'});
+  }
+  try {
+    // Execute the query with paramet
+    res.status(201).json({challenges: [{'leo':10}, {'ezra':5}]}).headers;
+  } catch (err) {
+    console.error('Error executing query:', err.stack);
+    res.set('Access-Control-Allow-Origin', '*');
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.post('/post-problem', async (req, res) => {
   // Access query parameters and JSON body
