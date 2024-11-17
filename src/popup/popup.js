@@ -78,7 +78,7 @@ const friendsListData = [
     { name: 'LeBron'},
     { name: 'John 2'},
     { name: 'Bob'},
-    { name: 'Mary'};
+    { name: 'Mary'}];
 
 //generate the table based on the data
 const friendsListTable = GenerateTable(friendsListData);
