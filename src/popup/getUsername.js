@@ -1,4 +1,4 @@
-export async function getUsername() {
+export async function GetUsername() {
     try {
         const query = `
             query globalData {
