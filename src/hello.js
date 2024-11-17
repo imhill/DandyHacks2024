@@ -142,7 +142,7 @@ app.get('/get-friends', async (req, res) => {
     const friendsResult = await client.query(query, [usrId]);
     const totalResult = await client.query(query, [usrId]);
     // Send the response
-    res.status(200).json({friends: friendsResult.rows.map(row => row.friend_id), pending: totalResult.filter(item => !friendsResult.includes(item))});
+    res.status(200).json({friends: friendsResult.rows.map(row => row.friend_id), pending: totalResult.rows.filter(item => !friendsResult.rows.includes(item))});
   } catch (err) {
     console.error('Error executing query:', err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
