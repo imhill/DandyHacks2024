@@ -43,7 +43,13 @@ app.post('/post-problem', async (req, res) => {
   }
   const query = `
     INSERT INTO problems (usr_id, problem_number, runtime, space)
-    VALUES ($1, $2, $3, $4)
+    VALUES (
+               (SELECT usr_id FROM users WHERE username = $1),
+               $2, -- Problem number
+               $3, -- Runtime (in seconds or milliseconds)
+               $4 -- Memory usage
+           );
+
   `;
   try {
     // Execute the query with parameters
