@@ -97,7 +97,10 @@ app.post('/add-friend', async (req, res) => {
   try {
     console.log(queryParams.username);
     // Execute the query with parameters
-    const userRes = await client.query(`SELECT usr_id FROM users WHERE username = ($1);`, [queryParams.username]);
+    const query = `
+    SELECT usr_id FROM users WHERE username = ($1);
+  `;
+    const userRes = await client.query(query, [queryParams.username]);
     const friendRes = await client.query(`SELECT usr_id FROM users WHERE username = ($2);`, [jsonBody.friend]);
   
     console.log(userRes.rows);
