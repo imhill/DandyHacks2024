@@ -317,7 +317,7 @@ app.get('/get-problem-stats', async (req, res) => {
 //   AND p.problem_number = $2
 //   `
   
-  const query = `SELECT * from problems WHERE problems.problem_number = $1;`;
+  const query = `SELECT * from problems JOIN users.usr_id = problems.usr_id WHERE problems.problem_number = $1;`;
   try {
     // Execute the query with parameters
     const result = await client.query(query, [queryParm.titleSlug]);
