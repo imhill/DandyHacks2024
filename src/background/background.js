@@ -1,6 +1,24 @@
 const LEETCODE_BASE_URL = "leetcode.com";
 
+chrome.webRequest.onBeforeRequest.addListener(
+    async (details) => {
+        const url = details.url;
+        if (url.includes("/check/")) {
+            console.log("saw check");
 
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+
+                console.log("response body: ", data);
+            } catch (err) {
+                console.error("error fetching response: ", err);
+            }
+        }
+    },
+    { urls: ["*://*.leetcode.com/submissions/detail/*/check"] },
+    []
+);
 
 //Check if URL contains "/submissions/detail/" & "/check/"
 
