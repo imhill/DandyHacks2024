@@ -79,9 +79,12 @@ function formatLeaderboardData(board){
         probArray[i] = String(probArray[i]).charAt(0).toUpperCase() + String(probArray[i]).slice(1);
     }
     leaderboardTitle.textContent = probArray.join(" ");
-
+    
+    let place = 1;
+    
     for (const row of board) {
         formattedList.push({
+            "#": place++,
             User: row.username,
             Runtime: String(row.runtime) + " ms",
             Memory: String((row.space / 1000000).toFixed(2)) + " MB"
