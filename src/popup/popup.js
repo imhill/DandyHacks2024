@@ -84,7 +84,7 @@ function formatLeaderboardData(board){
     
     for (const row of board) {
         formattedList.push({
-            "#": place++,
+            "#": String(place++)+".",
             User: row.username,
             Runtime: String(row.runtime) + " ms",
             Memory: String((row.space / 1000000).toFixed(2)) + " MB"
