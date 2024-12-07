@@ -38,6 +38,22 @@ body{
     display: block;
 }
 
+/* User signed in as information */ 
+
+#userSignedIn{
+    z-index: 0;
+    position: absolute;
+    text-align: right;
+    width: 380px;
+    top: 12px;
+    margin: 2px;
+    height: 0px;
+}
+
+#usernameText{
+    font-style: italic;
+}
+
 /* Style the different tabs and their status */
 
 .tabbutton{
