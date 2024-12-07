@@ -1,22 +1,36 @@
 import {GenerateTable} from "./generateTable.js";
 import {AddFriend,RemoveFriend,GetFriends} from "./friendUtils.js";
 import {GetLeaderboard} from "./leaderboardUtils.js";
+import {GetUsername} from "./getUsername.js";
+
+/*
+ *    Display the username of the currently signed in user
+ */
+
+const userSignedInBox = document.getElementById("userSignedIn");
+const usernameText = document.getElementById("usernameText");
+
+//this is just to test the functionality and placeholder for styling
+usernameText.textContent = "TEST_USER";
 
 /*
  *    Switch between tabs
  */
 
-//add the functions to the buttons
+/* define the buttons */
 const leaderboardButton = document.getElementById("leaderboardButton");
-leaderboardButton.addEventListener("click", switchToLeaderboard);
 const friendsButton = document.getElementById("friendsButton");
-friendsButton.addEventListener("click", switchToFriends);
 //const challengesButton = document.getElementById("challengesButton");
+
+/* add function to each button */
+leaderboardButton.addEventListener("click", switchToLeaderboard);
+friendsButton.addEventListener("click", switchToFriends);
 //challengesButton.addEventListener("click", switchToChallenges);
-//group buttons
+
+/* create array with all buttons */
 const tabButtons = [leaderboardButton,friendsButton];//,challengesButton];
 
-//define the function to switch to a given page
+/* define the functions to switch to a given page */
 function switchToLeaderboard(){ switchTab("leaderboard"); }
 function switchToFriends(){ switchTab("friends"); }
 //function switchToChallenges(){ switchTab("challenges"); }
@@ -25,30 +39,40 @@ function switchToFriends(){ switchTab("friends"); }
 const leaderboardDiv = document.getElementById("leaderboard");
 const friendsDiv = document.getElementById("friends");
 //const challengesDiv = document.getElementById("challenges");
-//opening home page icon
+
+/* define the home page icon */
 const icon = document.getElementById("homeIcon");
-//group divs
-const tabDivs = [leaderboardDiv,friendsDiv,icon];//challengesDiv];
+
+/* create an array with all of the tab divs and home icon */
+const tabDivs = [leaderboardDiv,friendsDiv,icon];//,challengesDiv];
 
 
 /*
  *    Create tables for each tab div
  */
 
+/* define the tables */
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
+const leaderboardTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 
+/* define the title above the leaderboard */
 const leaderboardTitle = document.getElementById("leaderboardTitle");
-const friendsTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 
-const addFriendButton = document.getElementById("addFriendButton");
+/* define the search bar */
 const searchBarTextbox = document.getElementById("searchBarTextBox");
-addFriendButton.addEventListener("click", sendFriendReq);
 
+/* define buttons for adding and removing friends */
+const addFriendButton = document.getElementById("addFriendButton");
 const removeFriendButton = document.getElementById("removeFriendButton");
+
+/* add function to each of the buttons */
+addFriendButton.addEventListener("click", sendFriendReq);
 removeFriendButton.addEventListener("click", removeFriend);
 
-const tableDivs = [friendsListTableDiv,friendsTableDiv];
+/* create array with all the table divs */
+const tableDivs = [friendsListTableDiv,leaderboardTableDiv];
 
+/* function that formats the raw friend data so it can be displayed in a table */
 function formatFriendsList(friendList){
     const formattedList = []
     for(const friend of friendList){
@@ -56,6 +80,33 @@ function formatFriendsList(friendList){
     }
     return formattedList;
 }
+
+/* function that formats the raw leaderboard data so it can be displayed in a table */
+function formatLeaderboardData(leaderboardData){
+    const problemTitleWords = leaderboardData[0].problem_number.split("-");
+
+    for (let i = 0; i < problemTitleWords.length; i++) {
+        problemTitleWords[i] = String(problemTitleWords[i]).charAt(0).toUpperCase() + String(problemTitleWords[i]).slice(1);
+    }
+
+    /* update the title of the leaderboard with the formatted problem title */
+    leaderboardTitle.textContent = problemTitleWords.join(" ");
+    
+    const formattedList = [];
+    let place = 1;
+
+    for (const row of leaderboardData) {
+        formattedList.push({
+            "#": String(place++)+".",
+            User: row.username,
+            Runtime: String(row.runtime) + " ms",
+            Memory: String((row.space / 1000000).toFixed(2)) + " MB"
+        });
+    }
+
+    return formattedList;
+}
+
 
 async function buildFriendsTab(){
     //Friends tab friend list table
@@ -70,27 +121,6 @@ async function buildFriendsTab(){
     
     //add it to the div
     friendsListTableDiv.appendChild(friendsListTable);
-}
-
-function formatLeaderboardData(board){
-    const formattedList = [];
-    const probArray = board[0].problem_number.split("-");
-    for (let i = 0; i < probArray.length; i++) {
-        probArray[i] = String(probArray[i]).charAt(0).toUpperCase() + String(probArray[i]).slice(1);
-    }
-    leaderboardTitle.textContent = probArray.join(" ");
-    
-    let place = 1;
-    
-    for (const row of board) {
-        formattedList.push({
-            "#": String(place++)+".",
-            User: row.username,
-            Runtime: String(row.runtime) + " ms",
-            Memory: String((row.space / 1000000).toFixed(2)) + " MB"
-        });
-    }
-    return formattedList;
 }
 
 function sendFriendReq() {
@@ -118,7 +148,7 @@ async function buildLeaderboardTab(){
     leaderboardFriendsTable.id = "leaderboardFriendsTable";
     
     //add it to the div
-    friendsTableDiv.appendChild(leaderboardFriendsTable);
+    leaderboardTableDiv.appendChild(leaderboardFriendsTable);
 }
 
 //function to hide all divs
@@ -147,8 +177,8 @@ function switchTab(tab){
             buildLeaderboardTab();
             break;
         case "friends":
-            friendsDiv.style.display = "block";
             friendsButton.className = "tabButton activeTab";
+            friendsDiv.style.display = "block";
             buildFriendsTab();
             break;
         /*case "challenges":
