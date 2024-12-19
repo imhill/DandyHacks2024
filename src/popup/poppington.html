@@ -1,9 +1,13 @@
-<html>
+<html class="dark-mode">
     <head>
         <title>JILE</title>
         <link rel="stylesheet" href="../styles/getstylishwithit.css">
     </head>
     <body>
+        <div id="userSignedIn">
+            Signed in as: <span id="usernameText"></span>
+        </div>
+
         <div class="tabmenu">
             <button class="tabButton inactiveTab" id="leaderboardButton">Leaderboard</button>
             <button class="tabButton inactiveTab" id="friendsButton">Friends</button>
@@ -11,7 +15,7 @@
         </div>
         
         <div class="tabbody" id="homeIcon">
-            <img src="../assets/luhcon.png" style="margin: 50px 0px 0px 64px;">
+            <img id="jileHomeIcon" src="../assets/luhconInverted.png" style="margin: 50px 0px 0px 64px;">
         </div>
         
         <div class="tabbody" id="leaderboard">
@@ -25,7 +29,8 @@
                 <div id="searchBarDiv">
                     <input id="searchBarTextBox" name="searchBarText" type="text" placeholder="Add friend...">
                 </div>
-                <button id="addFriendButton">Add Friend</button>
+                <button class="friendButton" id="addFriendButton">Add Friend</button>
+                <button class="friendButton" id="removeFriendButton">Remove Friend</button>
             </div>
             <div class="tableDiv" id="friendsListTableDiv"></div>
         </div>

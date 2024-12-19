@@ -30,6 +30,36 @@ export async function AddFriend(friendName) {
     }
 }
 
+export async function RemoveFriend(friendName) {
+    // Get user's name
+    const username = await GetUsername();
+
+    // Send remove friend
+    try {
+        const remFriend1 = await fetch(`http://3.143.223.90:8000/remove-friend?username=${username}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                friend: friendName
+            })
+        });
+
+        const remFriend2 = await fetch(`http://3.143.223.90:8000/remove-friend?username=${friendName}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                friend: username
+            })
+        });
+    } catch(err) {
+        console.error(err)
+    }
+}
+
 export async function GetFriends() {
     // Get user's username
     const username = await GetUsername();
