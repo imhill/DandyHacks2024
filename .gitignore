@@ -1,3 +1,6 @@
 *.swp
 .idea/
 push.sh
+
+*.DS_Store
+.env
