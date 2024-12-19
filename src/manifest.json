@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "JILE: LL & Friends",
-	"version": "1.10",
+	"version": "1.11",
 	"description": "Friends list and per-problem leaderboards for LeetCode. First-place winning DandyHacks 2024 community track submission",
 	"action": {
 		"default_popup": "popup/poppington.html",
