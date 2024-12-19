@@ -1,14 +1,14 @@
-// Load HTTP module
-const http = require("http");
 const { Client } = require('pg');
 const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
 const hostname = "0.0.0.0";
 const port = 8000;
 
 const app = express();
-const cors = require('cors');
 app.use(express.json());
+
 app.use((req, res, next) => {
   const originalSend = res.send; // Save the original res.send method
   
@@ -25,11 +25,11 @@ app.use((req, res, next) => {
 
 // PostgreSQL connection setup
 const client = new Client({
-  user: 'sike', // Replace with your PostgreSQL username
-  host: 'sike',     // Change to the host if your DB is remote
-  database: 'sike',   // Replace with your PostgreSQL database name
-  password: 'sike', // Replace with your password
-  port: 6969,            // Default PostgreSQL port
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
 });
 
 // Connect to PostgreSQL database
@@ -37,7 +37,7 @@ client.connect((err) => {
   if (err) {
     console.error('Error connecting to PostgreSQL', err.stack);
   } else {
-    console.log('Connected to PostgreSQL');
+    console.log(`Connected to PostgreSQL with environment variables:\n${process.env}`);
   }
 });
 
