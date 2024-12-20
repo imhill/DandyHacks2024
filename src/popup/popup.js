@@ -90,7 +90,7 @@ function formatFriendsList(friendList){
     for(const friend of friendList){
         formattedList.push({User: friend});
     }
-    
+
     return formattedList;
 }
 
@@ -120,10 +120,12 @@ function formatLeaderboardData(leaderboardData){
     return formattedList;
 }
 
+/* need to implement */
 function formatChallengeData(){
+    const formattedList = [];
 
+    return formattedList;
 }
-
 
 async function buildFriendsTab(){
     //Friends tab friend list table

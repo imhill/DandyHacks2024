@@ -11,7 +11,7 @@
     --buttonActiveColor: rgba(128,128,128,1);
 
     --activeTabBackgroundColor: #AAA;
-    --inactiveTapColor: #DDD;
+    --inactiveTabColor: #DDD;
 
     --tableHeaderColor: #F28C28;
     --tableHeaderTextColor: #222;
@@ -37,17 +37,18 @@
     --activeTabTextColor: #EEE;
     --activeTabGradient: linear-gradient(-10deg, #262626, #262626, #2D2D2D, #444444);
 
-    --inactiveTapColor: #1D1D1D;
+    --inactiveTabColor: #1D1D1D;
     --inactiveTabTextColor: #BBB;
 
-    --tableBackground: #EEE;
-    --tableHeaderColor: #F28C28;
+    --tableBackground: #262626;
+    --tableHeaderColor: #FFA116;
     --tableHeaderTextColor: #222;
     
-    --tableRowHoverColor: rgba(160,90,30,0.25);
-    --tableRowPrimaryColor: #EEE;
-    --tableRowAlternateColor: #E2E2E2;
-    --tableTextColor: #000;
+    --tableRowHoverColor: #CCC;
+    --tableRowHoverTextColor: #111;
+    --tableRowPrimaryColor: #303030;
+    --tableRowAlternateColor: #444444;
+    --tableTextColor: #DDD;
 
     --buttonColor: #3C3C3C;
     --buttonHoverColor: #4E4E4E;
@@ -61,6 +62,8 @@
     --searchBarTextColor: #EEE;
 
     --textColor: #EEE;
+
+    --horizontalBarColor: #CCC;
 }
 
 /* Set the dimensions and background color of the window */
@@ -126,7 +129,7 @@ body{
     color: var(--activeTabTextColor);
 }
 .inactiveTab{
-    background-color: var(--inactiveTapColor);
+    background-color: var(--inactiveTabColor);
     color: var(--inactiveTabTextColor);
 }
 
@@ -141,7 +144,7 @@ body{
 
 .tableDiv{
     padding: 10px;
-    width: 364px;
+    width: 389px;
 }
 table{
     width: 100%;
@@ -155,12 +158,18 @@ th{
 }
 tr{
     background-color: var(--tableRowPrimaryColor);
+    border-radius: 4px 4px 4px 4px;
 }
 tr:nth-child(even){
     background-color: var(--tableRowAlternateColor);
 }
 tr:hover {
     background-color: var(--tableRowHoverColor);
+    color: var(--tableRowHoverTextColor);
+}
+th, td{
+    padding: 0px 4px 0px 4px;
+    text-align: center;
 }
 
 /* Style the searchbar */
@@ -216,8 +225,17 @@ input::placeholder{
 
 /* Style the titles of each tab */
 
-#leaderboardTitle{
+.tabTitle{
     margin:0;
     padding: 20px 10px 10px 10px;
     text-align: center;
+}
+
+/* style the horizontal rule (dividing bar) */
+
+hr{
+    background-color: var(--horizontalBarColor);
+    width: 95%;
+    height: 1px;
+    border: none;
 }
