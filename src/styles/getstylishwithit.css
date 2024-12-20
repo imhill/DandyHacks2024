@@ -27,20 +27,20 @@
 /* dark mode colors */
 /* the default, and most up to date color scheme */
 .dark-mode{
-    --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #222, #555);
-    --popupBackgroundColor: #111;
+    --popupBackgroundColor: #1C1C1C; 
 
-    --tabButtonHoverColor: #222;
-    --tabButtonPressedColor: #333;
+    --tabButtonHoverColor: #333;
+    --tabButtonPressedColor: #444;
 
-    --activeTabBackgroundColor: #2d2d2d;
-    --activeTabTextColor: #D8D8D8;
+    --activeTabBackgroundColor: #282828;
+    --activeTabTextColor: #FFF;
     --activeTabGradient: linear-gradient(-10deg, #2d2d2d, #2d2d2d, #2f2f2f, #444);;
 
-    --inactiveTapColor: #1a1a1a;
+    --inactiveTapColor: #222222;
     --inactiveTabTextColor: #D8D8D8;
 
+    --tableBackground: #FFF;
     --tableHeaderColor: #F28C28;
     --tableHeaderTextColor: #222;
     
@@ -49,13 +49,13 @@
     --tableRowAlternateColor: #E2E2E2;
     --tableTextColor: #000;
 
-    --buttonColor: #666; /* scary 😱 */
-    --buttonHoverColor: #999;
-    --buttonActiveColor: #BBB;
+    --buttonColor: #888;
+    --buttonHoverColor: #AAA;
+    --buttonActiveColor: #CCC;
 
-    --searchBarBackgroundColor: #666; /* even scarier the second time */
-    --searchBarHoverColor: #999;
-    --searchBarActiveColor: #BBB;
+    --searchBarBackgroundColor: #888;
+    --searchBarHoverColor: #AAA;
+    --searchBarActiveColor: #CCC;
     --placeholderTextColor: #000;
 
     --textColor: #FFF;
@@ -130,7 +130,7 @@ body{
 .tabbody{
     display: none;
     background-color: var(--activeTabBackgroundColor);
-    height: 460px;
+    height: 485px;
     border-radius: 0px 4px 8px 8px;
 }
 
