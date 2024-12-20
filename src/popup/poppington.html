@@ -5,17 +5,17 @@
     </head>
     <body>
         <div id="userSignedIn">
-            Signed in as: <span id="usernameText"></span>
+            <span id="usernameText"></span>
         </div>
 
         <div class="tabmenu">
             <button class="tabButton inactiveTab" id="leaderboardButton">Leaderboard</button>
             <button class="tabButton inactiveTab" id="friendsButton">Friends</button>
-            <!--<button class="tabButton inactiveTab" id="challengesButton">Challenges</button>-->
+            <button class="tabButton inactiveTab" id="challengesButton">Challenges</button>
         </div>
         
         <div class="tabbody" id="homeIcon">
-            <img id="jileHomeIcon" src="../assets/luhconInverted.png" style="margin: 50px 0px 0px 64px;">
+            <img id="jileHomeIcon" src="../assets/luhconInverted.png">
         </div>
         
         <div class="tabbody" id="leaderboard">
@@ -27,18 +27,18 @@
         <div class="tabbody" id="friends">
             <div id="addFriendDiv">
                 <div id="searchBarDiv">
-                    <input id="searchBarTextBox" name="searchBarText" type="text" placeholder="Add friend...">
+                    <input id="searchBarTextBox" name="searchBarText" type="text" placeholder=" Add friend...">
                 </div>
                 <button class="friendButton" id="addFriendButton">Add Friend</button>
                 <button class="friendButton" id="removeFriendButton">Remove Friend</button>
             </div>
             <div class="tableDiv" id="friendsListTableDiv"></div>
         </div>
-        <!--
+        
         <div class="tabbody" id="challenges">
             <div class="tableDiv" id="activeChallengesTableDiv"></div>
             <div class="tableDiv" id="previousChallengesTableDiv"></div>
-        </div>-->
+        </div>
 
       <script type="module" src="popup.js"></script>
   </body>

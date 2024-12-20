@@ -20,31 +20,38 @@ usernameText.textContent = "TEST_USER";
 /* define the buttons */
 const leaderboardButton = document.getElementById("leaderboardButton");
 const friendsButton = document.getElementById("friendsButton");
-//const challengesButton = document.getElementById("challengesButton");
+const challengesButton = document.getElementById("challengesButton");
 
 /* add function to each button */
 leaderboardButton.addEventListener("click", switchToLeaderboard);
 friendsButton.addEventListener("click", switchToFriends);
-//challengesButton.addEventListener("click", switchToChallenges);
+challengesButton.addEventListener("click", switchToChallenges);
 
 /* create array with all buttons */
-const tabButtons = [leaderboardButton,friendsButton];//,challengesButton];
+const tabButtons = [leaderboardButton,
+                    friendsButton,
+                    challengesButton,
+                ];
 
 /* define the functions to switch to a given page */
 function switchToLeaderboard(){ switchTab("leaderboard"); }
 function switchToFriends(){ switchTab("friends"); }
-//function switchToChallenges(){ switchTab("challenges"); }
+function switchToChallenges(){ switchTab("challenges"); }
 
 //define the divs for each of the tabs
 const leaderboardDiv = document.getElementById("leaderboard");
 const friendsDiv = document.getElementById("friends");
-//const challengesDiv = document.getElementById("challenges");
+const challengesDiv = document.getElementById("challenges");
 
 /* define the home page icon */
 const icon = document.getElementById("homeIcon");
 
 /* create an array with all of the tab divs and home icon */
-const tabDivs = [leaderboardDiv,friendsDiv,icon];//,challengesDiv];
+const tabDivs = [leaderboardDiv,
+                friendsDiv,
+                challengesDiv,
+                icon,
+            ];
 
 
 /*
@@ -54,6 +61,7 @@ const tabDivs = [leaderboardDiv,friendsDiv,icon];//,challengesDiv];
 /* define the tables */
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 const leaderboardTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
 
 /* define the title above the leaderboard */
 const leaderboardTitle = document.getElementById("leaderboardTitle");
@@ -70,14 +78,19 @@ addFriendButton.addEventListener("click", sendFriendReq);
 removeFriendButton.addEventListener("click", removeFriend);
 
 /* create array with all the table divs */
-const tableDivs = [friendsListTableDiv,leaderboardTableDiv];
+const tableDivs = [friendsListTableDiv,
+                leaderboardTableDiv,
+                activeChallengesTableDiv,
+            ];
 
 /* function that formats the raw friend data so it can be displayed in a table */
 function formatFriendsList(friendList){
     const formattedList = []
+
     for(const friend of friendList){
         formattedList.push({User: friend});
     }
+    
     return formattedList;
 }
 
@@ -107,12 +120,18 @@ function formatLeaderboardData(leaderboardData){
     return formattedList;
 }
 
+function formatChallengeData(){
+
+}
+
 
 async function buildFriendsTab(){
     //Friends tab friend list table
     
+    //get the raw data from the endpoint
     const rawFriendsList = await GetFriends();
     
+    //format the raw data
     const friendsListData = formatFriendsList(rawFriendsList.friends);
     
     //generate the table based on the data
@@ -137,10 +156,13 @@ function removeFriend() {
 
 async function buildLeaderboardTab(){
     //create the Leaderboard tab tables
+
+    //get the raw data from the endpoint
     const rawLeaderboard = await GetLeaderboard();
     
     //const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
     
+    //format the raw data
     const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
     
     //generate the table with the data
@@ -149,6 +171,33 @@ async function buildLeaderboardTab(){
     
     //add it to the div
     leaderboardTableDiv.appendChild(leaderboardFriendsTable);
+}
+
+/* */
+// to be implemented!
+/* */
+async function buildChallengesTab(){
+    //create the challenges tab tables
+
+    //need to define GetChallenges function/helper file
+    //const rawChallengeData = await GetChallenges();
+
+    //format the data
+    //const activeChallengesData = formatChallengeData(rawChallengeData);
+
+    //temporary hard-coded data for testing
+    const activeChallengesData = [
+        {User: "lscortino", Question: "1", Expires: "8pm, 11/19/24"},
+        {User: "jtrokel", Question: "735", Expires: "6pm, 11/20/24"},
+        {User: "etock", Question: "1738", Expires: "2pm, 12/26/24"},
+    ];
+
+    //generate the table with the formatted data
+    const activeChallengesTable = GenerateTable(activeChallengesData);
+    activeChallengesTable.id = "activeChallengesTable";
+
+    //add it to the div
+    activeChallengesTableDiv.appendChild(activeChallengesTable);
 }
 
 //function to hide all divs
@@ -181,31 +230,10 @@ function switchTab(tab){
             friendsDiv.style.display = "block";
             buildFriendsTab();
             break;
-        /*case "challenges":
+        case "challenges":
             challengesDiv.style.display = "block";
             challengesButton.className = "tabButton activeTab";
-            break;*/
+            buildChallengesTab();
+            break;
     }
 }
-
-//create the Challenge tab tables
-/*const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
-const previousChallengesDiv = document.getElementById("previousChallengesTableDiv");
-
-const activeChallengesData = [
-    {User: "lscortino", Question: "1", Expires: "8pm, 11/19/24"},
-    {User: "jtrokel", Question: "735", Expires: "6pm, 11/20/24"}];
-
-const previousChallengesData = [
-    {User: "etock", Question: "1738", Winner: "ihill"},
-    {User: "jtrokel", Question: "542", Winner: "jtrokel"}];
-
-//generate the table with the data
-const activeChallengesTable = GenerateTable(activeChallengesData);
-leaderboardFriendsTable.id = "leaderboardFriendsTable";
-const previousChallengesTable = GenerateTable(previousChallengesData);
-leaderboardFriendsTable.id = "leaderboardFriendsTable";
-
-//add it to the div
-activeChallengesTableDiv.appendChild(activeChallengesTable);
-previousChallengesDiv.appendChild(previousChallengesTable);*/

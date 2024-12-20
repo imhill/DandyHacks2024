@@ -28,37 +28,39 @@
 /* the default, and most up to date color scheme */
 .dark-mode{
     --popupBackground: linear-gradient(-225deg, #222, #555);
-    --popupBackgroundColor: #1C1C1C; 
+    --popupBackgroundColor: #0F0F0F; 
 
     --tabButtonHoverColor: #333;
     --tabButtonPressedColor: #444;
 
-    --activeTabBackgroundColor: #282828;
-    --activeTabTextColor: #FFF;
-    --activeTabGradient: linear-gradient(-10deg, #2d2d2d, #2d2d2d, #2f2f2f, #444);;
+    --activeTabBackgroundColor: #262626;
+    --activeTabTextColor: #EEE;
+    --activeTabGradient: linear-gradient(-10deg, #262626, #262626, #2D2D2D, #444444);
 
-    --inactiveTapColor: #222222;
-    --inactiveTabTextColor: #D8D8D8;
+    --inactiveTapColor: #1D1D1D;
+    --inactiveTabTextColor: #BBB;
 
-    --tableBackground: #FFF;
+    --tableBackground: #EEE;
     --tableHeaderColor: #F28C28;
     --tableHeaderTextColor: #222;
     
     --tableRowHoverColor: rgba(160,90,30,0.25);
-    --tableRowPrimaryColor: #FFF;
+    --tableRowPrimaryColor: #EEE;
     --tableRowAlternateColor: #E2E2E2;
     --tableTextColor: #000;
 
-    --buttonColor: #888;
-    --buttonHoverColor: #AAA;
-    --buttonActiveColor: #CCC;
+    --buttonColor: #3C3C3C;
+    --buttonHoverColor: #4E4E4E;
+    --buttonActiveColor: #565656;
+    --buttonTextColor: #EEE;
 
-    --searchBarBackgroundColor: #888;
-    --searchBarHoverColor: #AAA;
-    --searchBarActiveColor: #CCC;
-    --placeholderTextColor: #000;
+    --searchBarBackgroundColor: #3C3C3C;
+    --searchBarHoverColor: #4E4E4E;
+    --searchBarActiveColor: #565656;
+    --placeholderTextColor: #EEE;
+    --searchBarTextColor: #EEE;
 
-    --textColor: #FFF;
+    --textColor: #EEE;
 }
 
 /* Set the dimensions and background color of the window */
@@ -81,7 +83,8 @@ body{
 
 #jileHomeIcon{
     border-radius: 8px;
-    /*display: none;*/
+    box-shadow: 0px 0px 16px 4px #000;
+    margin: 75px 0px 0px 76px;
 }
 
 /* User signed in as information */ 
@@ -90,8 +93,8 @@ body{
     z-index: 0;
     position: absolute;
     text-align: right;
-    width: 376px;
-    top: 8px;
+    width: 400px;
+    top: 10px;
     margin: 4px;
     height: 0px;
 }
@@ -166,13 +169,15 @@ input::placeholder{
     color: var(--placeholderTextColor);
 }
 #searchBarTextBox{
-    width: 230px;
+    width: 240px;
     height: 30px;
     border-radius: 8px;
     background-color: var(--searchBarBackgroundColor);
     border: 0;
     margin: 30px 0px 20px 30px;
     padding: 10px;
+    outline: none;
+    color: var(--searchBarTextColor);
 }
 
 #searchBarTextBox:hover{
@@ -192,6 +197,7 @@ input::placeholder{
     font-size: 10px;
     border: 0;
     border-radius: 4px;
+    color: var(--buttonTextColor);
 }
 .friendButton:hover{
     background-color: var(--buttonHoverColor);
@@ -201,11 +207,11 @@ input::placeholder{
 }
 
 #removeFriendButton{
-    margin: -32px 0px 0px 280px;
+    margin: -32px 0px 0px 300px;
 }
 
 #addFriendButton{
-    margin: -56px 0px 0px 290px;
+    margin: -56px 0px 0px 310px;
 }
 
 /* Style the titles of each tab */
