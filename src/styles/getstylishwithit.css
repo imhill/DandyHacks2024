@@ -1,6 +1,7 @@
 /* Define variables */
 
 /* light mode colors */
+/* not updated since demo, needs work before use */
 .light-mode{
     --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #FFF, #AAA);
@@ -24,6 +25,7 @@
 }
 
 /* dark mode colors */
+/* the default, and most up to date color scheme */
 .dark-mode{
     --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #222, #555);
@@ -47,13 +49,13 @@
     --tableRowAlternateColor: #E2E2E2;
     --tableTextColor: #000;
 
-    --buttonColor: #BBB;
-    --buttonHoverColor: #888;
-    --buttonActiveColor: #444;
+    --buttonColor: #666; /* scary 😱 */
+    --buttonHoverColor: #999;
+    --buttonActiveColor: #BBB;
 
-    --searchBarBackgroundColor: #BBB;
-    --searchBarHoverColor: #888;
-    --searchBarActiveColor: #777;
+    --searchBarBackgroundColor: #666; /* even scarier the second time */
+    --searchBarHoverColor: #999;
+    --searchBarActiveColor: #BBB;
     --placeholderTextColor: #000;
 
     --textColor: #FFF;
@@ -62,8 +64,8 @@
 /* Set the dimensions and background color of the window */
 
 html{
-    width: 400px;
-    height: 500px;
+    width: 425px;
+    height: 525px;
     color: var(--textColor);
 }
 body{
@@ -78,6 +80,7 @@ body{
 }
 
 #jileHomeIcon{
+    border-radius: 8px;
     /*display: none;*/
 }
 
