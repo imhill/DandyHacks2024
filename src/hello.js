@@ -37,7 +37,7 @@ client.connect((err) => {
   if (err) {
     console.error('Error connecting to PostgreSQL', err.stack);
   } else {
-    console.log(`Connected to PostgreSQL with environment variables:\n${process.env}`);
+    console.log(`Connected to PostgreSQL with environment variables:\n${JSON.stringify(process.env, null, 2)}`);
   }
 });
 
