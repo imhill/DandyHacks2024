@@ -63,7 +63,7 @@
 
     --textColor: #EEE;
 
-    --horizontalBarColor: #CCC;
+    --horizontalBarColor: #AAA;
 }
 
 /* Set the dimensions and background color of the window */
@@ -174,11 +174,8 @@ th, td{
 
 /* Style the searchbar */
 
-input::placeholder{
-    color: var(--placeholderTextColor);
-}
-#searchBarTextBox{
-    width: 240px;
+.searchBar{
+    width: 230px;
     height: 30px;
     border-radius: 8px;
     background-color: var(--searchBarBackgroundColor);
@@ -188,18 +185,20 @@ input::placeholder{
     outline: none;
     color: var(--searchBarTextColor);
 }
-
-#searchBarTextBox:hover{
+.searchBar:hover{
     background-color: var(--searchBarHoverColor);
 }
-
-#searchBarTextBox:active{
+.searchBar:active{
     background-color: var(--searchBarActiveColor);
 }
+input::placeholder{
+    color: var(--placeholderTextColor);
+}
+
 
 /* Style the add/remove friend buttons */
 
-.friendButton{
+.searchBarButton{
     background-color: var(--buttonColor);
     display: inline-block;
     height: 20px;
@@ -207,20 +206,26 @@ input::placeholder{
     border: 0;
     border-radius: 4px;
     color: var(--buttonTextColor);
+    width: 96px;
 }
-.friendButton:hover{
+.searchBarButton:hover{
     background-color: var(--buttonHoverColor);
 }
-.friendButton:active{
+.searchBarButton:active{
     background-color: var(--buttonActiveColor);
 }
 
 #removeFriendButton{
-    margin: -32px 0px 0px 300px;
+    margin: -32px 0px 0px 2800px;
 }
 
 #addFriendButton{
-    margin: -56px 0px 0px 310px;
+    margin: -56px 0px 0px 280px;
+}
+
+#sendChallengeButton{
+    margin: -47px 0px 0px 285px;
+    height: 24px;
 }
 
 /* Style the titles of each tab */
@@ -229,6 +234,10 @@ input::placeholder{
     margin:0;
     padding: 20px 10px 10px 10px;
     text-align: center;
+}
+
+#newChallengeTitle{
+    padding-bottom: 0;
 }
 
 /* style the horizontal rule (dividing bar) */
