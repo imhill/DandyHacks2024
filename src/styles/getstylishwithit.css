@@ -49,6 +49,7 @@
     --tableRowPrimaryColor: #303030;
     --tableRowAlternateColor: #444444;
     --tableTextColor: #DDD;
+    --tableTextSize: 20px;
 
     --buttonColor: #3C3C3C;
     --buttonHoverColor: #4E4E4E;
@@ -115,6 +116,7 @@ body{
     font-size: 16px;
     padding: 4px 12px 2px 12px;
     border-radius: 6px 6px 0px 0px;
+    cursor: pointer;
 }
 .tabbutton:hover{
     background-color: var(--tabButtonHoverColor);
@@ -151,6 +153,7 @@ table{
     border-spacing: 0;
     text-align: left;
     color: var(--tableTextColor);
+    font-size: var(--tableTextSize);
 }
 th{
     background-color: var(--tableHeaderColor);
@@ -170,6 +173,9 @@ tr:hover {
 th, td{
     padding: 0px 4px 0px 4px;
     text-align: center;
+}
+td:first-child,th:first-child{
+    text-align: left;
 }
 
 /* Style the searchbar */
@@ -207,6 +213,7 @@ input::placeholder{
     border-radius: 4px;
     color: var(--buttonTextColor);
     width: 96px;
+    cursor: pointer;
 }
 .searchBarButton:hover{
     background-color: var(--buttonHoverColor);
@@ -216,7 +223,7 @@ input::placeholder{
 }
 
 #removeFriendButton{
-    margin: -32px 0px 0px 2800px;
+    margin: -32px 0px 0px 280px;
 }
 
 #addFriendButton{
@@ -226,6 +233,26 @@ input::placeholder{
 #sendChallengeButton{
     margin: -47px 0px 0px 285px;
     height: 24px;
+}
+
+.removeFriendButton{
+    height: 14px;
+    width: 18px;
+    display: inline-flex;
+    position: absolute;
+    right: 22px;
+    cursor: pointer;
+    margin-top: 3px;
+    justify-content: center;
+    align-items:center;
+    padding-bottom: 4px;
+    border-radius: 2px;
+}
+.removeFriendButton:hover{
+    scale: 1.1;
+}
+.removeFriendButton:active{
+    scale: 1.25;
 }
 
 /* Style the titles of each tab */
@@ -238,6 +265,7 @@ input::placeholder{
 
 #newChallengeTitle{
     padding-bottom: 0;
+    margin-bottom: -10px;
 }
 
 /* style the horizontal rule (dividing bar) */

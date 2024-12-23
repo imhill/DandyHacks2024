@@ -134,10 +134,16 @@ async function buildFriendsTab(){
     const rawFriendsList = await GetFriends();
     
     //format the raw data
-    const friendsListData = formatFriendsList(rawFriendsList.friends);
+    //const friendsListData = formatFriendsList(rawFriendsList.friends);
+    const friendsListData = [
+                            {User: "Jacob"},
+                            {User: "Ian"},
+                            {User: "Leo"},
+                            {User: "Ezra"},
+                        ];
     
     //generate the table based on the data
-    const friendsListTable = GenerateTable(friendsListData);
+    const friendsListTable = GenerateTable({data:friendsListData, remove:true});
     friendsListTable.id = "friendsListTable";
     
     //add it to the div
@@ -168,7 +174,7 @@ async function buildLeaderboardTab(){
     const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
     
     //generate the table with the data
-    const leaderboardFriendsTable = GenerateTable(friendLeaderboardData);
+    const leaderboardFriendsTable = GenerateTable({data:friendLeaderboardData});
     leaderboardFriendsTable.id = "leaderboardFriendsTable";
     
     //add it to the div
@@ -195,7 +201,7 @@ async function buildChallengesTab(){
     ];
 
     //generate the table with the formatted data
-    const activeChallengesTable = GenerateTable(activeChallengesData);
+    const activeChallengesTable = GenerateTable({data: activeChallengesData});
     activeChallengesTable.id = "activeChallengesTable";
 
     //add it to the div

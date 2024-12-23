@@ -1,4 +1,4 @@
-export function GenerateTable(data){
+export function GenerateTable({data, remove=false}){
     //create the table object
     const table = document.createElement('table');
 
@@ -24,6 +24,12 @@ export function GenerateTable(data){
         for (const key in rowData) {
             const cell = row.insertCell();
             cell.textContent = rowData[key];
+            if(remove){
+                const removeFriendButton = document.createElement("span");
+                removeFriendButton.classList = "removeFriendButton";
+                removeFriendButton.innerHTML = "&times;";
+                cell.appendChild(removeFriendButton);
+            }
         }
     }
 
