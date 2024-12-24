@@ -25,31 +25,33 @@
         </div>
         
         <div class="tabbody" id="friends">
+            <h1 class="tabTitle searchBarTitle" id="newChallengeTitle">Add Friend</h1>
             <div id="addFriendDiv">
                 <div id="friendSearchBarDiv">
                     <input class="searchBar" id="friendSearchBarTextBox" name="friendSearchBarText" type="text" placeholder=" Add friend...">
                 </div>
                 <button class="searchBarButton" id="addFriendButton">Add Friend</button>
-                <button class="searchBarButton" id="removeFriendButton">Remove Friend</button>
+                <!---<button class="searchBarButton" id="removeFriendButton">Remove Friend</button>-->
             </div>
 
             <hr>
 
+            <h1 class="tabTitle" id="friendsListTitle">Friends</h1>
             <div class="tableDiv" id="friendsListTableDiv"></div>
 
             <div class="popupModal" id="deleteConfirmationModal">
                 <div class="popupModalContent" id="deleteConfirmationModalContent">
-                    <p id="deleteConfirmationModalText">Jacob</p>
-                    <button class="popupModalButton popupModalConfirmButton">Remove</button>
+                    <p id="deleteConfirmationModalUsername">Jacob</p>
+                    <button class="popupModalButton popupModalConfirmButton" id="deleteConfirmationModalConfirmButton">Remove</button>
                     <button class="popupModalButton popupModalCancelButton" id="deleteConfirmationModalCancelButton">Cancel</button>
                 </div>
             </div>
         </div>
 
         <div class="tabbody" id="challenges">
-            <h1 class="tabTitle" id="newChallengeTitle">Create New Challenge</h1>
-            <div id="addFriendDiv">
-                <div id="searchBarDiv">
+            <h1 class="tabTitle searchBarTitle" id="newChallengeTitle">Create New Challenge</h1>
+            <div id="newChallengeDiv">
+                <div id="challengeSearchBarDiv">
                     <input class="searchBar" id="searchBarTextBox" name="searchBarText" type="text" placeholder=" Send challenge...">
                 </div>
                 <button class="searchBarButton" id="sendChallengeButton">Send</button>

@@ -2,6 +2,7 @@ import {GenerateTable} from "./generateTable.js";
 import {AddFriend,RemoveFriend,GetFriends} from "./friendUtils.js";
 import {GetLeaderboard} from "./leaderboardUtils.js";
 import {GetUsername} from "./getUsername.js";
+import {HideDeleteConfirmationModal} from "./additionalUtils.js";
 
 /*
  *    Display the username of the currently signed in user
@@ -71,11 +72,22 @@ const searchBarTextbox = document.getElementById("searchBarTextBox");
 
 /* define buttons for adding and removing friends */
 const addFriendButton = document.getElementById("addFriendButton");
-const removeFriendButton = document.getElementById("removeFriendButton");
+const deleteConfirmationConfirmButton = document.getElementById("deleteConfirmationModalConfirmButton");
+const deleteConfirmationCloseButton = document.getElementById("deleteConfirmationModalCancelButton");
+
+/* define the friend deletion modal divs */
+const deleteConfirmationModal = document.getElementById("deleteConfirmationModal");
+const deleteConfirmationModalContent = document.getElementById("deleteConfirmationModalContent");
+const deleteConfirmationUsername = document.getElementById("deleteConfirmationModalUsername");
+
+/* allow clicking away from the modal to close it */
+deleteConfirmationModalContent.addEventListener("click",(event) => {event.stopPropagation();});
+deleteConfirmationModal.addEventListener("click",HideDeleteConfirmationModal);
 
 /* add function to each of the buttons */
 addFriendButton.addEventListener("click", sendFriendReq);
-removeFriendButton.addEventListener("click", removeFriend);
+deleteConfirmationCloseButton.addEventListener("click",HideDeleteConfirmationModal);
+deleteConfirmationConfirmButton.addEventListener("click",removeFriend);
 
 /* create array with all the table divs */
 const tableDivs = [friendsListTableDiv,
@@ -157,8 +169,9 @@ function sendFriendReq() {
 }
 
 function removeFriend() {
-    const enemyToRemove = searchBarTextbox.value;
+    const enemyToRemove = deleteConfirmationUsername.textContent;
     RemoveFriend(enemyToRemove);
+    HideDeleteConfirmationModal();
     searchBarTextbox.value = "";
 }
 
@@ -210,19 +223,19 @@ async function buildChallengesTab(){
 
 //function to hide all divs
 function nukeDivs(divs,buttons){
-    for(const d of divs){
-        d.style.display = "none";
+    for(const div of divs){
+        div.style.display = "none";
     }
-    for(const b of buttons){
-        b.className = "tabButton inactiveTab";
+    for(const btn of buttons){
+        btn.className = "tabButton inactiveTab";
     }
-    for(const tD of tableDivs){
-        tD.innerHTML = "";
+    for(const tableDiv of tableDivs){
+        tableDiv.innerHTML = "";
     }
 }
 
 //function that handles switching between tabs
-function switchTab(tab){
+async function switchTab(tab){
     //fist clear all divs
     nukeDivs(tabDivs,tabButtons);
 

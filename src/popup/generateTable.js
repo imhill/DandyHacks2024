@@ -33,7 +33,7 @@ export function GenerateTable({data, remove=false}){
             cell.id = `row${rowNumber}.cell${cellNumber}`;
             if(remove){
                 const removeFriendButton = document.createElement("span");
-                removeFriendButton.classList = "removeFriendButton";
+                removeFriendButton.className = "removeFriendButton";
                 removeFriendButton.id = `row${rowNumber}`;
                 removeFriendButton.innerHTML = "&times;";
                 removeFriendButton.rowNumber = rowNumber;

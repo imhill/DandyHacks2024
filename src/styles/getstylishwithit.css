@@ -68,12 +68,15 @@
 
     --popupModalBackgroundColor: rgba(68,68,68,0.85);
     --popupModalTextColor: var(--textColor);
+
     --popupModalButtonColor: ;
-    --modelConfirmButtonBackgroundColor: #CCC;
-    --modalCancelButtonBackgroundColor: rgba(192,192,192,0.25);
-    --modalCancelButtonHoverBackgroundColor: rgba(192,192,192,0.25);
-    --modalCancelButtonActiveBackgroundColor: rgba(192,192,192,0.25);
+    --modelConfirmButtonBackgroundColor: #AAA;
+    --modalConfirmButtonHoverBackgroundColor: #CCC;
+    --modalConfirmButtonActiveBackgroundColor: #EEE;
     --modelConfirmButtonTextColor: #111;
+    --modalCancelButtonBackgroundColor: rgba(192,192,192,0.25);
+    --modalCancelButtonHoverBackgroundColor: rgba(192,192,192,0.5);
+    --modalCancelButtonActiveBackgroundColor: rgba(192,192,192,0.85);
     --modelCancelButtonTextColor: var(--textColor);
 }
 
@@ -233,12 +236,14 @@ input::placeholder{
     background-color: var(--buttonActiveColor);
 }
 
-#removeFriendButton{
+/*#removeFriendButton{
     margin: -32px 0px 0px 280px;
-}
+}*/
 
 #addFriendButton{
-    margin: -56px 0px 0px 280px;
+    /*margin: -56px 0px 0px 280px;*/
+    margin: -47px 0px 0px 285px;
+    height: 24px;
 }
 
 #sendChallengeButton{
@@ -302,35 +307,47 @@ input::placeholder{
     background-color: var(--modelConfirmButtonBackgroundColor);
     color: var(--modelConfirmButtonTextColor);
 }
+.popupModalConfirmButton:hover{
+    background-color: var(--modalConfirmButtonHoverBackgroundColor);
+}
+.popupModalConfirmButton:active{
+    background-color: var(--modalConfirmButtonActiveBackgroundColor);
+}
 .popupModalCancelButton{
     background-color: var(--modalCancelButtonBackgroundColor);
     color: var(--modelCancelButtonTextColor);
 }
+.popupModalCancelButton:hover{
+    background-color: var(--modalCancelButtonHoverBackgroundColor);
+}
+.popupModalCancelButton:active{
+    background-color: var(--modalCancelButtonActiveBackgroundColor);
+}
 
-#deleteConfirmationModalText{
+#deleteConfirmationModalUsername{
     width: 80%;
     padding: 2.5% 10%;
     text-align: center;
     font-size: 20px;
 }
-#deleteConfirmationModalText::before{
+#deleteConfirmationModalUsername::before{
     content: "Are you sure you want to remove ";
 }
-#deleteConfirmationModalText::after{
+#deleteConfirmationModalUsername::after{
     content: " as a friend?";
 }
 
 /* Style the titles of each tab */
 
 .tabTitle{
-    margin:0;
+    margin: -10px 0px -10px 0px;
     padding: 20px 10px 10px 10px;
     text-align: center;
 }
 
-#newChallengeTitle{
+.searchBarTitle{
     padding-bottom: 0;
-    margin-bottom: -10px;
+    margin-bottom: -16px;
 }
 
 /* style the horizontal rule (dividing bar) */
