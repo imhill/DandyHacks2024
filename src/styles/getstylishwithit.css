@@ -98,7 +98,7 @@ body{
     display: block;
 }
 
-#jileHomeIcon{
+.jileHomeIcon{
     border-radius: 8px;
     box-shadow: 0px 0px 16px 4px #000;
     margin: 75px 0px 0px 76px;
@@ -357,4 +357,17 @@ hr{
     width: 95%;
     height: 1px;
     border: none;
+}
+
+/* alternate window for when not on LeetCode.com */
+#alternateWindowDiv{
+    display: none;
+}
+#alternateWindowText{
+    text-align: center;
+    text-decoration: bold;
+    color: var(--textColor);
+    font-size: 24px;
+    width: 256px;
+    margin: 40px auto;
 }

@@ -5,7 +5,8 @@
 	"description": "Friends list and per-problem leaderboards for LeetCode. First-place winning DandyHacks 2024 community track submission",
 	"action": {
 		"default_popup": "popup/poppington.html",
-		"default_icon": "icons/JILE-32.png"
+		"default_icon": "icons/JILE-32.png",
+		"default_title": "JILE: LL & Friends"
 	},
 	"icons": {
 		"32": "icons/JILE-32.png",
@@ -15,9 +16,9 @@
 	"background": {
 		"service_worker": "background/background.js"
 	},
-	"permissions": ["webRequest","activeTab"],
+	"permissions": ["webRequest","activeTab","tabs"],
 	"host_permissions": ["https://leetcode.com/*"],
 	"content_security_policy": {
-    		"extension_pages": "script-src 'self'; connect-src http://3.143.223.90:8000 *"
+    	"extension_pages": "script-src 'self'; connect-src http://3.143.223.90:8000 *"
   	}
 }

@@ -4,6 +4,30 @@ import {GetLeaderboard} from "./leaderboardUtils.js";
 import {GetUsername} from "./getUsername.js";
 import {HideDeleteConfirmationModal} from "./additionalUtils.js";
 
+let currentUrl = "https://";
+const LEETCODE_BASE_URL = "https://leetcode.com";
+
+const mainWindow = document.getElementById("mainWindowDiv");
+const alternateWindow = document.getElementById("alternateWindowDiv");
+
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs.length > 0) {
+        currentUrl = tabs[0].url;
+        
+        if(currentUrl.startsWith(LEETCODE_BASE_URL)){
+            console.log("On LeetCode!");
+        } else {
+            console.log("NOO NOT ON LEETCODE");
+            console.log(currentUrl);
+            mainWindow.style.display = "none";
+            alternateWindow.style.display = "block";
+        }
+    } else {
+        console.log("Can't find URL");
+    }
+  }
+);
+
 /*
  *    Display the username of the currently signed in user
  */
