@@ -34,7 +34,7 @@
     --tabButtonPressedColor: #444;
 
     --activeTabBackgroundColor: #262626;
-    --activeTabTextColor: #EEE;
+    --activeTabTextColor:  var(--textColor);
     --activeTabGradient: linear-gradient(-10deg, #262626, #262626, #2D2D2D, #444444);
 
     --inactiveTabColor: #1D1D1D;
@@ -58,13 +58,23 @@
 
     --searchBarBackgroundColor: #3C3C3C;
     --searchBarHoverColor: #4E4E4E;
-    --searchBarActiveColor: #565656;
-    --placeholderTextColor: #EEE;
-    --searchBarTextColor: #EEE;
+    --searchBarFocusColor: #565656;
+    --placeholderTextColor: var(--textColor);
+    --searchBarTextColor: var(--textColor);
 
     --textColor: #EEE;
 
     --horizontalBarColor: #AAA;
+
+    --popupModalBackgroundColor: rgba(68,68,68,0.85);
+    --popupModalTextColor: var(--textColor);
+    --popupModalButtonColor: ;
+    --modelConfirmButtonBackgroundColor: #CCC;
+    --modalCancelButtonBackgroundColor: rgba(192,192,192,0.25);
+    --modalCancelButtonHoverBackgroundColor: rgba(192,192,192,0.25);
+    --modalCancelButtonActiveBackgroundColor: rgba(192,192,192,0.25);
+    --modelConfirmButtonTextColor: #111;
+    --modelCancelButtonTextColor: var(--textColor);
 }
 
 /* Set the dimensions and background color of the window */
@@ -194,8 +204,9 @@ td:first-child,th:first-child{
 .searchBar:hover{
     background-color: var(--searchBarHoverColor);
 }
-.searchBar:active{
-    background-color: var(--searchBarActiveColor);
+.searchBar:focus{
+    background-color: var(--searchBarFocusColor);
+    border: 1px solid var(--searchBarTextColor);
 }
 input::placeholder{
     color: var(--placeholderTextColor);
@@ -253,6 +264,60 @@ input::placeholder{
 }
 .removeFriendButton:active{
     scale: 1.25;
+}
+
+/* style the popup modals */
+
+.popupModal{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.25);
+}
+.popupModalContent{
+    background-color: var(--popupModalBackgroundColor);
+    height: 25%;
+    width: 60%;
+    margin: 40% auto;
+    border-radius: 8px;
+    color: var(--popupModalTextColor);
+}
+.popupModalButton{
+    color: var(--popupModalTextColor);
+    background-color: var(--popupModalButtonColor);
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    position: relative;
+    top: -14px;
+    padding: 8px 12px 8px 12px;
+    margin-left: 16px;
+    left: 30px;
+    width: 72px;
+}
+.popupModalConfirmButton{
+    background-color: var(--modelConfirmButtonBackgroundColor);
+    color: var(--modelConfirmButtonTextColor);
+}
+.popupModalCancelButton{
+    background-color: var(--modalCancelButtonBackgroundColor);
+    color: var(--modelCancelButtonTextColor);
+}
+
+#deleteConfirmationModalText{
+    width: 80%;
+    padding: 2.5% 10%;
+    text-align: center;
+    font-size: 20px;
+}
+#deleteConfirmationModalText::before{
+    content: "Are you sure you want to remove ";
+}
+#deleteConfirmationModalText::after{
+    content: " as a friend?";
 }
 
 /* Style the titles of each tab */
