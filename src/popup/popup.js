@@ -43,7 +43,7 @@ const userSignedInBox = document.getElementById("userSignedIn");
 const usernameText = document.getElementById("usernameText");
 
 //this is just to test the functionality and placeholder for styling
-usernameText.textContent = "TEST_USER";
+usernameText.textContent = await GetUsername();
 
 /*
  *    Switch between tabs
@@ -102,7 +102,7 @@ const noChallengesFoundText = document.getElementById("noChallengesFoundText");
 const leaderboardTitle = document.getElementById("leaderboardTitle");
 
 /* define the search bar */
-const searchBarTextbox = document.getElementById("searchBarTextBox");
+const friendSearchBarTextbox = document.getElementById("friendSearchBarTextBox");
 
 /* define buttons for adding and removing friends */
 const addFriendButton = document.getElementById("addFriendButton");
@@ -188,13 +188,13 @@ async function buildFriendsTab(){
     noFriendsFoundText.style.display = "none";
     
     //format the raw data
-    //const friendsListData = formatFriendsList(rawFriendsList.friends);
-    const friendsListData = [
+    const friendsListData = formatFriendsList(rawFriendsList.friends);
+    /*const friendsListData = [
                             {User: "Jacob"},
                             {User: "Ian"},
                             {User: "Leo"},
                             {User: "Ezra"},
-                        ];
+                        ];*/
     
     //generate the table based on the data
     const friendsListTable = GenerateTable({data:friendsListData, remove:true});
@@ -204,17 +204,19 @@ async function buildFriendsTab(){
     friendsListTableDiv.appendChild(friendsListTable);
 }
 
-function sendFriendReq() {
-    const friendToAdd = searchBarTextbox.value;
-    AddFriend(friendToAdd);
-    searchBarTextbox.value = "";
+/* these are currently very slow, by requiring new friend list queries to the server every time a friend is added or removed */
+async function sendFriendReq() {
+    const friendToAdd = friendSearchBarTextbox.value;
+    await AddFriend(friendToAdd);
+    friendSearchBarTextbox.value = "";
+    switchTab("friends");
 }
 
-function removeFriend() {
+async function removeFriend() {
     const enemyToRemove = deleteConfirmationUsername.textContent;
-    RemoveFriend(enemyToRemove);
+    await RemoveFriend(enemyToRemove);
     HideDeleteConfirmationModal();
-    searchBarTextbox.value = "";
+    switchTab("friends");
 }
 
 async function buildLeaderboardTab(){

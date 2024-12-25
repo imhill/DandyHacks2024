@@ -1,6 +1,7 @@
 import {GetUsername} from "./getUsername.js";
 
 export async function AddFriend(friendName) {
+    console.log("Adding",friendName);
     // Get runner's username
     const username = await GetUsername();
 
