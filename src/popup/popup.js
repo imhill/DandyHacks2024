@@ -5,7 +5,9 @@ import {GetUsername} from "./getUsername.js";
 import {HideDeleteConfirmationModal} from "./additionalUtils.js";
 
 let currentUrl = "https://";
+let onProblemPage = false;
 const LEETCODE_BASE_URL = "https://leetcode.com";
+const LEETCODE_PROBLEM_URL = "https://leetcode.com/problems/";
 
 const mainWindow = document.getElementById("mainWindowDiv");
 const alternateWindow = document.getElementById("alternateWindowDiv");
@@ -16,6 +18,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         
         if(currentUrl.startsWith(LEETCODE_BASE_URL)){
             console.log("On LeetCode!");
+            if(currentUrl.startsWith(LEETCODE_PROBLEM_URL)){
+                onProblemPage = true;
+            } else {
+                leaderboardButton.style.display = "none";
+            }
         } else {
             console.log("NOO NOT ON LEETCODE");
             console.log(currentUrl);
@@ -85,8 +92,11 @@ const tabDivs = [leaderboardDiv,
 
 /* define the tables */
 const friendsListTableDiv = document.getElementById("friendsListTableDiv");
+const noFriendsFoundText = document.getElementById("noFriendsFoundText");
 const leaderboardTableDiv = document.getElementById("leaderboardFriendsTableDiv");
+const noLeaderboardFoundText = document.getElementById("noLeaderboardFoundText");
 const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
+const noChallengesFoundText = document.getElementById("noChallengesFoundText");
 
 /* define the title above the leaderboard */
 const leaderboardTitle = document.getElementById("leaderboardTitle");
@@ -168,6 +178,14 @@ async function buildFriendsTab(){
     
     //get the raw data from the endpoint
     const rawFriendsList = await GetFriends();
+
+    if(rawFriendsList.length == 0){
+        console.log("No challenge data");
+        noFriendsFoundText.style.display = "block";
+        return;
+    }
+
+    noFriendsFoundText.style.display = "none";
     
     //format the raw data
     //const friendsListData = formatFriendsList(rawFriendsList.friends);
@@ -204,7 +222,15 @@ async function buildLeaderboardTab(){
 
     //get the raw data from the endpoint
     const rawLeaderboard = await GetLeaderboard();
-    
+
+    if(rawLeaderboard.length == 0){
+        console.log("No leaderboard data");
+        noLeaderboardFoundText.style.display = "block";
+        return;
+    }
+
+    noLeaderboardFoundText.style.display = "none";
+
     //const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
     
     //format the raw data
@@ -224,8 +250,18 @@ async function buildLeaderboardTab(){
 async function buildChallengesTab(){
     //create the challenges tab tables
 
+    /*
     //need to define GetChallenges function/helper file
-    //const rawChallengeData = await GetChallenges();
+    const rawChallengeData = await GetChallenges();
+
+    if(rawChallengeData.length == 0){
+        console.log("No challenge data");
+        noChallengesFoundText.style.display = "block";
+        return;
+    }
+
+    noChallengesFoundText.style.display = "none";
+    */
 
     //format the data
     //const activeChallengesData = formatChallengeData(rawChallengeData);

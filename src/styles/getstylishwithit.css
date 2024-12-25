@@ -96,6 +96,7 @@ body{
 
 #homeIcon{
     display: block;
+    margin-top: 0px;
 }
 
 .jileHomeIcon{
@@ -153,6 +154,7 @@ body{
     background-color: var(--activeTabBackgroundColor);
     height: 485px;
     border-radius: 0px 4px 8px 8px;
+    margin-top: 10px;
 }
 
 /* Style the tables */
@@ -370,4 +372,9 @@ hr{
     font-size: 24px;
     width: 256px;
     margin: 40px auto;
+}
+
+.noDataFoundText{
+    display: none;
+    text-align: center;
 }
