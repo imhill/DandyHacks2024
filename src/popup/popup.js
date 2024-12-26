@@ -12,6 +12,11 @@ const LEETCODE_PROBLEM_URL = "https://leetcode.com/problems/";
 const mainWindow = document.getElementById("mainWindowDiv");
 const alternateWindow = document.getElementById("alternateWindowDiv");
 
+/* define the buttons */
+const leaderboardButton = document.getElementById("leaderboardButton");
+const friendsButton = document.getElementById("friendsButton");
+const challengesButton = document.getElementById("challengesButton");
+
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
         currentUrl = tabs[0].url;
@@ -48,11 +53,6 @@ usernameText.textContent = await GetUsername();
 /*
  *    Switch between tabs
  */
-
-/* define the buttons */
-const leaderboardButton = document.getElementById("leaderboardButton");
-const friendsButton = document.getElementById("friendsButton");
-const challengesButton = document.getElementById("challengesButton");
 
 /* add function to each button */
 leaderboardButton.addEventListener("click", switchToLeaderboard);
