@@ -15,7 +15,7 @@ const alternateWindow = document.getElementById("alternateWindowDiv");
 /* define the buttons */
 const leaderboardButton = document.getElementById("leaderboardButton");
 const friendsButton = document.getElementById("friendsButton");
-const challengesButton = document.getElementById("challengesButton");
+//const challengesButton = document.getElementById("challengesButton");                                   //challenges
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
@@ -56,23 +56,23 @@ usernameText.textContent = await GetUsername();
 /* add function to each button */
 leaderboardButton.addEventListener("click", switchToLeaderboard);
 friendsButton.addEventListener("click", switchToFriends);
-challengesButton.addEventListener("click", switchToChallenges);
+//challengesButton.addEventListener("click", switchToChallenges);                                   //challenges
 
 /* create array with all buttons */
 const tabButtons = [leaderboardButton,
                     friendsButton,
-                    challengesButton,
+                    //challengesButton,                                                             //challenges
                 ];
 
 /* define the functions to switch to a given page */
 function switchToLeaderboard(){ switchTab("leaderboard"); }
 function switchToFriends(){ switchTab("friends"); }
-function switchToChallenges(){ switchTab("challenges"); }
+//function switchToChallenges(){ switchTab("challenges"); }                                            //challenges
 
 //define the divs for each of the tabs
 const leaderboardDiv = document.getElementById("leaderboard");
 const friendsDiv = document.getElementById("friends");
-const challengesDiv = document.getElementById("challenges");
+//const challengesDiv = document.getElementById("challenges");                                       //challenges
 
 /* define the home page icon */
 const icon = document.getElementById("homeIcon");
@@ -80,7 +80,7 @@ const icon = document.getElementById("homeIcon");
 /* create an array with all of the tab divs and home icon */
 const tabDivs = [leaderboardDiv,
                 friendsDiv,
-                challengesDiv,
+                //challengesDiv,                                                                   //challenges
                 icon,
             ];
 
@@ -94,8 +94,8 @@ const friendsListTableDiv = document.getElementById("friendsListTableDiv");
 const noFriendsFoundText = document.getElementById("noFriendsFoundText");
 const leaderboardTableDiv = document.getElementById("leaderboardFriendsTableDiv");
 const noLeaderboardFoundText = document.getElementById("noLeaderboardFoundText");
-const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");
-const noChallengesFoundText = document.getElementById("noChallengesFoundText");
+//const activeChallengesTableDiv = document.getElementById("activeChallengesTableDiv");                        //challenges
+//const noChallengesFoundText = document.getElementById("noChallengesFoundText");                              //challenges
 
 /* define the title above the leaderboard */
 const leaderboardTitle = document.getElementById("leaderboardTitle");
@@ -125,7 +125,7 @@ deleteConfirmationConfirmButton.addEventListener("click",removeFriend);
 /* create array with all the table divs */
 const tableDivs = [friendsListTableDiv,
                 leaderboardTableDiv,
-                activeChallengesTableDiv,
+                //activeChallengesTableDiv,                                                            //challenges
             ];
 
 /* function that formats the raw friend data so it can be displayed in a table */
@@ -165,7 +165,7 @@ function formatLeaderboardData(leaderboardData){
     return formattedList;
 }
 
-/* need to implement */
+/* need to implement */                                                                                    //challenges
 function formatChallengeData(){
     const formattedList = [];
 
@@ -179,7 +179,7 @@ async function buildFriendsTab(){
     const rawFriendsList = await GetFriends();
 
     if(rawFriendsList.length == 0){
-        console.log("No challenge data");
+        console.log("No friend data");
         noFriendsFoundText.style.display = "block";
         return;
     }
@@ -246,12 +246,11 @@ async function buildLeaderboardTab(){
 }
 
 /* */
-// to be implemented!
-/* */
+// to be implemented!                                                                                  //challenges
+/*
 async function buildChallengesTab(){
     //create the challenges tab tables
 
-    /*
     //need to define GetChallenges function/helper file
     const rawChallengeData = await GetChallenges();
 
@@ -262,7 +261,6 @@ async function buildChallengesTab(){
     }
 
     noChallengesFoundText.style.display = "none";
-    */
 
     //format the data
     //const activeChallengesData = formatChallengeData(rawChallengeData);
@@ -280,7 +278,7 @@ async function buildChallengesTab(){
 
     //add it to the div
     activeChallengesTableDiv.appendChild(activeChallengesTable);
-}
+}*/
 
 //function to hide all divs
 function nukeDivs(divs,buttons){
@@ -324,11 +322,11 @@ async function switchTab(tab){
             await buildFriendsTab();
             currentlySwitching = false;
             break;
-        case "challenges":
+        /*case "challenges":                                                                    //challenges
             challengesDiv.style.display = "block";
             challengesButton.className = "tabButton activeTab";
             await buildChallengesTab();
             currentlySwitching = false;
-            break;
+            break;*/
     }
 }
