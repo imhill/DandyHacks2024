@@ -47,7 +47,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 const userSignedInBox = document.getElementById("userSignedIn");
 const usernameText = document.getElementById("usernameText");
 
-//this is just to test the functionality and placeholder for styling
 usernameText.textContent = await GetUsername();
 
 /*
@@ -296,8 +295,18 @@ function nukeDivs(divs,buttons){
     }
 }
 
+let currentlySwitching = false;
+
 //function that handles switching between tabs
 async function switchTab(tab){
+    //stop the transition from happening if the previous call hasn't resolved yet
+    if(currentlySwitching){
+        console.log("Already switching tabs");
+        return;
+    } else {
+        currentlySwitching = true;
+    }
+
     //fist clear all divs
     nukeDivs(tabDivs,tabButtons);
 
@@ -306,17 +315,20 @@ async function switchTab(tab){
         case "leaderboard":
             leaderboardButton.className = "tabButton activeTab";
             leaderboardDiv.style.display = "block";
-            buildLeaderboardTab();
+            await buildLeaderboardTab();
+            currentlySwitching = false;
             break;
         case "friends":
             friendsButton.className = "tabButton activeTab";
             friendsDiv.style.display = "block";
-            buildFriendsTab();
+            await buildFriendsTab();
+            currentlySwitching = false;
             break;
         case "challenges":
             challengesDiv.style.display = "block";
             challengesButton.className = "tabButton activeTab";
-            buildChallengesTab();
+            await buildChallengesTab();
+            currentlySwitching = false;
             break;
     }
 }
