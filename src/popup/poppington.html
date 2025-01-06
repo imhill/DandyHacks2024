@@ -4,41 +4,73 @@
         <link rel="stylesheet" href="../styles/getstylishwithit.css">
     </head>
     <body>
-        <div id="userSignedIn">
-            Signed in as: <span id="usernameText"></span>
-        </div>
-
-        <div class="tabmenu">
-            <button class="tabButton inactiveTab" id="leaderboardButton">Leaderboard</button>
-            <button class="tabButton inactiveTab" id="friendsButton">Friends</button>
-            <!--<button class="tabButton inactiveTab" id="challengesButton">Challenges</button>-->
-        </div>
-        
-        <div class="tabbody" id="homeIcon">
-            <img id="jileHomeIcon" src="../assets/luhconInverted.png" style="margin: 50px 0px 0px 64px;">
-        </div>
-        
-        <div class="tabbody" id="leaderboard">
-            <h1 id="leaderboardTitle"></h1>
-            <div class="tableDiv" id="leaderboardFriendsTableDiv"></div>
-            <div class="tableDiv" id="leaderboardCommunityTableDiv"></div>
-        </div>
-        
-        <div class="tabbody" id="friends">
-            <div id="addFriendDiv">
-                <div id="searchBarDiv">
-                    <input id="searchBarTextBox" name="searchBarText" type="text" placeholder="Add friend...">
-                </div>
-                <button class="friendButton" id="addFriendButton">Add Friend</button>
-                <button class="friendButton" id="removeFriendButton">Remove Friend</button>
+        <div id="mainWindowDiv">
+            <div id="userSignedIn">
+                <span id="usernameText"></span>
             </div>
-            <div class="tableDiv" id="friendsListTableDiv"></div>
+
+            <div class="tabmenu">
+                <button class="tabButton inactiveTab" id="leaderboardButton">Leaderboard</button>
+                <button class="tabButton inactiveTab" id="friendsButton">Friends</button>
+                <!--<button class="tabButton inactiveTab" id="challengesButton">Challenges</button>-->
+            </div>
+            
+            <div class="tabbody" id="homeIcon">
+                <img class="jileHomeIcon" src="../assets/luhconInverted.png">
+            </div>
+            
+            <div class="tabbody" id="leaderboard">
+                <h1 class="tabTitle" id="leaderboardTitle"></h1>
+                <div class="tableDiv" id="leaderboardFriendsTableDiv"></div>
+                <!--<div class="tableDiv" id="leaderboardCommunityTableDiv"></div>-->
+                <p class="noDataFoundText" id="noLeaderboardFoundText">No leaderboard data found.</p>
+            </div>
+            
+            <div class="tabbody" id="friends">
+                <h1 class="tabTitle searchBarTitle" id="newChallengeTitle">Add Friend</h1>
+                <div id="addFriendDiv">
+                    <div id="friendSearchBarDiv">
+                        <input class="searchBar" id="friendSearchBarTextBox" name="friendSearchBarText" type="text" placeholder=" Add friend...">
+                    </div>
+                    <button class="searchBarButton" id="addFriendButton">Add Friend</button>
+                </div>
+
+                <hr>
+
+                <h1 class="tabTitle" id="friendsListTitle">Friends</h1>
+                <div class="tableDiv" id="friendsListTableDiv"></div>
+                <p class="noDataFoundText" id="noFriendsFoundText">No friend list data found.</p>
+
+                <div class="popupModal" id="deleteConfirmationModal">
+                    <div class="popupModalContent" id="deleteConfirmationModalContent">
+                        <p id="deleteConfirmationModalUsername">Jacob</p>
+                        <button class="popupModalButton popupModalConfirmButton" id="deleteConfirmationModalConfirmButton">Remove</button>
+                        <button class="popupModalButton popupModalCancelButton" id="deleteConfirmationModalCancelButton">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="tabbody" id="challenges">
+                <h1 class="tabTitle searchBarTitle" id="newChallengeTitle">Create New Challenge</h1>
+                <div id="newChallengeDiv">
+                    <div id="challengeSearchBarDiv">
+                        <input class="searchBar" id="challengeSearchBarTextBox" name="searchBarText" type="text" placeholder=" Send challenge...">
+                    </div>
+                    <button class="searchBarButton" id="sendChallengeButton">Send</button>
+                </div>
+                <hr>
+                <h1 class="tabTitle" id="activeChallengesTitle">Active Challenges</h1>
+                <div class="tableDiv" id="activeChallengesTableDiv"></div>
+                <div class="tableDiv" id="previousChallengesTableDiv"></div>
+                <p class="noDataFoundText" id="noChallengesFoundText">No challenge data found.</p>
+            </div>-->
         </div>
-        <!--
-        <div class="tabbody" id="challenges">
-            <div class="tableDiv" id="activeChallengesTableDiv"></div>
-            <div class="tableDiv" id="previousChallengesTableDiv"></div>
-        </div>-->
+        <div id="a">
+            <div id="alternateWindowDiv">
+                <img class="jileHomeIcon" id="alternateWindowJileHomeIcon" src="../assets/luhconInverted.png">
+                <p id="alternateWindowText">Please visit <a target="_blank" href="https://leetcode.com/problemset">LeetCode</a> to use this extension.</p>
+            </div>
+        </div>
 
       <script type="module" src="popup.js"></script>
   </body>

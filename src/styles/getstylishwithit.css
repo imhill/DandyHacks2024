@@ -1,6 +1,7 @@
 /* Define variables */
 
 /* light mode colors */
+/* not updated since demo, needs work before use */
 .light-mode{
     --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #FFF, #AAA);
@@ -10,7 +11,7 @@
     --buttonActiveColor: rgba(128,128,128,1);
 
     --activeTabBackgroundColor: #AAA;
-    --inactiveTapColor: #DDD;
+    --inactiveTabColor: #DDD;
 
     --tableHeaderColor: #F28C28;
     --tableHeaderTextColor: #222;
@@ -24,46 +25,70 @@
 }
 
 /* dark mode colors */
+/* the default, and most up to date color scheme */
 .dark-mode{
-    --tableBackground: #FFF;
     --popupBackground: linear-gradient(-225deg, #222, #555);
-    --popupBackgroundColor: #111;
+    --popupBackgroundColor: #0F0F0F; 
 
-    --tabButtonHoverColor: #222;
-    --tabButtonPressedColor: #333;
+    --tabButtonHoverColor: #333;
+    --tabButtonPressedColor: #444;
 
-    --activeTabBackgroundColor: #2d2d2d;
-    --activeTabTextColor: #D8D8D8;
-    --activeTabGradient: linear-gradient(-10deg, #2d2d2d, #2d2d2d, #2f2f2f, #444);;
+    --activeTabBackgroundColor: #262626;
+    --activeTabTextColor:  var(--textColor);
+    --activeTabGradient: linear-gradient(-10deg, #262626, #262626, #2D2D2D, #444444);
 
-    --inactiveTapColor: #1a1a1a;
-    --inactiveTabTextColor: #D8D8D8;
+    --inactiveTabColor: #1D1D1D;
+    --inactiveTabTextColor: #BBB;
 
-    --tableHeaderColor: #F28C28;
+    --tableBackground: #262626;
+    --tableHeaderColor: #FFA116;
     --tableHeaderTextColor: #222;
     
-    --tableRowHoverColor: rgba(160,90,30,0.25);
-    --tableRowPrimaryColor: #FFF;
-    --tableRowAlternateColor: #E2E2E2;
-    --tableTextColor: #000;
+    --tableRowHoverColor: #CCC;
+    --tableRowHoverTextColor: #111;
+    --tableRowPrimaryColor: #303030;
+    --tableRowAlternateColor: #444444;
+    --tableTextColor: #DDD;
+    --tableTextSize: 20px;
 
-    --buttonColor: #BBB;
-    --buttonHoverColor: #888;
-    --buttonActiveColor: #444;
+    --currentUserRowBackgroundColor: rgba(255,161,22,0.2);
+    --currentUserRowBorderColor: #FFA116;
 
-    --searchBarBackgroundColor: #BBB;
-    --searchBarHoverColor: #888;
-    --searchBarActiveColor: #777;
-    --placeholderTextColor: #000;
+    --buttonColor: #3C3C3C;
+    --buttonHoverColor: #4E4E4E;
+    --buttonActiveColor: #565656;
+    --buttonTextColor: #EEE;
 
-    --textColor: #FFF;
+    --searchBarBackgroundColor: #3C3C3C;
+    --searchBarHoverColor: #4E4E4E;
+    --searchBarFocusColor: #565656;
+    --placeholderTextColor: var(--textColor);
+    --searchBarTextColor: var(--textColor);
+
+    --textColor: #EEE;
+
+    --horizontalBarColor: #AAA;
+
+    --popupModalBackgroundColor: rgba(72,72,72,0.95);
+    --popupModalTextColor: var(--textColor);
+    --popupModalBoxShadowColor: rgba(255,255,255,0.05);
+
+    --popupModalButtonColor: ;
+    --modelConfirmButtonBackgroundColor: #AAA;
+    --modalConfirmButtonHoverBackgroundColor: #CCC;
+    --modalConfirmButtonActiveBackgroundColor: #EEE;
+    --modelConfirmButtonTextColor: #111;
+    --modalCancelButtonBackgroundColor: rgba(192,192,192,0.25);
+    --modalCancelButtonHoverBackgroundColor: rgba(192,192,192,0.5);
+    --modalCancelButtonActiveBackgroundColor: rgba(192,192,192,0.85);
+    --modelCancelButtonTextColor: var(--textColor);
 }
 
 /* Set the dimensions and background color of the window */
 
 html{
-    width: 400px;
-    height: 500px;
+    width: 425px;
+    height: 525px;
     color: var(--textColor);
 }
 body{
@@ -75,10 +100,13 @@ body{
 
 #homeIcon{
     display: block;
+    margin-top: 0px;
 }
 
-#jileHomeIcon{
-    /*display: none;*/
+.jileHomeIcon{
+    border-radius: 8px;
+    box-shadow: 0px 0px 16px 4px #000;
+    margin: 75px 0px 0px 76px;
 }
 
 /* User signed in as information */ 
@@ -87,8 +115,8 @@ body{
     z-index: 0;
     position: absolute;
     text-align: right;
-    width: 376px;
-    top: 8px;
+    width: 400px;
+    top: 10px;
     margin: 4px;
     height: 0px;
 }
@@ -106,6 +134,7 @@ body{
     font-size: 16px;
     padding: 4px 12px 2px 12px;
     border-radius: 6px 6px 0px 0px;
+    cursor: pointer;
 }
 .tabbutton:hover{
     background-color: var(--tabButtonHoverColor);
@@ -120,28 +149,30 @@ body{
     color: var(--activeTabTextColor);
 }
 .inactiveTab{
-    background-color: var(--inactiveTapColor);
+    background-color: var(--inactiveTabColor);
     color: var(--inactiveTabTextColor);
 }
 
 .tabbody{
     display: none;
     background-color: var(--activeTabBackgroundColor);
-    height: 460px;
+    height: 485px;
     border-radius: 0px 4px 8px 8px;
+    margin-top: 10px;
 }
 
 /* Style the tables */
 
 .tableDiv{
     padding: 10px;
-    width: 364px;
+    width: 389px;
 }
 table{
     width: 100%;
     border-spacing: 0;
     text-align: left;
     color: var(--tableTextColor);
+    font-size: var(--tableTextSize);
 }
 th{
     background-color: var(--tableHeaderColor);
@@ -149,20 +180,31 @@ th{
 }
 tr{
     background-color: var(--tableRowPrimaryColor);
+    border-radius: 4px 4px 4px 4px;
 }
 tr:nth-child(even){
     background-color: var(--tableRowAlternateColor);
 }
 tr:hover {
     background-color: var(--tableRowHoverColor);
+    color: var(--tableRowHoverTextColor);
+}
+th, td{
+    padding: 0px 4px 0px 4px;
+    text-align: center;
+}
+td:first-child,th:first-child{
+    text-align: left;
+}
+
+.currentUserRow *{
+    background-color: var(--currentUserRowBackgroundColor);
+    /*border: 2px solid var(--currentUserRowBorderColor);*/
 }
 
 /* Style the searchbar */
 
-input::placeholder{
-    color: var(--placeholderTextColor);
-}
-#searchBarTextBox{
+.searchBar{
     width: 230px;
     height: 30px;
     border-radius: 8px;
@@ -170,45 +212,179 @@ input::placeholder{
     border: 0;
     margin: 30px 0px 20px 30px;
     padding: 10px;
+    outline: none;
+    color: var(--searchBarTextColor);
 }
-
-#searchBarTextBox:hover{
+.searchBar:hover{
     background-color: var(--searchBarHoverColor);
 }
-
-#searchBarTextBox:active{
-    background-color: var(--searchBarActiveColor);
+.searchBar:focus{
+    background-color: var(--searchBarFocusColor);
+    border: 1px solid var(--searchBarTextColor);
 }
+input::placeholder{
+    color: var(--placeholderTextColor);
+}
+
 
 /* Style the add/remove friend buttons */
 
-.friendButton{
+.searchBarButton{
     background-color: var(--buttonColor);
     display: inline-block;
     height: 20px;
     font-size: 10px;
     border: 0;
     border-radius: 4px;
+    color: var(--buttonTextColor);
+    width: 96px;
+    cursor: pointer;
 }
-.friendButton:hover{
+.searchBarButton:hover{
     background-color: var(--buttonHoverColor);
 }
-.friendButton:active{
+.searchBarButton:active{
     background-color: var(--buttonActiveColor);
 }
 
-#removeFriendButton{
+/*#removeFriendButton{
     margin: -32px 0px 0px 280px;
-}
+}*/
 
 #addFriendButton{
-    margin: -56px 0px 0px 290px;
+    /*margin: -56px 0px 0px 280px;*/
+    margin: -47px 0px 0px 285px;
+    height: 24px;
+}
+
+#sendChallengeButton{
+    margin: -47px 0px 0px 285px;
+    height: 24px;
+}
+
+.removeFriendButton{
+    height: 14px;
+    width: 18px;
+    display: inline-flex;
+    position: absolute;
+    right: 22px;
+    cursor: pointer;
+    margin-top: 3px;
+    justify-content: center;
+    align-items:center;
+    padding-bottom: 4px;
+    border-radius: 2px;
+}
+.removeFriendButton:hover{
+    scale: 1.1;
+}
+.removeFriendButton:active{
+    scale: 1.25;
+}
+
+/* style the popup modals */
+
+.popupModal{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.25);
+}
+.popupModalContent{
+    background-color: var(--popupModalBackgroundColor);
+    height: 25%;
+    width: 60%;
+    margin: 40% auto;
+    border-radius: 8px;
+    color: var(--popupModalTextColor);
+    box-shadow: 0px 0px 16px var(--popupModalBoxShadowColor);
+}
+.popupModalButton{
+    color: var(--popupModalTextColor);
+    background-color: var(--popupModalButtonColor);
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    position: relative;
+    top: -14px;
+    padding: 8px 12px 8px 12px;
+    margin-left: 16px;
+    left: 30px;
+    width: 72px;
+}
+.popupModalConfirmButton{
+    background-color: var(--modelConfirmButtonBackgroundColor);
+    color: var(--modelConfirmButtonTextColor);
+}
+.popupModalConfirmButton:hover{
+    background-color: var(--modalConfirmButtonHoverBackgroundColor);
+}
+.popupModalConfirmButton:active{
+    background-color: var(--modalConfirmButtonActiveBackgroundColor);
+}
+.popupModalCancelButton{
+    background-color: var(--modalCancelButtonBackgroundColor);
+    color: var(--modelCancelButtonTextColor);
+}
+.popupModalCancelButton:hover{
+    background-color: var(--modalCancelButtonHoverBackgroundColor);
+}
+.popupModalCancelButton:active{
+    background-color: var(--modalCancelButtonActiveBackgroundColor);
+}
+
+#deleteConfirmationModalUsername{
+    width: 80%;
+    padding: 2.5% 10%;
+    text-align: center;
+    font-size: 20px;
+}
+#deleteConfirmationModalUsername::before{
+    content: "Are you sure you want to remove ";
+}
+#deleteConfirmationModalUsername::after{
+    content: " as a friend?";
 }
 
 /* Style the titles of each tab */
 
-#leaderboardTitle{
-    margin:0;
+.tabTitle{
+    margin: -10px 0px -10px 0px;
     padding: 20px 10px 10px 10px;
+    text-align: center;
+}
+
+.searchBarTitle{
+    padding-bottom: 0;
+    margin-bottom: -16px;
+}
+
+/* style the horizontal rule (dividing bar) */
+
+hr{
+    background-color: var(--horizontalBarColor);
+    width: 95%;
+    height: 1px;
+    border: none;
+}
+
+/* alternate window for when not on LeetCode.com */
+#alternateWindowDiv{
+    display: none;
+}
+#alternateWindowText{
+    text-align: center;
+    text-decoration: bold;
+    color: var(--textColor);
+    font-size: 24px;
+    width: 256px;
+    margin: 40px auto;
+}
+
+.noDataFoundText{
+    display: none;
     text-align: center;
 }
