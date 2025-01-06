@@ -47,7 +47,9 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 const userSignedInBox = document.getElementById("userSignedIn");
 const usernameText = document.getElementById("usernameText");
 
-usernameText.textContent = await GetUsername();
+const currentUserName = await GetUsername();
+
+usernameText.textContent = currentUserName;
 
 /*
  *    Switch between tabs
@@ -243,6 +245,13 @@ async function buildLeaderboardTab(){
     
     //add it to the div
     leaderboardTableDiv.appendChild(leaderboardFriendsTable);
+
+    try {
+        const currentUserRow = document.getElementById(currentUserName);
+        currentUserRow.className = "currentUserRow";
+    } catch (err) {
+        console.error('Error:', err);
+    }
 }
 
 /* */

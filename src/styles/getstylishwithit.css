@@ -51,6 +51,9 @@
     --tableTextColor: #DDD;
     --tableTextSize: 20px;
 
+    --currentUserRowBackgroundColor: rgba(255,161,22,0.2);
+    --currentUserRowBorderColor: #FFA116;
+
     --buttonColor: #3C3C3C;
     --buttonHoverColor: #4E4E4E;
     --buttonActiveColor: #565656;
@@ -192,6 +195,11 @@ th, td{
 }
 td:first-child,th:first-child{
     text-align: left;
+}
+
+.currentUserRow *{
+    background-color: var(--currentUserRowBackgroundColor);
+    /*border: 2px solid var(--currentUserRowBorderColor);*/
 }
 
 /* Style the searchbar */

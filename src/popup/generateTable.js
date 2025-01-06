@@ -28,6 +28,10 @@ export function GenerateTable({data, remove=false}){
 
         //within each row, add the data
         for (const key in rowData) {
+            if(key == "User"){
+                row.id = rowData[key];
+            }
+            
             const cell = row.insertCell();
             cell.textContent = rowData[key];
             cell.id = `row${rowNumber}.cell${cellNumber}`;
