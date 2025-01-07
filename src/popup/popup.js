@@ -30,7 +30,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             }
         } else {
             console.log("NOO NOT ON LEETCODE");
-            console.log(currentUrl);
+            //console.log(currentUrl);
             mainWindow.style.display = "none";
             alternateWindow.style.display = "block";
         }
@@ -308,7 +308,7 @@ let currentlySwitching = false;
 async function switchTab(tab){
     //stop the transition from happening if the previous call hasn't resolved yet
     if(currentlySwitching){
-        console.log("Already switching tabs");
+        //console.log("Already switching tabs");
         return;
     } else {
         currentlySwitching = true;

@@ -17,7 +17,6 @@
 		"service_worker": "background/background.js"
 	},
 	"permissions": ["webRequest","tabs"],
-	"host_permissions": ["https://leetcode.com/*"],
 	"content_security_policy": {
     	"extension_pages": "script-src 'self'; connect-src http://3.143.223.90:8000 *"
   	}
