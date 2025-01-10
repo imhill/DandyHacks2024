@@ -2,15 +2,8 @@ console.log("service worker started!!!!");
 
 let id = "";
 
-let t = true;
-
 chrome.webRequest.onCompleted.addListener(
   async (details) => {
-    if(t){
-      t = false;
-      console.log(details);
-    }
-
     const url = details.url;
     const initiator = details.initiator;
     if (url.includes("/check/") && initiator == "https://leetcode.com") {
@@ -51,16 +44,13 @@ chrome.webRequest.onCompleted.addListener(
             body: JSON.stringify({ query: query })
           });
 
-          console.log("made it less far");
-
           const gqlData = await gqlResponse.json();
 
-          console.log("made it this far");
-
           const gqlSubData = gqlData.data.submissionDetails;
-          //console.log("user: ", gqlSubData.user.username, "lang: ", gqlSubData.lang.name, "runtime: ", gqlSubData.runtimeDisplay, "memory: ", gqlSubData.memoryDisplay);
 
+          //console.log("user: ", gqlSubData.user.username, "lang: ", gqlSubData.lang.name, "runtime: ", gqlSubData.runtimeDisplay, "memory: ", gqlSubData.memoryDisplay);
           //console.log("slug: ", gqlSubData.question.titleSlug);
+
           const dbBody = JSON.stringify({
             titleSlug: gqlSubData.question.titleSlug,
             runtime: Number(gqlSubData.runtime),
