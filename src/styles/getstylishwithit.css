@@ -51,7 +51,7 @@
     --tableTextColor: #DDD;
     --tableTextSize: 20px;
 
-    --currentUserRowBackgroundColor: rgba(255,161,22,0.2);
+    --currentUserRowBackgroundColor: rgba(255,161,22,0.25);
     --currentUserRowBorderColor: #FFA116;
 
     --buttonColor: #3C3C3C;
