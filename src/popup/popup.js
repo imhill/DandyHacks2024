@@ -1,8 +1,8 @@
-import {GenerateTable} from "./generateTable.js";
-import {AddFriend,RemoveFriend,GetFriends} from "./friendUtils.js";
-import {GetLeaderboard} from "./leaderboardUtils.js";
-import {GetUsername} from "./getUsername.js";
-import {HideDeleteConfirmationModal} from "./additionalUtils.js";
+import {GenerateTable} from "./utils/generateTable.js";
+import {AddFriend,RemoveFriend,GetFriends} from "./utils/friendUtils.js";
+import {GetLeaderboard} from "./utils/leaderboardUtils.js";
+import {GetUsername} from "./utils/getUsername.js";
+import {HideDeleteConfirmationModal} from "./utils/additionalUtils.js";
 
 let currentUrl = "https://";
 let onProblemPage = false;
