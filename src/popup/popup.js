@@ -15,7 +15,9 @@ const alternateWindow = document.getElementById("alternateWindowDiv");
 /* define the buttons */
 const leaderboardButton = document.getElementById("leaderboardButton");
 const friendsButton = document.getElementById("friendsButton");
-//const challengesButton = document.getElementById("challengesButton");                                   //challenges
+//const challengesButton = document.getElementById("challengesButton");                             //challenges
+
+let ONLEETCODE = false;
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
@@ -28,17 +30,21 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             } else {
                 leaderboardButton.style.display = "none";
             }
+            ONLEETCODE = true;
         } else {
             console.log("NOO NOT ON LEETCODE");
             //console.log(currentUrl);
             mainWindow.style.display = "none";
             alternateWindow.style.display = "block";
+            ONLEETCODE = false;
         }
     } else {
         console.log("Can't find URL");
     }
   }
 );
+
+//should only do everything below here if we are indeed on leetcode, otherwise it is uncessary
 
 /*
  *    Display the username of the currently signed in user
@@ -49,7 +55,12 @@ const usernameText = document.getElementById("usernameText");
 
 const currentUserName = await GetUsername();
 
-usernameText.textContent = currentUserName;
+if(!currentUserName){
+    // not signed in
+    // display please sign in to leetcode windows on leaderboard/friends tabs
+} else {
+    usernameText.textContent = currentUserName;
+}
 
 /*
  *    Switch between tabs
@@ -68,7 +79,7 @@ const tabButtons = [leaderboardButton,
 
 /* define the functions to switch to a given page */
 function switchToLeaderboard(){ switchTab("leaderboard"); }
-function switchToFriends(){ switchTab("friends"); }
+function switchToFriends(){ console.log("clicked friends");switchTab("friends"); }
 //function switchToChallenges(){ switchTab("challenges"); }                                            //challenges
 
 //define the divs for each of the tabs
