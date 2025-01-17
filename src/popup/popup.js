@@ -153,7 +153,7 @@ function formatFriendsList(friendList){
 }
 
 /* function that formats the raw leaderboard data so it can be displayed in a table */
-function formatLeaderboardData(leaderboardData){
+function formatLeaderboardData(leaderboardData,truncatedTitle = false){
     const problemTitleWords = leaderboardData[0].problem_number.split("-");
 
     for (let i = 0; i < problemTitleWords.length; i++) {
@@ -162,6 +162,10 @@ function formatLeaderboardData(leaderboardData){
 
     /* update the title of the leaderboard with the formatted problem title */
     leaderboardTitle.textContent = problemTitleWords.join(" ");
+
+    if(truncatedTitle){
+        leaderboardTitle.textContent += "...";
+    }
     
     const formattedList = [];
     let place = 1;
@@ -235,7 +239,10 @@ async function buildLeaderboardTab(){
     //create the Leaderboard tab tables
 
     //get the raw data from the endpoint
-    const rawLeaderboard = await GetLeaderboard();
+    const rawLeaderboardData = await GetLeaderboard();
+
+    const leaderboardTitleTruncated = rawLeaderboardData[1];
+    const rawLeaderboard = rawLeaderboardData[0];
 
     if(rawLeaderboard.length == 0){
         console.log("No leaderboard data");
@@ -248,7 +255,7 @@ async function buildLeaderboardTab(){
     //const communityTableDiv = document.getElementById("leaderboardCommunityTableDiv");
     
     //format the raw data
-    const friendLeaderboardData = formatLeaderboardData(rawLeaderboard);
+    const friendLeaderboardData = formatLeaderboardData(rawLeaderboard,leaderboardTitleTruncated);
     
     //generate the table with the data
     const leaderboardFriendsTable = GenerateTable({data:friendLeaderboardData});

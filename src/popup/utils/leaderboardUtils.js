@@ -16,6 +16,8 @@ export async function GetLeaderboard() {
     const fullTitleSlug = slug;
     let constrainedTitleSlug = "";
 
+    let truncatedTitle = false;
+
     //I do know there is definitely a better faster way to do this but I'm trying to solve the problem first
     if(fullTitleSlug.length > 50){
       const titleSlugWords = fullTitleSlug.split("-");
@@ -32,6 +34,7 @@ export async function GetLeaderboard() {
           break;
         }
       }
+      truncatedTitle = true;
     } else {
       constrainedTitleSlug = fullTitleSlug;
     }
@@ -47,9 +50,9 @@ export async function GetLeaderboard() {
             }
         });
         const boardData = await leaderboardResponse.json()
-        return boardData;
+        return [boardData,truncatedTitle];
     } catch(err) {
         console.error(err)
     }
-    return [];
+    return [[],truncatedTitle];
 }
