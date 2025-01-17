@@ -64,8 +64,34 @@ chrome.webRequest.onCompleted.addListener(
 
           //console.log("User creation query executed",createResp);
 
+          //function to convert the titleSlug to the longest string of words under 50 characters without splitting a word
+          const fullTitleSlug = gqlSubData.question.titleSlug;
+          let constrainedTitleSlug = "";
+
+          //I do know there is definitely a better faster way to do this but I'm trying to solve the problem first
+          if(fullTitleSlug.length > 50){
+            const titleSlugWords = fullTitleSlug.split("-");
+
+            constrainedTitleSlug = titleSlugWords[0];
+
+            let currentCharLength = titleSlugWords[0].length;
+
+            for(const word of titleSlugWords.slice(1)){
+              if(currentCharLength<=49-word.length){
+                constrainedTitleSlug += "-"+word;
+                currentCharLength += word.length + 1;
+              }else{
+                break;
+              }
+            }
+          } else {
+            constrainedTitleSlug = fullTitleSlug;
+          }
+
+          console.log(constrainedTitleSlug);
+
           const dbBody = JSON.stringify({
-            titleSlug: gqlSubData.question.titleSlug,
+            titleSlug: constrainedTitleSlug,
             runtime: Number(gqlSubData.runtime),
             space: Number(gqlSubData.memory)
           });
