@@ -11,3 +11,5 @@ node_modules/*
 output.log
 
 .vscode
+
+.zip
