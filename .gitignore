@@ -12,4 +12,6 @@ output.log
 
 .vscode
 
-.zip
+*.zip
+
+*.pem
