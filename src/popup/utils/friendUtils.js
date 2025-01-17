@@ -5,6 +5,12 @@ export async function AddFriend(friendName) {
     // Get runner's username
     const username = await GetUsername();
 
+    //check for self add
+    if(username == friendName){
+        console.log("You can't add yourself!");
+        return;
+    }
+
     // Send friend request
     try {
         const friendReqResponse = await fetch(`http://3.143.223.90:8000/add-friend?username=${username}`, {
