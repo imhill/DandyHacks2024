@@ -1,8 +1,8 @@
 {
 	"manifest_version": 3,
 	"name": "LeetConnect by JILE",
-	"version": "1.40",
-	"description": "Friends list and per-problem leaderboards for LeetCode. First-place winning DandyHacks 2024 community track submission. A JILE production.",
+	"version": "1.41",
+	"description": "Friends list and per-problem leaderboards for LeetCode. First-place community track submission @ DandyHacks. A JILE production.",
 	"action": {
 		"default_popup": "popup/poppington.html",
 		"default_icon": "icons/JILE-32.png",
