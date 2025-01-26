@@ -88,7 +88,7 @@ chrome.webRequest.onCompleted.addListener(
             constrainedTitleSlug = fullTitleSlug;
           }
 
-          console.log(constrainedTitleSlug);
+          //console.log(constrainedTitleSlug);
 
           const dbBody = JSON.stringify({
             titleSlug: constrainedTitleSlug,

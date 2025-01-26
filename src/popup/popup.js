@@ -79,7 +79,7 @@ const tabButtons = [leaderboardButton,
 
 /* define the functions to switch to a given page */
 function switchToLeaderboard(){ switchTab("leaderboard"); }
-function switchToFriends(){ console.log("clicked friends");switchTab("friends"); }
+function switchToFriends(){ switchTab("friends"); }
 //function switchToChallenges(){ switchTab("challenges"); }                                            //challenges
 
 //define the divs for each of the tabs
